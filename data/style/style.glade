@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.4 -->
+<!-- Generated with glade 3.22.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <!-- interface-css-provider-path style.css -->
@@ -9,8 +9,7 @@
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
-    <property name="default_width">415</property>
-    <property name="default_height">630</property>
+    <property name="icon">img/ico.svg</property>
     <property name="type_hint">dialog</property>
     <property name="gravity">center</property>
     <property name="program_name">WordEng</property>
@@ -20,7 +19,7 @@
 (Английского)</property>
     <property name="website">https://github.com/HaliksaR/WordEng</property>
     <property name="website_label" translatable="yes">GitHub</property>
-    <property name="logo">./img/logo.png</property>
+    <property name="logo">img/logo.png</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -50,8 +49,11 @@
             <property name="name">developer</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Разработчики</property>
+            <property name="label" translatable="yes">                    Разработчики                    </property>
             <property name="track_visited_links">False</property>
+            <attributes>
+              <attribute name="underline" value="True"/>
+            </attributes>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -71,7 +73,7 @@
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="stock">gtk-missing-image</property>
+                <property name="pixbuf">img/65756756.png</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -82,7 +84,7 @@
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">./img/35256960.png</property>
+                <property name="pixbuf">img/35256960.png</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -93,7 +95,7 @@
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">./img/36221843.png</property>
+                <property name="pixbuf">img/36221843.png</property>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -165,7 +167,7 @@
                 <property name="can_focus">False</property>
                 <property name="margin_bottom">40</property>
                 <property name="label" translatable="yes">Программист
-Интерейс</property>
+Интерфейс</property>
                 <property name="justify">center</property>
               </object>
               <packing>
@@ -215,12 +217,13 @@
         </child>
       </object>
     </child>
+    <accelerator key="Cyrillic_shorti" signal="close"/>
   </object>
   <object class="GtkWindow" id="window">
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
-    <property name="icon">./img/ico.svg</property>
+    <property name="icon">img/ico.svg</property>
     <property name="gravity">center</property>
     <child>
       <object class="GtkOverlay" id="overlay">
@@ -241,7 +244,7 @@
                 <property name="name">helloback</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">./img/hello.tif</property>
+                <property name="pixbuf">img/hello.svg</property>
               </object>
               <packing>
                 <property name="index">-1</property>
@@ -252,7 +255,7 @@
                 <property name="name">back</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">./img/main.svg</property>
+                <property name="pixbuf">img/back.svg</property>
               </object>
               <packing>
                 <property name="index">1</property>
@@ -635,7 +638,7 @@
                 <property name="name">backmain</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">./img/main.svg</property>
+                <property name="pixbuf">img/back.svg</property>
               </object>
               <packing>
                 <property name="index">-1</property>
@@ -1336,7 +1339,7 @@
           <object class="GtkImage">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixbuf">./img/ico.svg</property>
+            <property name="pixbuf">img/ico.svg</property>
           </object>
         </child>
       </object>
