@@ -3,12 +3,12 @@ OBJ =
 CC = gcc
 CFLAGS  = -Wall -Werror
 
-.PHONY: clean gtk console
+.PHONY: clean gtk console sh
 
 ./bin/WordEng: ./build/main_gtk.o  bin
-	$(CC) $(CFLAGS) ./build/main.o -o ./bin/WordEng $(GTK_LIB)
+	$(CC) $(CFLAGS) ./build/main_gtk.o -o ./bin/WordEng $(GTK_LIB)
 
-./build/main_gtk.o: src/main_gtk.c  build
+./build/main_gtk.o: src/main_gtk.c  build #sh
 	$(CC) $(CFLAGS) -c ./src/main_gtk.c -o ./build/main_gtk.o $(GTK_LIB)
 
 build:
@@ -21,6 +21,9 @@ clean:
 	rm -rf build bin
 
 console :
-		./bin/WordEng_console
+	./bin/WordEng_console
 gtk :
-		./bin/WordEng
+	./bin/WordEng
+sh :
+	sudo chmod +x packages.sh
+	sudo ./packages.sh
