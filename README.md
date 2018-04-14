@@ -1,3 +1,0 @@
-WordEng
-dev
-HaliksaR
