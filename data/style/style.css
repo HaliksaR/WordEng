@@ -6,6 +6,14 @@
 dialog {
     background: #121116;
 }
+box {
+    background: #121116;
+}
+label#name {
+    font-size: 30pt;
+    font-weight: bold;
+    color: #FF1F4B;
+}
 label#first {
     font-weight: bold;
     font-size: 20pt;
