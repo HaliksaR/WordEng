@@ -3,17 +3,11 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <!-- interface-css-provider-path style.css -->
-  <object class="GtkAboutDialog" id="dialog">
-    <property name="width_request">415</property>
-    <property name="height_request">630</property>
+  <object class="GtkAboutDialog" id="dialoggtk">
     <property name="can_focus">False</property>
-    <property name="no_show_all">True</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
-    <property name="icon">img/ico.svg</property>
     <property name="type_hint">dialog</property>
-    <property name="accept_focus">False</property>
-    <property name="gravity">center</property>
     <property name="program_name">WordEng</property>
     <property name="version">1.0 Beta</property>
     <property name="copyright" translatable="yes">Курсовая работа студентов Сибирского государственного университета телекоммуникаций и информатики</property>
@@ -24,17 +18,14 @@
     <property name="logo">img/logo.png</property>
     <child internal-child="vbox">
       <object class="GtkBox">
-        <property name="can_focus">True</property>
+        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox">
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
-            <property name="double_buffered">False</property>
-            <property name="orientation">vertical</property>
-            <property name="baseline_position">bottom</property>
-            <property name="layout_style">expand</property>
+            <property name="layout_style">start</property>
             <child>
               <placeholder/>
             </child>
@@ -42,7 +33,6 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="pack_type">end</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -50,16 +40,16 @@
           <object class="GtkLabel">
             <property name="name">developer</property>
             <property name="visible">True</property>
+            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">                    Разработчики                    </property>
-            <property name="track_visited_links">False</property>
             <attributes>
               <attribute name="underline" value="True"/>
             </attributes>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">False</property>
+            <property name="fill">True</property>
             <property name="padding">10</property>
             <property name="position">2</property>
           </packing>
@@ -105,78 +95,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLinkButton">
-                <property name="label" translatable="yes">Artemka13722</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="relief">none</property>
-                <property name="uri">https://github.com/artemka13722</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLinkButton">
-                <property name="label" translatable="yes">HaliksaR</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="relief">none</property>
-                <property name="uri">https://github.com/HaliksaR</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLinkButton">
-                <property name="label" translatable="yes">KrackensCorp</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="relief">none</property>
-                <property name="uri">https://github.com/KrackensCorp</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="name">work</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_bottom">40</property>
-                <property name="label" translatable="yes">Программист
-Тестировщик</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="name">work</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_bottom">40</property>
-                <property name="label" translatable="yes">Программист
-Интерфейс</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">2</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel">
                 <property name="name">work</property>
                 <property name="visible">True</property>
@@ -184,11 +102,89 @@
                 <property name="margin_bottom">40</property>
                 <property name="label" translatable="yes">Программист
 Базы данных</property>
-                <property name="justify">center</property>
               </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="name">work</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_bottom">40</property>
+                <property name="label" translatable="yes">Программист
+Графический
+интерфейс</property>
+                <property name="justify">center</property>
+                <property name="track_visited_links">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="name">work</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_bottom">40</property>
+                <property name="label" translatable="yes">Программист
+Консольный 
+интерфейс</property>
+                <property name="justify">center</property>
+                <property name="track_visited_links">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLinkButton">
+                <property name="label" translatable="yes">button</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <property name="uri">https://github.com/artemka13722</property>
+                <property name="visited">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLinkButton">
+                <property name="label" translatable="yes">button</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <property name="uri">https://github.com/HaliksaR</property>
+                <property name="visited">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLinkButton">
+                <property name="label" translatable="yes">button</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <property name="uri">https://github.com/KrackensCorp</property>
+                <property name="visited">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">1</property>
               </packing>
             </child>
           </object>
@@ -201,43 +197,48 @@
       </object>
     </child>
     <child type="titlebar">
-      <object class="GtkHeaderBar" id="dialog_header">
+      <object class="GtkHeaderBar" id="header2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="title">WordEng</property>
         <property name="subtitle">Учи английский с радостью!</property>
-        <property name="spacing">0</property>
         <property name="show_close_button">True</property>
         <child>
           <object class="GtkImage">
-            <property name="width_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="stock">gtk-justify-fill</property>
+            <property name="pixbuf">img/ico.svg</property>
           </object>
         </child>
       </object>
     </child>
-    <accelerator key="Cyrillic_shorti" signal="close"/>
   </object>
-  <object class="GtkWindow" id="profile">
+  <object class="GtkDialog" id="profilegtk">
     <property name="can_focus">False</property>
-    <property name="no_show_all">True</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
-    <property name="icon">img/ico.svg</property>
     <property name="type_hint">dialog</property>
-    <property name="accept_focus">False</property>
-    <property name="gravity">center</property>
-    <child>
+    <child internal-child="vbox">
       <object class="GtkBox">
-        <property name="name">box</property>
-        <property name="visible">True</property>
-        <property name="sensitive">False</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
         <child>
-          <object class="GtkLabel" id="profile_name">
+          <object class="GtkLabel" id=" profile_name">
             <property name="name">name</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -263,10 +264,8 @@
               <object class="GtkLabel">
                 <property name="name">1</property>
                 <property name="visible">True</property>
-                <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Уровень:</property>
-                <property name="track_visited_links">False</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -276,12 +275,9 @@
             <child>
               <object class="GtkLabel">
                 <property name="name">1</property>
-                <property name="height_request">-1</property>
                 <property name="visible">True</property>
-                <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Выученных слов:</property>
-                <property name="track_visited_links">False</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -292,10 +288,8 @@
               <object class="GtkLabel">
                 <property name="name">1</property>
                 <property name="visible">True</property>
-                <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Ошибок:</property>
-                <property name="track_visited_links">False</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -308,7 +302,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">easy</property>
-                <property name="track_visited_links">False</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -321,7 +314,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">244</property>
-                <property name="track_visited_links">False</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -334,7 +326,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">34</property>
-                <property name="track_visited_links">False</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -352,66 +343,60 @@
       </object>
     </child>
     <child type="titlebar">
-      <object class="GtkHeaderBar" id="window_header">
+      <object class="GtkHeaderBar" id="header1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="title">WordEng</property>
         <property name="subtitle">Учи английский с радостью!</property>
-        <property name="spacing">0</property>
         <property name="show_close_button">True</property>
         <child>
           <object class="GtkImage">
-            <property name="width_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="stock">gtk-justify-fill</property>
+            <property name="pixbuf">img/ico.svg</property>
           </object>
         </child>
       </object>
     </child>
   </object>
-  <object class="GtkWindow" id="window">
-    <property name="name">window</property>
-    <property name="visible">True</property>
+  <object class="GtkWindow" id="windowgtk">
     <property name="can_focus">False</property>
-    <property name="no_show_all">True</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
-    <property name="icon">img/ico.svg</property>
-    <property name="gravity">center</property>
     <child>
-      <object class="GtkFixed" id="fixed">
+      <object class="GtkFixed">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkImage" id="all_back">
+          <object class="GtkImage" id="all_hello">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
-            <property name="can_focus">False</property>
-            <property name="pixbuf">img/back.svg</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkImage" id="hello_back">
-            <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="pixbuf">img/hello.svg</property>
           </object>
         </child>
         <child>
-          <object class="GtkMenuBar" id="Menubar">
+          <object class="GtkImage" id="all_back">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/back.svg</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuBar">
             <property name="width_request">564</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkMenuItem" id="menubar_learn_">
+              <object class="GtkMenuItem" id="menubar_learn">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Учить</property>
                 <property name="use_underline">True</property>
-                <signal name="activate" handler="on_menubar_learn__activate" swapped="no"/>
               </object>
             </child>
             <child>
@@ -420,7 +405,6 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Повторять</property>
                 <property name="use_underline">True</property>
-                <signal name="activate" handler="on_menubar_retry_activate" swapped="no"/>
               </object>
             </child>
             <child>
@@ -429,7 +413,7 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Профиль</property>
                 <property name="use_underline">True</property>
-                <signal name="activate" handler="on_menubar_profile_activate" object="profile" swapped="no"/>
+                <signal name="activate" handler="menubar_profile_activate_cb" swapped="no"/>
               </object>
             </child>
             <child>
@@ -438,22 +422,7 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Справка</property>
                 <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menubar_learn_about_about">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="menubar_about_about">
-                        <property name="label">gtk-about</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="on_menubar_about_about_activate" object="dialog" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                <signal name="activate" handler="menubar_about_activate_cb" swapped="no"/>
               </object>
             </child>
           </object>
@@ -465,8 +434,7 @@
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Design by HaliksaR</property>
-            <property name="justify">center</property>
-            <property name="single_line_mode">True</property>
+            <property name="track_visited_links">False</property>
           </object>
           <packing>
             <property name="x">212</property>
@@ -487,7 +455,7 @@
           </object>
           <packing>
             <property name="x">95</property>
-            <property name="y">550</property>
+            <property name="y">530</property>
           </packing>
         </child>
         <child>
@@ -504,7 +472,7 @@
           </object>
           <packing>
             <property name="x">95</property>
-            <property name="y">585</property>
+            <property name="y">565</property>
           </packing>
         </child>
         <child>
@@ -516,7 +484,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_hello_button_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -531,12 +498,13 @@
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Как вас зовут?</property>
+            <property name="justify">center</property>
             <property name="wrap">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
             <property name="x">132</property>
-            <property name="y">375</property>
+            <property name="y">370</property>
           </packing>
         </child>
         <child>
@@ -545,12 +513,8 @@
             <property name="height_request">70</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="max_length">20</property>
-            <property name="shadow_type">none</property>
             <property name="primary_icon_stock">gtk-go-forward</property>
             <property name="placeholder_text" translatable="yes">Введите ваше имя</property>
-            <property name="input_purpose">name</property>
-            <property name="input_hints">GTK_INPUT_HINT_UPPERCASE_CHARS | GTK_INPUT_HINT_UPPERCASE_WORDS | GTK_INPUT_HINT_NONE</property>
           </object>
           <packing>
             <property name="x">60</property>
@@ -566,7 +530,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_name_button_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -579,12 +542,10 @@
             <property name="width_request">475</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Твои знания английского языка?</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
-            <property name="track_visited_links">False</property>
           </object>
           <packing>
             <property name="x">43</property>
@@ -600,7 +561,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_level_button_easy_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -616,7 +576,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_level_button_middle_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -632,7 +591,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_level_button_hight_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -645,7 +603,6 @@
             <property name="width_request">475</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Сколько слов выучите за раз?</property>
             <property name="justify">center</property>
@@ -666,7 +623,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_number_button_num_1_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">95</property>
@@ -682,7 +638,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_number_button_num_2_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">191</property>
@@ -698,7 +653,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_number_button_num_3_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">285</property>
@@ -714,7 +668,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_number_button_num_4_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">380</property>
@@ -728,6 +681,7 @@
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Слов:</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -737,11 +691,12 @@
         </child>
         <child>
           <object class="GtkLabel" id="stats_learn">
-            <property name="name">2</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Выученных:</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -751,25 +706,24 @@
         </child>
         <child>
           <object class="GtkLabel" id="stats_fail">
-            <property name="name">3</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Ошибок:</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
             <property name="x">20</property>
-            <property name="y">86</property>
+            <property name="y">88</property>
           </packing>
         </child>
         <child>
           <object class="GtkLabel" id="stats_words_word">
-            <property name="name">4</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">4545</property>
-            <property name="justify">right</property>
             <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
@@ -780,10 +734,11 @@
         </child>
         <child>
           <object class="GtkLabel" id="stats_words_learn">
-            <property name="name">5</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">656</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -793,10 +748,11 @@
         </child>
         <child>
           <object class="GtkLabel" id="stats_words_fail">
-            <property name="name">6</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">34</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -806,10 +762,11 @@
         </child>
         <child>
           <object class="GtkLabel" id="stats_words_num">
-            <property name="name">7</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">1</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -819,11 +776,11 @@
         </child>
         <child>
           <object class="GtkLabel" id="stats_sl">
-            <property name="name">8</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">/</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -833,10 +790,11 @@
         </child>
         <child>
           <object class="GtkLabel" id="stats_words_num_all">
-            <property name="name">9</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">4</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -846,12 +804,11 @@
         </child>
         <child>
           <object class="GtkLabel" id="stats_wrd">
-            <property name="name">10</property>
+            <property name="name">1</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes"> слов</property>
-            <property name="track_visited_links">False</property>
+            <property name="single_line_mode">True</property>
           </object>
           <packing>
             <property name="x">510</property>
@@ -868,7 +825,6 @@
             <property name="label" translatable="yes">Rabbit</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
-            <property name="wrap_mode">char</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -880,10 +836,9 @@
           <object class="GtkLabel" id="retry_label">
             <property name="name">first</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Ответ:</property>
-            <property name="justify">right</property>
+            <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -897,12 +852,8 @@
             <property name="height_request">70</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="max_length">20</property>
-            <property name="shadow_type">none</property>
             <property name="primary_icon_stock">gtk-go-forward</property>
             <property name="placeholder_text" translatable="yes">Перевод</property>
-            <property name="input_purpose">name</property>
-            <property name="input_hints">GTK_INPUT_HINT_UPPERCASE_CHARS | GTK_INPUT_HINT_UPPERCASE_WORDS | GTK_INPUT_HINT_NONE</property>
           </object>
           <packing>
             <property name="x">60</property>
@@ -913,11 +864,9 @@
           <object class="GtkLabel" id="retry_fails">
             <property name="name">fail</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">НЕВЕРНО!</property>
             <property name="justify">center</property>
-            <property name="wrap">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -934,7 +883,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_retry_stop_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">60</property>
@@ -950,7 +898,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_retry_next_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">300</property>
@@ -996,7 +943,6 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_learn_button_next_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -1016,7 +962,6 @@
           <object class="GtkImage">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
             <property name="pixbuf">img/ico.svg</property>
           </object>
         </child>
