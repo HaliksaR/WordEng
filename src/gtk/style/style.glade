@@ -238,7 +238,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id=" profile_name">
+          <object class="GtkLabel" id="profile_name">
             <property name="name">name</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -387,7 +387,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkMenuBar">
+          <object class="GtkMenuBar" id="menubar">
             <property name="width_request">564</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
@@ -398,6 +398,7 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Учить</property>
                 <property name="use_underline">True</property>
+                <signal name="activate" handler="menubar_learn_activate_cb" swapped="no"/>
               </object>
             </child>
             <child>
@@ -406,6 +407,7 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Повторять</property>
                 <property name="use_underline">True</property>
+                <signal name="activate" handler="menubar_retry_activate_cb" swapped="no"/>
               </object>
             </child>
             <child>
@@ -758,7 +760,7 @@
           </object>
           <packing>
             <property name="x">85</property>
-            <property name="y">86</property>
+            <property name="y">88</property>
           </packing>
         </child>
         <child>
