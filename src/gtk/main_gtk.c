@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "global.h"
 #include "gtkwidgets.h"
 #include "widget_build.h"
 
@@ -11,11 +12,11 @@ static GtkWidget* create_windowgtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new();
-    if (!gtk_builder_add_from_file(builder, "./src/gtk/style/style.glade", &error)) {
+    if (!gtk_builder_add_from_file(builder, "./data/style/style.glade", &error)) {
         g_critical("Не могу загрузить файл: %s", error->message);
         g_error_free(error);
     }
-    GFile *file= g_file_new_for_path("./src/gtk/style/style.css");
+    GFile *file= g_file_new_for_path("./data/style/style.css");
     GtkCssProvider *provider = gtk_css_provider_new();
     if(!gtk_css_provider_load_from_file(provider, file, &error)) {
         g_warning("%s", error->message );
@@ -35,11 +36,11 @@ static GtkWidget* create_dialoggtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new ();
-    if (!gtk_builder_add_from_file (builder, "./src/gtk/style/style.glade", &error)) {
+    if (!gtk_builder_add_from_file (builder, "./data/style/style.glade", &error)) {
         g_critical("Не могу загрузить файл: %s", error->message);
         g_error_free(error);
     }
-    GFile *file= g_file_new_for_path("./src/gtk/style/style.css");
+    GFile *file= g_file_new_for_path("./data/style/style.css");
     GtkCssProvider *provider = gtk_css_provider_new();
     if(!gtk_css_provider_load_from_file(provider, file, &error)) {
         g_warning("%s", error->message );
@@ -61,11 +62,11 @@ static GtkWidget* create_profilegtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new ();
-    if (!gtk_builder_add_from_file(builder, "./src/gtk/style/style.glade", &error)) {
+    if(!gtk_builder_add_from_file(builder, "./data/style/style.glade", &error)) {
         g_critical("Не могу загрузить файл: %s", error->message);
         g_error_free(error);
     }
-    GFile *file= g_file_new_for_path("./src/gtk/style/style.css");
+    GFile *file= g_file_new_for_path("./data/style/style.css");
     GtkCssProvider *provider = gtk_css_provider_new();
     if(!gtk_css_provider_load_from_file(provider, file, &error)) {
         g_warning("%s", error->message);
@@ -75,7 +76,7 @@ static GtkWidget* create_profilegtk(void) {
     gtk_builder_connect_signals(builder, NULL);
         
     profilegtk = GTK_WIDGET(gtk_builder_get_object(builder, "profilegtk"));
-    if (!profilegtk) {
+    if(!profilegtk) {
         g_critical("Ошибка при получении виджета profilegtk");
     }
     g_object_unref(builder);
@@ -115,6 +116,10 @@ void status_text() {
     char str[7];
     sprintf(str, "%d", in);
     gtk_label_set_text(GTK_LABEL(stats_words_word), str);
+    gtk_label_set_text(GTK_LABEL(stats_words_learn), str);
+    gtk_label_set_text(GTK_LABEL(stats_words_fail), str);
+    gtk_label_set_text(GTK_LABEL(stats_words_num), str);
+    gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
 }
 
 void menubar_learn_activate_cb() {
@@ -474,6 +479,7 @@ void number_button_num_1_clicked_cb () {
 }
 
 int main (int argc, char *argv[]) {
+
     int i = 0;
     gtk_init(&argc, &argv);
     windowgtk = create_windowgtk();
