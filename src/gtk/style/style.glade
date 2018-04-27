@@ -487,6 +487,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="hello_button_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -533,6 +534,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="name_button_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -564,6 +566,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="level_button_easy_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -579,6 +582,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="level_button_middle_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -594,6 +598,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="level_button_hight_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">132</property>
@@ -626,6 +631,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="number_button_num_1_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">95</property>
@@ -641,6 +647,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="number_button_num_2_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">191</property>
@@ -656,6 +663,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="number_button_num_3_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">285</property>
@@ -671,6 +679,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="number_button_num_4_clicked_cb" swapped="no"/>
           </object>
           <packing>
             <property name="x">380</property>

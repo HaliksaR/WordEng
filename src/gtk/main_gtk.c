@@ -253,6 +253,14 @@ static GtkWidget* create_windowgtk(void) {
         g_critical("Ошибка при получении виджета hello_welcome2");
     }   
 
+    stats_sl = GTK_WIDGET(gtk_builder_get_object(builder, "stats_sl"));
+    if (!stats_sl) {
+        g_critical("Ошибка при получении виджета stats_sl");
+    } 
+    stats_words_num_all = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words_num_all"));
+    if (!stats_words_num_all) {
+        g_critical("Ошибка при получении виджета stats_words_num_all");
+    }
     /*********************widgets build for hide and show*********************/
     g_object_unref(builder);
 
@@ -441,10 +449,243 @@ void menubar_retry_activate_cb () {
     gtk_widget_set_visible(learn_button_next, FALSE);
 }
 
+void edit_profile_1() {
+    // меню
+    gtk_widget_set_visible(menubar, FALSE);
+    // фон
+    gtk_widget_set_visible(all_hello, TRUE);
+    gtk_widget_set_visible(all_back, FALSE);
+    // приветствие
+    gtk_widget_set_visible(hello_welcome, TRUE);
+    gtk_widget_set_visible(hello_welcome2, TRUE);
+    gtk_widget_set_visible(hello_button, TRUE);
+    // имя
+    gtk_widget_set_visible(name_label, FALSE);
+    gtk_widget_set_visible(name_enty, FALSE);
+    gtk_widget_set_visible(name_button, FALSE);
+    // уровень
+    gtk_widget_set_visible(level_label, FALSE);
+    gtk_widget_set_visible(level_button_easy, FALSE);
+    gtk_widget_set_visible(level_button_middle, FALSE);
+    gtk_widget_set_visible(level_button_hight, FALSE);
+    // слова
+    gtk_widget_set_visible(words_label, FALSE);
+    gtk_widget_set_visible(number_button_num_1, FALSE);
+    gtk_widget_set_visible(number_button_num_2, FALSE);
+    gtk_widget_set_visible(number_button_num_3, FALSE);
+    gtk_widget_set_visible(number_button_num_4, FALSE);
+    // статус
+    gtk_widget_set_visible(stats_words, FALSE);
+    gtk_widget_set_visible(stats_learn, FALSE);
+    gtk_widget_set_visible(stats_fail, FALSE);
+    gtk_widget_set_visible(stats_words_word, FALSE);
+    gtk_widget_set_visible(stats_words_learn, FALSE);
+    gtk_widget_set_visible(stats_words_fail, FALSE);
+    gtk_widget_set_visible(stats_words_num, FALSE);
+    gtk_widget_set_visible(stats_sl, FALSE);
+    gtk_widget_set_visible(stats_words_num_all, FALSE);
+    gtk_widget_set_visible(stats_wrd, FALSE);
+    // повторение
+    gtk_widget_set_visible(retry_english, FALSE);
+    gtk_widget_set_visible(retry_label, FALSE);
+    gtk_widget_set_visible(retry_enty, FALSE);
+    gtk_widget_set_visible(retry_fails, FALSE);
+    gtk_widget_set_visible(retry_stop, FALSE);
+    gtk_widget_set_visible(retry_next, FALSE);
+    // изучение
+    gtk_widget_set_visible(learn_eng, FALSE);
+    gtk_widget_set_visible(learn_rus, FALSE);
+    gtk_widget_set_visible(learn_button_next, FALSE);
+}
+
+void hello_button_clicked_cb () {
+    // меню
+    gtk_widget_set_visible(menubar, FALSE);
+    // фон
+    gtk_widget_set_visible(all_hello, FALSE);
+    gtk_widget_set_visible(all_back, TRUE);
+    // приветствие
+    gtk_widget_set_visible(hello_welcome, FALSE);
+    gtk_widget_set_visible(hello_welcome2, FALSE);
+    gtk_widget_set_visible(hello_button, FALSE);
+    // имя
+    gtk_widget_set_visible(name_label, TRUE);
+    gtk_widget_set_visible(name_enty, TRUE);
+    gtk_widget_set_visible(name_button, TRUE);
+    // уровень
+    gtk_widget_set_visible(level_label, FALSE);
+    gtk_widget_set_visible(level_button_easy, FALSE);
+    gtk_widget_set_visible(level_button_middle, FALSE);
+    gtk_widget_set_visible(level_button_hight, FALSE);
+    // слова
+    gtk_widget_set_visible(words_label, FALSE);
+    gtk_widget_set_visible(number_button_num_1, FALSE);
+    gtk_widget_set_visible(number_button_num_2, FALSE);
+    gtk_widget_set_visible(number_button_num_3, FALSE);
+    gtk_widget_set_visible(number_button_num_4, FALSE);
+    // статус
+    gtk_widget_set_visible(stats_words, FALSE);
+    gtk_widget_set_visible(stats_learn, FALSE);
+    gtk_widget_set_visible(stats_fail, FALSE);
+    gtk_widget_set_visible(stats_words_word, FALSE);
+    gtk_widget_set_visible(stats_words_learn, FALSE);
+    gtk_widget_set_visible(stats_words_fail, FALSE);
+    gtk_widget_set_visible(stats_words_num, FALSE);
+    gtk_widget_set_visible(stats_sl, FALSE);
+    gtk_widget_set_visible(stats_words_num_all, FALSE);
+    gtk_widget_set_visible(stats_wrd, FALSE);
+    // повторение
+    gtk_widget_set_visible(retry_english, FALSE);
+    gtk_widget_set_visible(retry_label, FALSE);
+    gtk_widget_set_visible(retry_enty, FALSE);
+    gtk_widget_set_visible(retry_fails, FALSE);
+    gtk_widget_set_visible(retry_stop, FALSE);
+    gtk_widget_set_visible(retry_next, FALSE);
+    // изучение
+    gtk_widget_set_visible(learn_eng, FALSE);
+    gtk_widget_set_visible(learn_rus, FALSE);
+    gtk_widget_set_visible(learn_button_next, FALSE);
+}
+
+void edit_profile_2() {
+    // меню
+    gtk_widget_set_visible(menubar, FALSE);
+    // фон
+    gtk_widget_set_visible(all_hello, FALSE);
+    gtk_widget_set_visible(all_back, TRUE);
+    // приветствие
+    gtk_widget_set_visible(hello_welcome, FALSE);
+    gtk_widget_set_visible(hello_welcome2, FALSE);
+    gtk_widget_set_visible(hello_button, FALSE);
+    // имя
+    gtk_widget_set_visible(name_label, FALSE);
+    gtk_widget_set_visible(name_enty, FALSE);
+    gtk_widget_set_visible(name_button, FALSE);
+    // уровень
+    gtk_widget_set_visible(level_label, TRUE);
+    gtk_widget_set_visible(level_button_easy, TRUE);
+    gtk_widget_set_visible(level_button_middle, TRUE);
+    gtk_widget_set_visible(level_button_hight, TRUE);
+    // слова
+    gtk_widget_set_visible(words_label, FALSE);
+    gtk_widget_set_visible(number_button_num_1, FALSE);
+    gtk_widget_set_visible(number_button_num_2, FALSE);
+    gtk_widget_set_visible(number_button_num_3, FALSE);
+    gtk_widget_set_visible(number_button_num_4, FALSE);
+    // статус
+    gtk_widget_set_visible(stats_words, FALSE);
+    gtk_widget_set_visible(stats_learn, FALSE);
+    gtk_widget_set_visible(stats_fail, FALSE);
+    gtk_widget_set_visible(stats_words_word, FALSE);
+    gtk_widget_set_visible(stats_words_learn, FALSE);
+    gtk_widget_set_visible(stats_words_fail, FALSE);
+    gtk_widget_set_visible(stats_words_num, FALSE);
+    gtk_widget_set_visible(stats_sl, FALSE);
+    gtk_widget_set_visible(stats_words_num_all, FALSE);
+    gtk_widget_set_visible(stats_wrd, FALSE);
+    // повторение
+    gtk_widget_set_visible(retry_english, FALSE);
+    gtk_widget_set_visible(retry_label, FALSE);
+    gtk_widget_set_visible(retry_enty, FALSE);
+    gtk_widget_set_visible(retry_fails, FALSE);
+    gtk_widget_set_visible(retry_stop, FALSE);
+    gtk_widget_set_visible(retry_next, FALSE);
+    // изучение
+    gtk_widget_set_visible(learn_eng, FALSE);
+    gtk_widget_set_visible(learn_rus, FALSE);
+    gtk_widget_set_visible(learn_button_next, FALSE);
+}
+
+void edit_profile_3() {
+    // меню
+    gtk_widget_set_visible(menubar, FALSE);
+    // фон
+    gtk_widget_set_visible(all_hello, FALSE);
+    gtk_widget_set_visible(all_back, TRUE);
+    // приветствие
+    gtk_widget_set_visible(hello_welcome, FALSE);
+    gtk_widget_set_visible(hello_welcome2, FALSE);
+    gtk_widget_set_visible(hello_button, FALSE);
+    // имя
+    gtk_widget_set_visible(name_label, FALSE);
+    gtk_widget_set_visible(name_enty, FALSE);
+    gtk_widget_set_visible(name_button, FALSE);
+    // уровень
+    gtk_widget_set_visible(level_label, FALSE);
+    gtk_widget_set_visible(level_button_easy, FALSE);
+    gtk_widget_set_visible(level_button_middle, FALSE);
+    gtk_widget_set_visible(level_button_hight, FALSE);
+    // слова
+    gtk_widget_set_visible(words_label, TRUE);
+    gtk_widget_set_visible(number_button_num_1, TRUE);
+    gtk_widget_set_visible(number_button_num_2, TRUE);
+    gtk_widget_set_visible(number_button_num_3, TRUE);
+    gtk_widget_set_visible(number_button_num_4, TRUE);
+    // статус
+    gtk_widget_set_visible(stats_words, FALSE);
+    gtk_widget_set_visible(stats_learn, FALSE);
+    gtk_widget_set_visible(stats_fail, FALSE);
+    gtk_widget_set_visible(stats_words_word, FALSE);
+    gtk_widget_set_visible(stats_words_learn, FALSE);
+    gtk_widget_set_visible(stats_words_fail, FALSE);
+    gtk_widget_set_visible(stats_words_num, FALSE);
+    gtk_widget_set_visible(stats_sl, FALSE);
+    gtk_widget_set_visible(stats_words_num_all, FALSE);
+    gtk_widget_set_visible(stats_wrd, FALSE);
+    // повторение
+    gtk_widget_set_visible(retry_english, FALSE);
+    gtk_widget_set_visible(retry_label, FALSE);
+    gtk_widget_set_visible(retry_enty, FALSE);
+    gtk_widget_set_visible(retry_fails, FALSE);
+    gtk_widget_set_visible(retry_stop, FALSE);
+    gtk_widget_set_visible(retry_next, FALSE);
+    // изучение
+    gtk_widget_set_visible(learn_eng, FALSE);
+    gtk_widget_set_visible(learn_rus, FALSE);
+    gtk_widget_set_visible(learn_button_next, FALSE);
+}
+
+
+void level_button_hight_clicked_cb() {
+    edit_profile_3();
+}
+void level_button_middle_clicked_cb() {
+    edit_profile_3();
+}
+void level_button_easy_clicked_cb() {
+    edit_profile_3();
+}
+
+
+void name_button_clicked_cb() {
+    edit_profile_2();
+}
+
+
+void number_button_num_4_clicked_cb () {
+    menubar_learn_activate_cb();
+}
+void number_button_num_3_clicked_cb () {
+    menubar_learn_activate_cb();
+}
+void number_button_num_2_clicked_cb () {
+    menubar_learn_activate_cb();
+}
+void number_button_num_1_clicked_cb () {
+    menubar_learn_activate_cb();
+}
+
 int main (int argc, char *argv[]) {
+    int i = 0;
     gtk_init(&argc, &argv);
     windowgtk = create_windowgtk();
     gtk_widget_show(windowgtk);
+    if (i == 0) {
+        edit_profile_1();
+    }
+    if (i == 1) {
+        menubar_learn_activate_cb();
+    }
     gtk_main();
     return 0;
 }
