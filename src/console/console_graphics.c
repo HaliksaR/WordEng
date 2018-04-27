@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-
 #include "includes/term.h"
 #include "includes/logo.h"
 
@@ -60,7 +59,7 @@ int words_console(int words);
 int learn_console(database, profile_data, int max_index, int max_learn);
 int retry_console(database, profile_data, int max_index, int max_learn);
 //всплывающие окна
-int profile_console(database, profile_data, int max_index, int max_learn);
+int profile_console(database, profile_data, int max_index, int max_learn, int form);
 void about_console();
 
 void logo();
@@ -96,10 +95,11 @@ int main () {
     retry_console(main_data, main_profile, max_index, max_learn);
 
 */
-    about_console();
-   // delay(9000000);
-   // profile_console(main_data, main_profile, max_index, max_learn);
-    return 0;
+  /*  about_console();
+    delay(9000000);
+    profile_console(main_data, main_profile, max_index, max_learn);
+    return 0;*/
+    learn_console(main_data, main_profile, max_index, max_learn);
 }
 
 int guestion_console() {
@@ -201,7 +201,8 @@ int words_console(int words) {
 int learn_console(database data, profile_data profile, int max_index, int max_learn) {
     int xx = 54;
     int yy = 32;
-    
+    int form = 1;
+    char next[1];
     system("clear");
     frame(yy,xx);
     gotoxy(2,5);
@@ -219,9 +220,8 @@ int learn_console(database data, profile_data profile, int max_index, int max_le
     printf("%s", data.russian);
     gotoxy(alignment("Далее(N)", xx/2),20);
     printf("%sДалее(N)%s", RED, RESET);
-    scanf("%d", &xx);
+    scanf("%s", next);
     gotoxy(xx/2,22);
-    return 0;
 }
 
 int retry_console(database data, profile_data profile, int max_index, int max_learn) {
@@ -257,25 +257,61 @@ int retry_console(database data, profile_data profile, int max_index, int max_le
 }
 
 
-int profile_console(database data, profile_data profile, int max_index, int max_learn) {
+int profile_console(database data, profile_data profile, int max_index, int max_learn, int form) {
     int xx = 54;
-    int yy = 10;
-    frame(yy,xx);
-
-    gotoxy(alignment( profile.name, xx/2),5);
+    int yy = 16;
+    int yyk = yy + 10;
+    char exit[1];
+    gotoxy(xx,yy); 
+    printf("┤");
+    gotoxy(1,yy); 
+    printf("├");
+    for (int i = 2; i < xx; i++) {
+        for (int j = yy; j < yyk; j++){
+             gotoxy(i,j);
+             printf(" ");
+        }
+    }
+    for ( int i = 2; i < xx; i++) {
+        gotoxy(i,yy); printf("─");
+    }
+    gotoxy(xx - 8,yy); 
+    printf("%s Exit(Q)%s", RED , RESET);\
+    yy++;
+    gotoxy(alignment("Wordeng", xx/2),yy); 
+    printf("%s%sWordeng%s", RED, UNDERLINE, RESET);
+    yy++;
+    gotoxy(alignment("Учи английский с радостью!", xx/2),yy); 
+    printf("%sУчи английский с радостью!%s", GRAY, RESET);
+    yy++;
+    gotoxy(alignment( profile.name, xx/2),yy);
     printf("%s", profile.name);
-
-    gotoxy(alignment( "Выученных:", xx/2),7);
+    yy = yy + 2;
+    gotoxy(alignment( "Выученных:", xx/2),yy);
     printf("Выученных: %d", max_learn);
-
-    gotoxy(alignment( "Ошибок: ", xx/2),8);
+    yy++;
+    gotoxy(alignment( "Ошибок: ", xx/2),yy);
     printf("Ошибок: %d", profile.fail);
-
+    yy++;
+    gotoxy(xx,yyk); 
+    printf("┤");
+    gotoxy(1,yyk); 
+    printf("├");
+    for ( int i = 2; i < xx; i++) {
+        gotoxy(i,yyk); printf("─");
+    }
+    yy++;
+    gotoxy(alignment( "Назад (R)", xx/2),yy);
+    printf("Назад (R)");
+    yy++;
+    gotoxy(alignment( "Назад (R)", xx/2),yy);
+    scanf("%s", exit);
 }
 
 void about_console() {
     int xx = 54;
     int yy = 18;
+    system("clear");
     frame(yy,xx);
 
     gotoxy(alignment("WordEnd", xx/2),5);
@@ -314,7 +350,6 @@ int alignment(char* slovo, int pol) {
 }
 
 void frame(int dlina, int shirina) {
-    system("clear");
     gotoxy(1,1);
     printf("┌");
     for ( int i = 2; i < shirina; i++) {
@@ -324,7 +359,6 @@ void frame(int dlina, int shirina) {
     printf("┐");
     gotoxy(shirina - 8,1); 
     printf("%s Exit(Q)%s", RED , RESET);\
-    gotoxy(1,2);
     gotoxy(alignment("Wordeng", shirina/2),2); 
     printf("%s%sWordeng%s", RED, UNDERLINE, RESET);
     gotoxy(alignment("Учи английский с радостью!", shirina/2),3); 
@@ -347,4 +381,3 @@ void frame(int dlina, int shirina) {
     }
     printf("┘");
 }
-
