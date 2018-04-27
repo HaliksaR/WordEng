@@ -1,69 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h> 
-#include <gtk/gtk.h>
 #include <string.h>
-#include <glib.h>
+#include <ctype.h>
 
-    GtkWidget *dialoggtk;
-
-    GtkWidget *profilegtk;
-    GtkWidget *header1;
-    GtkWidget *profile_name;
-    GtkWidget *profile_level;
-    GtkWidget *profile_words;
-    GtkWidget *profile_fail;
-
-    GtkWidget *windowgtk;
-    /****МЕНЮ****/
-    GtkWidget *menubar;
-    /*HIDE SHOW!!!
-    ****ФОН***/
-    GtkWidget *all_hello;
-    GtkWidget *all_back;
-    /****ОКНО ПРИВЕТСТВИЯ*****/
-    GtkWidget *hello_welcome;
-    GtkWidget *hello_welcome2;
-    GtkWidget *hello_button;
-    /****ОКНО ИМЕНИ****/
-    GtkWidget *name_label;
-    GtkWidget *name_enty;
-    GtkWidget *name_button;
-    /****ОКНО УРОВНЯ*****/
-    GtkWidget *level_label;
-    GtkWidget *level_button_easy;
-    GtkWidget *level_button_middle;
-    GtkWidget *level_button_hight;
-    /****ОКНО СЛОВ*****/
-    GtkWidget *words_label;
-    GtkWidget *number_button_num_1;
-    GtkWidget *number_button_num_2;
-    GtkWidget *number_button_num_3;
-    GtkWidget *number_button_num_4;
-    /****СТАТУС****/
-    GtkWidget *stats_words;         // СТАТИК
-    GtkWidget *stats_learn;         // СТАТИК
-    GtkWidget *stats_fail;         // СТАТИК
-    /****СТАТУС ПЕРЕМЕННЫЕ****/
-    GtkWidget *stats_words_word;
-    GtkWidget *stats_words_learn;
-    GtkWidget *stats_words_fail;
-    GtkWidget *stats_words_num;
-    GtkWidget *stats_sl;         // СТАТИК
-    GtkWidget *stats_words_num_all;
-    GtkWidget *stats_wrd;        //СТАТИК
-    /****ОКНО ПОВТОРЕНИЯ*****/
-    GtkWidget *retry_english;
-    GtkWidget *retry_label;
-    GtkWidget *retry_enty;
-    GtkWidget *retry_fails;
-    GtkWidget *retry_stop;
-    GtkWidget *retry_next;
-    /****ОКНО УЧИТЬ****/
-    GtkWidget *learn_eng;
-    GtkWidget *learn_rus;
-    GtkWidget *learn_button_next;
-
-    GtkBuilder *builder;
+#include "gtkwidgets.h"
+#include "widget_build.h"
 
 
 static GtkWidget* create_windowgtk(void) {
@@ -83,185 +24,8 @@ static GtkWidget* create_windowgtk(void) {
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
     gtk_builder_connect_signals(builder, NULL);
 
-    windowgtk = GTK_WIDGET(gtk_builder_get_object(builder, "windowgtk"));
-    if (!windowgtk) {
-        g_critical("Ошибка при получении виджета windowgtk");
-    }
-    /*********************widgets build for hide and show*********************/
-    menubar = GTK_WIDGET(gtk_builder_get_object(builder, "menubar"));
-    if (!menubar) {
-        g_critical("Ошибка при получении виджета menubar");
-    }
-    learn_eng = GTK_WIDGET(gtk_builder_get_object(builder, "learn_eng"));
-    if (!learn_eng) {
-        g_critical("Ошибка при получении виджета learn_eng");
-    }
-    all_hello = GTK_WIDGET(gtk_builder_get_object(builder, "all_hello"));
-    if (!all_hello) {
-        g_critical("Ошибка при получении виджета all_hello");
-    }
-    all_back = GTK_WIDGET(gtk_builder_get_object(builder, "all_back"));
-    if (!all_back) {
-        g_critical("Ошибка при получении виджета all_back");
-    }
-    hello_welcome = GTK_WIDGET(gtk_builder_get_object(builder, "hello_welcome"));
-    if (!hello_welcome) {
-        g_critical("Ошибка при получении виджета hello_welcome");
-    }
-    hello_button = GTK_WIDGET(gtk_builder_get_object(builder, "hello_button"));
-    if (!hello_button) {
-        g_critical("Ошибка при получении виджета hello_button");
-    }
-    name_label = GTK_WIDGET(gtk_builder_get_object(builder, "name_label"));
-    if (!name_label) {
-        g_critical("Ошибка при получении виджета name_label");
-    }
-    name_enty = GTK_WIDGET(gtk_builder_get_object(builder, "name_enty"));
-    if (!name_enty) {
-        g_critical("Ошибка при получении виджета name_enty");
-    }
-    name_button = GTK_WIDGET(gtk_builder_get_object(builder, "name_button"));
-    if (!name_button) {
-        g_critical("Ошибка при получении виджета name_button");
-    }
-    level_label = GTK_WIDGET(gtk_builder_get_object(builder, "level_label"));
-    if (!level_label) {
-        g_critical("Ошибка при получении виджета level_label");
-    }
-    level_button_easy = GTK_WIDGET(gtk_builder_get_object(builder, "level_button_easy"));
-    if (!level_button_easy) {
-        g_critical("Ошибка при получении виджета level_button_easy");
-    }
-    level_button_middle = GTK_WIDGET(gtk_builder_get_object(builder, "level_button_middle"));
-    if (!level_button_middle) {
-        g_critical("Ошибка при получении виджета level_button_middle");
-    }
-    level_button_hight = GTK_WIDGET(gtk_builder_get_object(builder, "level_button_hight"));
-    if (!level_button_hight) {
-        g_critical("Ошибка при получении виджета level_button_hight");
-    }
-    number_button_num_1 = GTK_WIDGET(gtk_builder_get_object(builder, "number_button_num_1"));
-    if (!number_button_num_1) {
-        g_critical("Ошибка при получении виджета number_button_num_1");
-    }
-    number_button_num_2 = GTK_WIDGET(gtk_builder_get_object(builder, "number_button_num_2"));
-    if (!number_button_num_2) {
-        g_critical("Ошибка при получении виджета number_button_num_2");
-    }
-    number_button_num_3 = GTK_WIDGET(gtk_builder_get_object(builder, "number_button_num_3"));
-    if (!number_button_num_3) {
-        g_critical("Ошибка при получении виджета number_button_num_3");
-    }
-    number_button_num_4 = GTK_WIDGET(gtk_builder_get_object(builder, "number_button_num_4"));
-    if (!number_button_num_4) {
-        g_critical("Ошибка при получении виджета number_button_num_4");
-    }
-    stats_words = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words"));
-    if (!stats_words) {
-        g_critical("Ошибка при получении виджета stats_words");
-    }
-    stats_learn = GTK_WIDGET(gtk_builder_get_object(builder, "stats_learn"));
-    if (!stats_learn) {
-        g_critical("Ошибка при получении виджета stats_learn");
-    }
-    stats_fail = GTK_WIDGET(gtk_builder_get_object(builder, "stats_fail"));
-    if (!stats_fail) {
-        g_critical("Ошибка при получении виджета stats_fail");
-    }
-    stats_words_word = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words_word"));
-    if (!stats_words_word) {
-        g_critical("Ошибка при получении виджета stats_words_word");
-    }
-    stats_words_learn = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words_learn"));
-    if (!stats_words_learn) {
-        g_critical("Ошибка при получении виджета stats_words_learn");
-    }
-    stats_words_fail = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words_fail"));
-    if (!stats_words_fail) {
-        g_critical("Ошибка при получении виджета stats_words_fail");
-    }
-    stats_words_num = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words_num"));
-    if (!stats_words_num) {
-        g_critical("Ошибка при получении виджета stats_words_num");
-    }
-    words_label = GTK_WIDGET(gtk_builder_get_object(builder, "words_label"));
-    if (!words_label) {
-        g_critical("Ошибка при получении виджета words_label");
-    }
-    stats_wrd = GTK_WIDGET(gtk_builder_get_object(builder, "stats_wrd"));
-    if (!stats_wrd) {
-        g_critical("Ошибка при получении виджета stats_wrd");
-    }
-    retry_english = GTK_WIDGET(gtk_builder_get_object(builder, "retry_english"));
-    if (!retry_english) {
-        g_critical("Ошибка при получении виджета retry_english");
-    }
-    retry_label = GTK_WIDGET(gtk_builder_get_object(builder, "retry_label"));
-    if (!retry_label) {
-        g_critical("Ошибка при получении виджета retry_label");
-    }
-    retry_enty = GTK_WIDGET(gtk_builder_get_object(builder, "retry_enty"));
-    if (!retry_enty) {
-        g_critical("Ошибка при получении виджета retry_enty");
-    }
-    retry_fails = GTK_WIDGET(gtk_builder_get_object(builder, "retry_fails"));
-    if (!retry_fails) {
-        g_critical("Ошибка при получении виджета retry_fails");
-    }
-    retry_stop = GTK_WIDGET(gtk_builder_get_object(builder, "retry_stop"));
-    if (!retry_stop) {
-        g_critical("Ошибка при получении виджета retry_stop");
-    }
-    retry_next = GTK_WIDGET(gtk_builder_get_object(builder, "retry_next"));
-    if (!retry_next) {
-        g_critical("Ошибка при получении виджета retry_next");
-    }
-    learn_eng = GTK_WIDGET(gtk_builder_get_object(builder, "learn_eng"));
-    if (!learn_eng) {
-        g_critical("Ошибка при получении виджета learn_eng");
-    }
-    learn_rus = GTK_WIDGET(gtk_builder_get_object(builder, "learn_rus"));
-    if (!learn_rus) {
-        g_critical("Ошибка при получении виджета learn_rus");
-    }
-    learn_button_next = GTK_WIDGET(gtk_builder_get_object(builder, "learn_button_next"));
-    if (!learn_button_next) {
-        g_critical("Ошибка при получении виджета learn_button_next");
-    }
-    profile_name = GTK_WIDGET(gtk_builder_get_object(builder, "profile_name"));
-    if (!profile_name) {
-        g_critical("Ошибка при получении виджета profile_name");
-    }
-    header1 = GTK_WIDGET(gtk_builder_get_object(builder, "header1"));
-    if (!header1) {
-        g_critical("Ошибка при получении виджета header1");
-    }
-    profile_level = GTK_WIDGET(gtk_builder_get_object(builder, "profile_level"));
-    if (!profile_level) {
-        g_critical("Ошибка при получении виджета profile_level");
-    }
-    profile_words = GTK_WIDGET(gtk_builder_get_object(builder, "profile_words"));
-    if (!profile_words) {
-        g_critical("Ошибка при получении виджета profile_words");
-    }
-    profile_fail = GTK_WIDGET(gtk_builder_get_object(builder, "profile_fail"));
-    if (!profile_fail) {
-        g_critical("Ошибка при получении виджета profile_fail");
-    }
-    hello_welcome2 = GTK_WIDGET(gtk_builder_get_object(builder, "hello_welcome2"));
-    if (!hello_welcome2) {
-        g_critical("Ошибка при получении виджета hello_welcome2");
-    }   
+    widget_build();
 
-    stats_sl = GTK_WIDGET(gtk_builder_get_object(builder, "stats_sl"));
-    if (!stats_sl) {
-        g_critical("Ошибка при получении виджета stats_sl");
-    } 
-    stats_words_num_all = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words_num_all"));
-    if (!stats_words_num_all) {
-        g_critical("Ошибка при получении виджета stats_words_num_all");
-    }
-    /*********************widgets build for hide and show*********************/
     g_object_unref(builder);
 
     return windowgtk;
@@ -345,8 +109,17 @@ void menubar_profile_activate_cb() {
     main_window_profilegtk();
 }
 
-void menubar_learn_activate_cb () {
+//********ФУНКЦИЯ ЗАПОЛНЕНИЯ LABEL*******
+void status_text() {
+    int in = 54354;
+    char str[7];
+    sprintf(str, "%d", in);
+    gtk_label_set_text(GTK_LABEL(stats_words_word), str);
+}
+
+void menubar_learn_activate_cb() {
     // меню
+    status_text();
     gtk_widget_set_visible(menubar, TRUE);
     // фон
     gtk_widget_set_visible(all_hello, FALSE);
@@ -394,8 +167,9 @@ void menubar_learn_activate_cb () {
     gtk_widget_set_visible(learn_button_next, TRUE);
 }
 
-void menubar_retry_activate_cb () {
+void menubar_retry_activate_cb() {
     // меню
+    status_text();
     gtk_widget_set_visible(menubar, TRUE);
     // фон
     gtk_widget_set_visible(all_hello, FALSE);
@@ -434,7 +208,7 @@ void menubar_retry_activate_cb () {
     gtk_widget_set_visible(retry_english, TRUE);
     gtk_widget_set_visible(retry_label, TRUE);
     gtk_widget_set_visible(retry_enty, TRUE);
-    gtk_widget_set_visible(retry_fails, TRUE);
+    gtk_widget_set_visible(retry_fails, FALSE);
     gtk_widget_set_visible(retry_stop, TRUE);
     gtk_widget_set_visible(retry_next, TRUE);
     // изучение
@@ -643,34 +417,58 @@ void edit_profile_3() {
 void level_button_hight_clicked_cb() {
     edit_profile_3();
 }
+
 void level_button_middle_clicked_cb() {
     edit_profile_3();
 }
+
 void level_button_easy_clicked_cb() {
     edit_profile_3();
 }
 
 void name_button_clicked_cb() {
-    char *input2;
+    char *input2, *str2 = "";
     input2 = (char*)gtk_entry_get_text(GTK_ENTRY(name_enty));
-    g_print("Hostname: %s\n", input2);
-    edit_profile_2();
+    if (strcmp (input2, str2) != 0) {
+        g_print("Hostname: %s\n", input2);
+        gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
+        edit_profile_2();
+    }
 }
+
 void on_retry_next_clicked() {
-    char *input2;
+    char *input2, *str2 = "", *ansv = "заяц";
     input2 = (char*)gtk_entry_get_text(GTK_ENTRY(retry_enty));
-    g_print("Words: %s\n", input2);
+    for (int i = 0; i < sizeof(input2) - 1; i++) {
+        input2[i] = tolower(input2[i]);
+    }
+    if (strcmp (input2, str2) != 0) {
+        if (strcmp (input2, ansv) != 0) {
+            gtk_widget_set_visible(retry_fails, TRUE);
+        } else {
+            gtk_widget_set_visible(retry_fails, FALSE);
+        }
+        printf("Words: %s\n", input2);
+        gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
+    }
+}
+
+void on_retry_stop_clicked() {
+    menubar_learn_activate_cb();
     gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
 }
 void number_button_num_4_clicked_cb () {
     menubar_learn_activate_cb();
 }
+
 void number_button_num_3_clicked_cb () {
     menubar_learn_activate_cb();
 }
+
 void number_button_num_2_clicked_cb () {
     menubar_learn_activate_cb();
 }
+
 void number_button_num_1_clicked_cb () {
     menubar_learn_activate_cb();
 }
