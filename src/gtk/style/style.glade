@@ -7,6 +7,7 @@
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
+    <property name="icon">img/ico.svg</property>
     <property name="type_hint">dialog</property>
     <property name="program_name">WordEng</property>
     <property name="version">1.0 Beta</property>
@@ -217,6 +218,7 @@
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
+    <property name="icon">img/ico.svg</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -363,6 +365,7 @@
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
+    <property name="icon">img/ico.svg</property>
     <signal name="destroy" handler="windowgtk_destroy_cb" swapped="no"/>
     <child>
       <object class="GtkFixed">
@@ -855,7 +858,7 @@
           </object>
           <packing>
             <property name="x">60</property>
-            <property name="y">443</property>
+            <property name="y">438</property>
           </packing>
         </child>
         <child>
@@ -911,7 +914,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_retry_next_clicked" object="learn_eng" swapped="no"/>
+            <signal name="clicked" handler="on_retry_next_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">300</property>

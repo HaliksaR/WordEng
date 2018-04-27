@@ -70,11 +70,11 @@ static GtkWidget* create_windowgtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new();
-    if (!gtk_builder_add_from_file(builder, "./style/style.glade", &error)) {
+    if (!gtk_builder_add_from_file(builder, "./src/gtk/style/style.glade", &error)) {
         g_critical("Не могу загрузить файл: %s", error->message);
         g_error_free(error);
     }
-    GFile *file= g_file_new_for_path("./style/style.css");
+    GFile *file= g_file_new_for_path("./src/gtk/style/style.css");
     GtkCssProvider *provider = gtk_css_provider_new();
     if(!gtk_css_provider_load_from_file(provider, file, &error)) {
         g_warning("%s", error->message );
@@ -271,11 +271,11 @@ static GtkWidget* create_dialoggtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new ();
-    if (!gtk_builder_add_from_file (builder, "./style/style.glade", &error)) {
+    if (!gtk_builder_add_from_file (builder, "./src/gtk/style/style.glade", &error)) {
         g_critical("Не могу загрузить файл: %s", error->message);
         g_error_free(error);
     }
-    GFile *file= g_file_new_for_path("./style/style.css");
+    GFile *file= g_file_new_for_path("./src/gtk/style/style.css");
     GtkCssProvider *provider = gtk_css_provider_new();
     if(!gtk_css_provider_load_from_file(provider, file, &error)) {
         g_warning("%s", error->message );
@@ -297,11 +297,11 @@ static GtkWidget* create_profilegtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new ();
-    if (!gtk_builder_add_from_file(builder, "./style/style.glade", &error)) {
+    if (!gtk_builder_add_from_file(builder, "./src/gtk/style/style.glade", &error)) {
         g_critical("Не могу загрузить файл: %s", error->message);
         g_error_free(error);
     }
-    GFile *file= g_file_new_for_path("./style/style.css");
+    GFile *file= g_file_new_for_path("./src/gtk/style/style.css");
     GtkCssProvider *provider = gtk_css_provider_new();
     if(!gtk_css_provider_load_from_file(provider, file, &error)) {
         g_warning("%s", error->message);
@@ -343,12 +343,6 @@ void menubar_about_activate_cb() {
 
 void menubar_profile_activate_cb() {
     main_window_profilegtk();
-}
-
-void on_retry_next_clicked () { 
-}
-
-void on_retry_stop_clicked () { 
 }
 
 void menubar_learn_activate_cb () {
@@ -656,12 +650,18 @@ void level_button_easy_clicked_cb() {
     edit_profile_3();
 }
 
-
 void name_button_clicked_cb() {
+    char *input2;
+    input2 = (char*)gtk_entry_get_text(GTK_ENTRY(name_enty));
+    g_print("Hostname: %s\n", input2);
     edit_profile_2();
 }
-
-
+void on_retry_next_clicked() {
+    char *input2;
+    input2 = (char*)gtk_entry_get_text(GTK_ENTRY(retry_enty));
+    g_print("Words: %s\n", input2);
+    gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
+}
 void number_button_num_4_clicked_cb () {
     menubar_learn_activate_cb();
 }
