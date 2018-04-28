@@ -1,4 +1,4 @@
-#include "widget_build.h"
+#include "gtkwidgets.h" // билдер
 
 void widget_build() {
         windowgtk = GTK_WIDGET(gtk_builder_get_object(builder, "windowgtk"));
@@ -146,6 +146,21 @@ void widget_build() {
     if (!learn_button_next) {
         g_critical("Ошибка при получении виджета learn_button_next");
     }
+    hello_welcome2 = GTK_WIDGET(gtk_builder_get_object(builder, "hello_welcome2"));
+    if (!hello_welcome2) {
+        g_critical("Ошибка при получении виджета hello_welcome2");
+    }
+    stats_sl = GTK_WIDGET(gtk_builder_get_object(builder, "stats_sl"));
+    if (!stats_sl) {
+        g_critical("Ошибка при получении виджета stats_sl");
+    } 
+    stats_words_num_all = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words_num_all"));
+    if (!stats_words_num_all) {
+        g_critical("Ошибка при получении виджета stats_words_num_all");
+    }
+}
+
+void widget_build_profilegtk() {
     profile_name = GTK_WIDGET(gtk_builder_get_object(builder, "profile_name"));
     if (!profile_name) {
         g_critical("Ошибка при получении виджета profile_name");
@@ -166,18 +181,5 @@ void widget_build() {
     if (!profile_fail) {
         g_critical("Ошибка при получении виджета profile_fail");
     }
-    hello_welcome2 = GTK_WIDGET(gtk_builder_get_object(builder, "hello_welcome2"));
-    if (!hello_welcome2) {
-        g_critical("Ошибка при получении виджета hello_welcome2");
-    }   
-
-    stats_sl = GTK_WIDGET(gtk_builder_get_object(builder, "stats_sl"));
-    if (!stats_sl) {
-        g_critical("Ошибка при получении виджета stats_sl");
-    } 
-    stats_words_num_all = GTK_WIDGET(gtk_builder_get_object(builder, "stats_words_num_all"));
-    if (!stats_words_num_all) {
-        g_critical("Ошибка при получении виджета stats_words_num_all");
-    }
-    /*********************widgets build for hide and show*********************/
 }
+/*********************widgets build for hide and show*********************/

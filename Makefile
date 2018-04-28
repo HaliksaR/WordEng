@@ -5,13 +5,16 @@ CFLAGS  = -Wall -Werror -std=c99
 
 .PHONY: clean gtk console sh
 
-bin/WordEng: build/main_gtk.o build/widget_build.o bin
-	$(CC) $(CFLAGS) build/main_gtk.o build/widget_build.o -o bin/WordEng $(GTK_LIB)
+bin/WordEng: build/main_gtk.o build/widget_build.o build/body_main.o bin
+	$(CC) $(CFLAGS) build/main_gtk.o build/widget_build.o build/body_main.o -o bin/WordEng $(GTK_LIB)
 
-build/main_gtk.o: src/gtk/main_gtk.c  build #sh
+build/body_main.o: src/body_main.c build #sh
+	$(CC) $(CFLAGS) -c src/body_main.c -o build/body_main.o $(GTK_LIB)
+
+build/main_gtk.o: src/gtk/main_gtk.c build #sh
 	$(CC) $(CFLAGS) -c src/gtk/main_gtk.c -o build/main_gtk.o $(GTK_LIB)
 
-build/widget_build.o: src/gtk/widget_build.c build
+build/widget_build.o: src/gtk/widget_build.c build #sh
 	$(CC) $(CFLAGS) -c src/gtk/widget_build.c -o build/widget_build.o $(GTK_LIB)
 
 build:

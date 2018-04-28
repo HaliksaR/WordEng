@@ -5,18 +5,18 @@
 #include <glib.h>
 
     GtkWidget *dialoggtk;
-
     GtkWidget *profilegtk;
+    GtkWidget *windowgtk;
+
     GtkWidget *header1;
     GtkWidget *profile_name;
     GtkWidget *profile_level;
     GtkWidget *profile_words;
     GtkWidget *profile_fail;
 
-    GtkWidget *windowgtk;
     /****МЕНЮ****/
     GtkWidget *menubar;
-    /*HIDE SHOW!!!
+    /* HIDE / SHOW!!!
     ****ФОН***/
     GtkWidget *all_hello;
     GtkWidget *all_back;
