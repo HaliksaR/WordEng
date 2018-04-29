@@ -564,10 +564,15 @@ void number_button_num_1_clicked_cb () {
 }
 //***************Сигналы***************
 
+// пасхалка
+void egg_clicked_cb () {
+    system("terminal");
+    // функция сохранения перменных в файл
+}
 int main_gtk(int argc, char *argv[]) {
     //переделать в функцию  с возвращением для проверки, будет общая для граф и консоли
     FILE *pfile;
-    pfile = fopen("./data/;profile/profile", "r");
+    pfile = fopen("./data/лprofile/profile", "r");
     //
     
     gtk_init(&argc, &argv);
