@@ -6,11 +6,8 @@
 #include <stdlib.h>
 #include "includes/term.h"
 #include "includes/logo.h"
-<<<<<<< HaliksaR
 #include "../global.h"
 
-=======
->>>>>>> Add console graphics
 
 #define RESET "\033[0m"
 #define GREEN "\033[1;32m"
@@ -33,27 +30,6 @@
     
     // https://habrahabr.ru/post/119436/
 
-<<<<<<< HaliksaR
-=======
-typedef struct {
-    int index;  // индекс нужного слова
-    char *english; // само слово
-    char *russian; // переводы
-} database; // структура данных о слове
-
-typedef struct {
-    char *name; // имя 
-    int level; // уровень 1-3
-    int words; // количество слов 1-4
-    int fail; // количество ошибок за весь период
-    int *index; // индексы выученных слов
-} profile_data; // структура профиля
-
-int max_index; // количество строк в базе слов
-int max_learn;
-
-
->>>>>>> Add console graphics
 void delay(int msec) {
     float milli_seconds = msec; 
     float start_time = clock();
@@ -63,7 +39,6 @@ void delay(int msec) {
 int guestion_console(); // выбор интерфейса
 //если нет файла профиля
 int hello_console();
-<<<<<<< HaliksaR
 int name_console();
 int level_console();
 int words_console();
@@ -71,46 +46,19 @@ int words_console();
 int learn_console();
 int retry_console();
 //всплывающие окна
-int profile_console(int form);
-=======
-int name_console(char *name);
-int level_console(int level);
-int words_console(int words);
-// если есть
-int learn_console(database, profile_data, int max_index, int max_learn);
-int retry_console(database, profile_data, int max_index, int max_learn);
-//всплывающие окна
-int profile_console(database, profile_data, int max_index, int max_learn, int form);
+int profile_console();
 void about_console();
 
 void logo();
 int alignment(char* slovo, int pol);
 void frame(int dlina, int shirina);
 
-<<<<<<< HaliksaR
 int main_console () {
-   // int error;
-=======
-int main () {
-    database main_data;
-    main_data.index = 1;
-    main_data.english = "Rabbit";
-    main_data.russian = "Заяц, кролик";
-
-    profile_data main_profile;
-    main_profile.name = "Alex";
-    main_profile.level = 1;
-    main_profile.words = 4;
-    main_profile.fail = 66;
-    max_index = 6665;
-    max_learn = 65;
-
->>>>>>> Add console graphics
+    int error;
   /* guestion_console();
    delay(900000);
    hello_console();
    delay(900000);
-<<<<<<< HaliksaR
    name_console();
    delay(900000);
    level_console();
@@ -126,7 +74,7 @@ int main () {
     delay(9000000);
     profile_console();
     return 0;*/
-    /*system("clear");
+    system("clear");
     frame(32, 54);
     logo();
     while (error != 1) {
@@ -143,37 +91,16 @@ int main () {
     error = 0;
      while (error != 1) {
         error = words_console();
-    }*/
-    profile_console(1);
+    }
     
 
-=======
-   name_console(main_profile.name);
-   delay(900000);
-   level_console(main_profile.level);
-   delay(900000);
-
-    words_console(main_profile.words);
-    learn_console(main_data, main_profile, max_index, max_learn);
-    delay(1000000);
-    retry_console(main_data, main_profile, max_index, max_learn);
-
-*/
-  /*  about_console();
-    delay(9000000);
-    profile_console(main_data, main_profile, max_index, max_learn);
-    return 0;*/
-    learn_console(main_data, main_profile, max_index, max_learn);
+    return 0;
 }
 
 int guestion_console() {
     int xx = 54;
     int yy = 14;
-<<<<<<< HaliksaR
     char ansv[1];
-=======
-    char ansv[0];
->>>>>>> Add console graphics
     system("clear");
     frame(yy,xx);
     gotoxy(alignment("Выберите интерфейс", xx/2),6);
@@ -191,22 +118,14 @@ int guestion_console() {
 
 int hello_console() {
     int xx = 54;
-<<<<<<< HaliksaR
     //int yy = 32;
     char ansv[2];
-=======
-    int yy = 32;
-    system("clear");
-    frame(yy,xx);
-    logo();
->>>>>>> Add console graphics
     gotoxy(alignment("Добро подаловать!", xx/2),28);
     printf("Добро подаловать!");
     gotoxy(alignment("Для начала вы должны заполнить профиль:)", xx/2),29);
     printf("%sДля начала вы должны заполнить профиль:)%s\n\n", GRAY, RESET);
     gotoxy(alignment("Начать!(N)", xx/2),30);
     printf("%sНачать!(N)%s\n", RED, RESET);
-<<<<<<< HaliksaR
     gotoxy(xx/2, 31);
     scanf("%s", ansv);
     if ( ansv[0] == 'N' || ansv[0] == 'n' || strcmp(ansv, "т") == 0 || strcmp(ansv, "Т") == 0) {
@@ -219,53 +138,27 @@ int name_console() {
     int xx = 54;
     int yy = 32;
     name = (char*)malloc(100);
-=======
-	return 0;
-}
-
-int name_console(char *name) {
-    int xx = 54;
-    int yy = 32;
->>>>>>> Add console graphics
     system("clear");
     frame(yy,xx);
     gotoxy(alignment("Как вас зовут?", xx/2),14);
     printf("%sКак вас зовут?", CYAN);
-<<<<<<< HaliksaR
     gotoxy(alignment("Enter", xx/2),24);
     printf("%sEnter%s\n\n", RED, RESET);
-=======
-    gotoxy(17,15);
-    name = (char*)malloc(100);
-    gotoxy(alignment("Далее(N)", xx/2),24);
-    printf("%sДалее(N)%s\n\n", RED, RESET);
->>>>>>> Add console graphics
     gotoxy(18,16);
     printf("%s", CYAN);
     scanf("%s", name);
     name = realloc (name, strlen(name));
     printf("%s", RESET);
-<<<<<<< HaliksaR
     // хз как проверить пока что, время первый час
 	return 1;
 }
 
 int level_console() {
-=======
-	return 0;
-}
-
-int level_console(int level) {
->>>>>>> Add console graphics
     int xx = 54;
     int yy = 32;
     system("clear");
     frame(yy,xx);
-<<<<<<< HaliksaR
     char leveli[2];
-=======
-    char leveli;
->>>>>>> Add console graphics
     gotoxy(alignment("Каковы твои знания английского языка?",xx/2),6);
     printf("%sКаковы твои знания английского языка?%s", WHITE, RESET);
     gotoxy(alignment("Низкий(E)",xx/2),8);
@@ -275,7 +168,6 @@ int level_console(int level) {
     gotoxy(alignment("Высокий(H)",xx/2),12);
     printf("%sВысокий(H)%s", WHITE, RESET);
     gotoxy(xx/2,14);
-<<<<<<< HaliksaR
     scanf("%s", leveli);
     if (leveli[0] == 'E' || leveli[0] == 'e' || strcmp(leveli, "у") == 0 || strcmp(leveli, "У") == 0) {
         level = 1;
@@ -295,63 +187,34 @@ int level_console(int level) {
 }
 
 int words_console() {
-=======
-    scanf("%c", &leveli);
-    if (leveli == 'E' ){
-        //level = 1;
-    }
-    if (leveli == 'N') {
-        //level = 2;
-    }
-    if (leveli == 'H') {
-        //level = 3;
-    }
-	return 0;
-}
-
-int words_console(int words) {
->>>>>>> Add console graphics
     int xx = 54;
     int yy = 32;
     system("clear");
     frame(yy,xx);
-<<<<<<< HaliksaR
-=======
-    int leveli;
->>>>>>> Add console graphics
     gotoxy(alignment("Сколько слов вы хотите учить за раз?", xx/2),15);
     printf("%sСколько слов вы хотите учить за раз?%s", WHITE, RESET);
     gotoxy(2,17);
     printf("\t\t1\t2\t3\t4");
     gotoxy(26,18);
-<<<<<<< HaliksaR
     scanf("%d", &words);
     if ( words == 1 || words == 2 || words == 3 || words == 4 ) {
 	    return 1;
     }
     else {
-        return -1;
+        return 0;
     }
 }
 
 int learn_console() { // проверка русских сделать
-=======
-    scanf("%d", &leveli);
-	return 0;
-}
-
-int learn_console(database data, profile_data profile, int max_index, int max_learn) {
->>>>>>> Add console graphics
     int xx = 54;
     int yy = 32;
-    int form = 1;
+    //int form = 1;
     char next[1];
     system("clear");
     frame(yy,xx);
     gotoxy(2,5);
     printf(" Учить(L) Повторение(R) Профиль(P) Справка(A)");
     gotoxy(2,7);
-<<<<<<< HaliksaR
     printf("%s Слов: %d\t\t\t\t%d/%d слов", GRAY, max_index, 1, words);
     gotoxy(2,8);
     printf(" Выученных: %d", max_learn);
@@ -361,33 +224,41 @@ int learn_console(database data, profile_data profile, int max_index, int max_le
     printf("%s%s%s%s", UNDERLINE, CYAN, english, RESET);
     gotoxy(alignment(russian, xx/2),14);
     printf("%s", russian);
-=======
-    printf("%s Слов: %d\t\t\t\t%d/%d слов", GRAY, max_index, 1, profile.words);
-    gotoxy(2,8);
-    printf(" Выученных: %d", max_learn);
-    gotoxy(2,9);
-    printf(" Ошибок: %d%s", profile.fail, RESET);
-    gotoxy(alignment(data.english, xx/2),11);
-    //центрировать по первому принту - выполнено
-    printf("%s%s%s%s", UNDERLINE, CYAN, data.english, RESET);
-    gotoxy(alignment(data.russian, xx/2),14);
-    printf("%s", data.russian);
->>>>>>> Add console graphics
     gotoxy(alignment("Далее(N)", xx/2),20);
     printf("%sДалее(N)%s", RED, RESET);
     scanf("%s", next);
     gotoxy(xx/2,22);
-}
-
-int retry_console() {
-    int xx = 54;
-    int yy = 32;
-    int form = 2;
-=======
+    if ( next[0] == 'n' || next[0] == 'N' || strcmp(next, "т") == 0 || 
+        strcmp(next, "Т") == 0) {
+        // 
+    } else {
+        if ( next[0] == 'l' || next[0] == 'L' || strcmp(next, "д") == 0 || 
+            strcmp(next, "Д") == 0) {
+            // 
+        } else {
+            if ( next[0] == 'r' || next[0] == 'R' || strcmp(next, "к") == 0 || 
+                strcmp(next, "К") == 0) {
+                //
+            } else {
+                if ( next[0] == 'p' || next[0] == 'P' || strcmp(next, "з") == 0 || 
+                    strcmp(next, "З") == 0) {
+                    //
+                } else {
+                    if ( next[0] == 'a' || next[0] == 'A' || strcmp(next, "ф") == 0 || 
+                        strcmp(next, "Ф") == 0 || next[0] == 'f' || next[0] == 'F' || 
+                        strcmp(next, "а") == 0 || strcmp(next, "А") == 0) {
+                        //
+                    } else {
+                        return -1;
+                    }
+                }
+            }
+        }
+    }
     return 0;
 }
 
-int retry_console(database data, profile_data profile, int max_index, int max_learn) {
+int retry_console() {
     int xx = 54;
     int yy = 32;
 >>>>>>> Add console graphics
@@ -396,24 +267,14 @@ int retry_console(database data, profile_data profile, int max_index, int max_le
     gotoxy(2,5);
     printf(" Учить(L) Повторение(R) Профиль(P) Справка(A)");
     gotoxy(2,7);
-<<<<<<< HaliksaR
     printf("%s Слов: %d\t\t\t\t%d/%d слов", GRAY, max_index, 1, words);
     gotoxy(2,8);
     printf(" Выученных: %d", max_learn);
     gotoxy(2,9);
     printf(" Ошибок: %d%s", fail, RESET);
     gotoxy(alignment(english,xx/2),12);
-    printf("%s%s%s%s", UNDERLINE, CYAN, english, RESET);
-=======
-    printf("%s Слов: %d\t\t\t\t%d/%d слов", GRAY, max_index, 1, profile.words);
-    gotoxy(2,8);
-    printf(" Выученных: %d", max_learn);
-    gotoxy(2,9);
-    printf(" Ошибок: %d%s", profile.fail, RESET);
-    gotoxy(alignment(data.english,xx/2),12);
     //центрировать по первому принту
-    printf("%s%s%s%s", UNDERLINE, CYAN, data.english, RESET);
->>>>>>> Add console graphics
+    printf("%s%s%s%s", UNDERLINE, CYAN, english, RESET);
     gotoxy(12,18);
     printf("Ответ:");
 
@@ -434,7 +295,7 @@ int retry_console(database data, profile_data profile, int max_index, int max_le
 
 int profile_console(database data, profile_data profile, int max_index, int max_learn) {
 
-int profile_console(database data, profile_data profile, int max_index, int max_learn, int form) {
+int profile_console() {
     int xx = 54;
     int yy = 16;
     int yyk = yy + 10;
@@ -461,14 +322,14 @@ int profile_console(database data, profile_data profile, int max_index, int max_
     gotoxy(alignment("Учи английский с радостью!", xx/2),yy); 
     printf("%sУчи английский с радостью!%s", GRAY, RESET);
     yy++;
-    gotoxy(alignment( profile.name, xx/2),yy);
-    printf("%s", profile.name);
+    gotoxy(alignment( name, xx/2),yy);
+    printf("%s", name);
     yy = yy + 2;
     gotoxy(alignment( "Выученных:", xx/2),yy);
     printf("Выученных: %d", max_learn);
     yy++;
     gotoxy(alignment( "Ошибок: ", xx/2),yy);
-    printf("Ошибок: %d", profile.fail);
+    printf("Ошибок: %d", fail);
     yy++;
     gotoxy(xx,yyk); 
     printf("┤");
@@ -483,6 +344,7 @@ int profile_console(database data, profile_data profile, int max_index, int max_
     yy++;
     gotoxy(alignment( "Назад (R)", xx/2),yy);
     scanf("%s", exit);
+    return 0;
 }
 
 void about_console() {
@@ -515,12 +377,6 @@ void about_console() {
 
     gotoxy(alignment("Разработчики", xx/2),17);
     printf("Разработчики");
-<<<<<<< HaliksaR
-}
-
-*/
-=======
-
 }
 >>>>>>> Add console graphics
 
