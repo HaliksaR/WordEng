@@ -40,7 +40,7 @@ bin:
 clean:
 	rm -rf build bin
 
-console :
+console:
 	./bin/WordEng_console
 
 gtk :
