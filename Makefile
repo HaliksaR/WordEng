@@ -1,4 +1,4 @@
-GTK_LIB = `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
+GTK_LIB = `pkg-config --cflags --libs gtk+-3.0` -export-dynamic -no-pie
 OBJ = 
 CC = gcc
 CFLAGS  = -g2 -Wall -Werror -std=c99
@@ -11,11 +11,11 @@ bin/WordEng: build/main_gtk.o build/widget_build.o build/body_main.o build/main.
 build/body_main.o: src/body_main.c build #sh
 	$(CC) $(CFLAGS) -c src/body_main.c -o build/body_main.o $(GTK_LIB)
 
-build/main_gtk.o: src/gtk/main_gtk.c build #sh
-	$(CC) $(CFLAGS) -c src/gtk/main_gtk.c -o build/main_gtk.o $(GTK_LIB)
+build/console_graphics.o: src/console/console_graphics.c build #sh
+	$(CC) $(CFLAGS) -c src/console/console_graphics.c -o build/console_graphics.o $(GTK_LIB)
 
-build/widget_build.o: src/gtk/widget_build.c build #sh
-	$(CC) $(CFLAGS) -c src/gtk/widget_build.c -o build/widget_build.o $(GTK_LIB)
+build/logo.o: src/console/logo.c build #sh
+	$(CC) $(CFLAGS) -c src/console/logo.c -o build/logo.o $(GTK_LIB)
 
 build/main.o: src/main.c build #sh
 	$(CC) $(CFLAGS) -c src/main.c -o build/main.o $(GTK_LIB)
@@ -29,7 +29,7 @@ bin:
 clean:
 	rm -rf build bin
 
-console :
+console:
 	./bin/WordEng_console
 gtk :
 	gdb ./bin/WordEng
