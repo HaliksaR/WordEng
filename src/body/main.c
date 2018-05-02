@@ -8,8 +8,8 @@ void menu_first() {
 		printf("1 - View profile\n2 - Next card\n3 - Set level\n4 - Show level\n5 - Exit\n");
 		scanf("%d",&m);
 	}
-	char buf[128];
-	char a = 'r';
+	wchar_t buf[128];
+	wchar_t a = 'r';
 	int lvl;
 	switch(m) {
 		case 1:
@@ -19,7 +19,7 @@ void menu_first() {
 		case 2:
 		get_next_raund();
 		printf("%s\n", get_eng());
-		scanf("%s",buf);
+		scanf("%s", buf);
 
 		if(check_answer(buf) == 0) {
 			printf("Верно!\n");
@@ -77,7 +77,7 @@ void menu_first() {
 }
 
 
-int main (int argc, char** argv) {
+int main (int argc, wchar_t** argv) {
 	load_progress();
 	load_level();
 	for(;;) {
