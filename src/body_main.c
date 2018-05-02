@@ -59,3 +59,32 @@ int srav_index() {
         err != -1;
     }
 }
+
+#include <stdio.h>
+#include <wchar.h>
+#include <wctype.h>
+#include <locale.h>
+
+
+#define MAXCHAR 1000
+
+int main() {
+setlocale(LC_CTYPE, "");
+FILE *fp;
+wchar_t str[MAXCHAR];
+char* filename = "level1.txt";
+
+fp = fopen(filename, "r");
+if (fp == NULL){
+printf("Could not open file %s",filename);
+return 1;
+}
+for(int i = 0; i < 485; i++) {
+fgetws(str, MAXCHAR, fp);
+if (i == 50 - 1) {
+wprintf(L"%ls", str);
+fclose(fp);
+}
+}
+return 0;
+}
