@@ -127,13 +127,12 @@ void menubar_profile_activate_cb() {  //GOOD
     char str[100];
     sprintf(str, "%d", fail);
     gtk_label_set_text(GTK_LABEL(profile_fail), str);
-    gtk_label_set_text(GTK_LABEL(profile_name), name);
+    gtk_label_set_text(GTK_LABEL(profile_name), (char*)name);
     memset(str, 0, 100);
     sprintf(str, "%d", max_learn);
     gtk_label_set_text(GTK_LABEL(profile_words), str);
 }
 //***************билдеры***************
-
 
 //***************Отрисовка***************
 void status_text() {
@@ -478,24 +477,23 @@ void level_button_easy_clicked_cb() {  //GOOD
 
 void name_button_clicked_cb() {  //GOOD
     char *str2 = "";
-    name = (char*)gtk_entry_get_text(GTK_ENTRY(name_enty));
-    if (strcmp (name, str2) != 0) {
+    name = (wchar_t*)gtk_entry_get_text(GTK_ENTRY(name_enty));
+    if (wcscmp(name, (wchar_t*)str2) != 0) {
         gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
         edit_profile_2();
     }
 }
 
 void on_learn_button_next_clicked() {
+    // вызов функции нового слова заполнение глобалок
+    //  внос интекса в профиль
     char str[100];
     sprintf(str, "%d", words);
     gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
     memset(str, 0, 100);
-    // следующее слово и внос интекса в профиль
-    // если макс слов равно индексу, то переход на учить
-    // вызов функции нового слова заполнение глобалок
     if (i_words != words) {
-        gtk_label_set_text(GTK_LABEL(learn_eng), english);
-        gtk_label_set_text(GTK_LABEL(learn_rus), russian);
+        gtk_label_set_text(GTK_LABEL(learn_eng), (char*)english);
+        gtk_label_set_text(GTK_LABEL(learn_rus), (char*)russian);
         i_words++;
     } else {
         i_words = 1;
@@ -506,11 +504,11 @@ void on_learn_button_next_clicked() {
 
 void on_retry_next_clicked() {
     if (i_words != max_learn) {
-        gtk_label_set_text(GTK_LABEL(retry_english), english);
-        char *ansv, *str2 = "";
-        ansv = (char*)gtk_entry_get_text(GTK_ENTRY(retry_enty));
-
-        if (strcmp (ansv, str2) != 0) {
+        gtk_label_set_text(GTK_LABEL(retry_english), (char*)english);
+        char *str2 = "";
+        wchar_t *ansv = (wchar_t*)gtk_entry_get_text(GTK_ENTRY(retry_enty));
+        // функция проверки введенного и глобалки если 1 то верно если 0 то вывод лабел и фэйл++
+        if (wcscmp(ansv, (wchar_t*)str2) != 0) {
             /*int prof = ansv_russ(ansv);
             if (prof = -1) {
                 gtk_widget_set_visible(retry_fails, TRUE);
@@ -537,38 +535,42 @@ void on_retry_next_clicked() {
 void on_retry_stop_clicked() {  //GOOD
     menubar_learn_activate_cb();
     gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
+    // вызов функции заполнения глобалок из бд
 }
 
 void number_button_num_4_clicked_cb () {
     words = 4;
     menubar_learn_activate_cb();
     // функция сохранения перменных в файл
+    // вызов функции заполнения глобалок из бд
 }
 
 void number_button_num_3_clicked_cb () {
     words = 3;
     menubar_learn_activate_cb();
     // функция сохранения перменных в файл
+    // вызов функции заполнения глобалок из бд
 }
 
 void number_button_num_2_clicked_cb () {
     words = 2;
     menubar_learn_activate_cb();
     // функция сохранения перменных в файл
+    // вызов функции заполнения глобалок из бд
 }
 
 void number_button_num_1_clicked_cb () {
     words = 1;
     menubar_learn_activate_cb();
     // функция сохранения перменных в файл
+    // вызов функции заполнения глобалок из бд
 }
 //***************Сигналы***************
 
-// пасхалка
 void egg_clicked_cb () {
-    system("terminal");
-    // функция сохранения перменных в файл
+
 }
+
 int main_gtk(int argc, char *argv[]) {
     //переделать в функцию  с возвращением для проверки, будет общая для граф и консоли
     FILE *pfile;
