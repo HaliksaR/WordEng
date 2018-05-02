@@ -14,7 +14,7 @@ struct DB* read_db_from_file(const char* path){
 		return NULL;
 	}
 
-	fscanf(pFile, "%d\n", &(db->size));
+	fwscanf(pFile, L"%d\n", &(db->size));
 	if(db->size <= 0) {
 		fclose(pFile);
 		free(db);
