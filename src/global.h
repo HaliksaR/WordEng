@@ -1,13 +1,18 @@
 #ifndef __GLOBAL_H__
 #define __GLOBAL_H__
 
+    #include <stdlib.h>
+    #include <stdio.h> 
+    #include <string.h>
+    
     #include <wchar.h>
     #include <wctype.h>
     #include <locale.h>
 
     int index;  // индекс нужного слова
+    int russian_num;
     wchar_t *english; // само слово
-    wchar_t *russian; // переводы
+    wchar_t **russian; // переводы
 
     wchar_t *name; // имя 
     int level; // уровень 1-3
