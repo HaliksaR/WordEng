@@ -46,7 +46,7 @@ int words_console();
 int learn_console();
 int retry_console();
 //всплывающие окна
-int profile_console();
+int profile_console(int form);
 void about_console();
 
 void logo();
@@ -54,7 +54,7 @@ int alignment(char* slovo, int pol);
 void frame(int dlina, int shirina);
 
 int main_console () {
-    int error;
+   // int error;
   /* guestion_console();
    delay(900000);
    hello_console();
@@ -74,7 +74,7 @@ int main_console () {
     delay(9000000);
     profile_console();
     return 0;*/
-    system("clear");
+    /*system("clear");
     frame(32, 54);
     logo();
     while (error != 1) {
@@ -91,7 +91,8 @@ int main_console () {
     error = 0;
      while (error != 1) {
         error = words_console();
-    }
+    }*/
+    profile_console(1);
     
 
     return 0;
@@ -201,14 +202,14 @@ int words_console() {
 	    return 1;
     }
     else {
-        return 0;
+        return -1;
     }
 }
 
 int learn_console() { // проверка русских сделать
     int xx = 54;
     int yy = 32;
-    //int form = 1;
+    int form = 1;
     char next[1];
     system("clear");
     frame(yy,xx);
@@ -242,7 +243,7 @@ int learn_console() { // проверка русских сделать
             } else {
                 if ( next[0] == 'p' || next[0] == 'P' || strcmp(next, "з") == 0 || 
                     strcmp(next, "З") == 0) {
-                    //
+                    profile_console(form);
                 } else {
                     if ( next[0] == 'a' || next[0] == 'A' || strcmp(next, "ф") == 0 || 
                         strcmp(next, "Ф") == 0 || next[0] == 'f' || next[0] == 'F' || 
@@ -261,7 +262,7 @@ int learn_console() { // проверка русских сделать
 int retry_console() {
     int xx = 54;
     int yy = 32;
->>>>>>> Add console graphics
+    int form = 2;
     system("clear");
     frame(yy,xx);
     gotoxy(2,5);
@@ -273,7 +274,6 @@ int retry_console() {
     gotoxy(2,9);
     printf(" Ошибок: %d%s", fail, RESET);
     gotoxy(alignment(english,xx/2),12);
-    //центрировать по первому принту
     printf("%s%s%s%s", UNDERLINE, CYAN, english, RESET);
     gotoxy(12,18);
     printf("Ответ:");
@@ -295,11 +295,11 @@ int retry_console() {
 
 int profile_console(database data, profile_data profile, int max_index, int max_learn) {
 
-int profile_console() {
+int profile_console(int form) {
     int xx = 54;
     int yy = 16;
     int yyk = yy + 10;
-    char exit[1];
+    char exit[2];
     gotoxy(xx,yy); 
     printf("┤");
     gotoxy(1,yy); 
@@ -344,6 +344,9 @@ int profile_console() {
     yy++;
     gotoxy(alignment( "Назад (R)", xx/2),yy);
     scanf("%s", exit);
+    if ( exit[0] == 'r' || exit[0] == 'R' || strcmp(exit, "к") == 0 || strcmp(exit, "К") == 0){
+        return form;
+    }
     return 0;
 }
 
