@@ -24,7 +24,6 @@ FILE* level_file() { // GOOD
 int search_index(FILE *dictionaries) {
     wchar_t *str = malloc(sizeof(wchar_t) * 1000);
 
-<<<<<<< HEAD
     for (int i = 0; i < max_index; i++) {
         fgetws(str, 1000, dictionaries);
         if (i == index - 1) {
@@ -37,22 +36,6 @@ int search_index(FILE *dictionaries) {
     free(str);
     return -1;
 }
-=======
-void learn_rand() {
-    int err = -1;
-    index_arr = malloc((int)* 30);
-    index_arr = {56, 57, 58, 59, 60, 61}; // diapazon rand
-    fscanf(pFile, "%d\n", max_index);
-    while (err == -1) {
-        int index = 1 + rand() &max_index; // srand
-        err = srav_index();// сравнене  в0озврат укк если все гуд то 0 если нет то -1ж
-    }
-    // обращение по индексу функция эта функкия заполняет глоб
-    // функция для переноса индекса в конец профиля 
-}
-
-/* тут должен быть код андрея, тоесть весь скелет программы (обработчики файлов, информации, ошибок) */
->>>>>>> Andrey
 
 int srav_index(int h) { // GOOD
     if (index_arr == NULL) {
@@ -119,7 +102,6 @@ int retry_rand() { // рандом повторять
     return 0;
 }
 
-<<<<<<< HEAD
 int retry_rus(wchar_t *ansv) { // Сравнение ввода // GOOD
     for (int i = 0; i < russian_num; i++) {
         if (wcscmp(ansv, russian[i])== 0) {
@@ -167,61 +149,4 @@ void load_profile() {
     //test
 
     fclose(profile);
-=======
-void search_index() {
-    setlocale(LC_CTYPE, "");
-    FILE *fp;
-    wchar_t str[MAXCHAR];
-    char* filename = "level1.txt";
-
-    fp = fopen(filename, "r");
-    if (fp == NULL){
-        printf("Could not open file %s",filename);
-        return 1;
-    }
-    for(int i = 0; i < max_index; i++) {
-        fgetws(str, MAXCHAR, fp);
-        if (i == index - 1) {
-            wprintf(L"%ls", str);
-            fclose(fp);
-        }
-    }
-}
-
-int srav_index() {
-    if (index_arr == NULL) {
-        return 0;
-    } else {
-        err != -1;
-    }
-}
-
-#include <stdio.h>
-#include <wchar.h>
-#include <wctype.h>
-#include <locale.h>
-
-
-#define MAXCHAR 1000
-
-int main() {
-setlocale(LC_CTYPE, "");
-FILE *fp;
-wchar_t str[MAXCHAR];
-char* filename = "level1.txt";
-
-fp = fopen(filename, "r");
-if (fp == NULL){
-printf("Could not open file %s",filename);
-return 1;
-}
-for(int i = 0; i < 485; i++) {
-fgetws(str, MAXCHAR, fp);
-if (i == 50 - 1) {
-wprintf(L"%ls", str);
-fclose(fp);
-}
-}
-return 0;
->>>>>>> Andrey
 }
