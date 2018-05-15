@@ -6,3 +6,4 @@ script: make
 branches:
   only:
     - HaliksaR
+    - dev
