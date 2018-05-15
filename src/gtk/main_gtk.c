@@ -113,6 +113,7 @@ void main_window_profilegtk() {   //GOOD
 }
 
 void windowgtk_destroy_cb() {   //GOOD
+    save_profile(1);
     gtk_main_quit();
 }
 
@@ -552,7 +553,7 @@ void on_retry_next_clicked() {
     correct_index();
     wprintf(L"%ls\n", russian);
     char *str = (char*) malloc(sizeof(char) * 1000);
-    if (i_words != max_learn) {
+    if (i_words != max_learn + 1) {
         wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
         gtk_label_set_text(GTK_LABEL(retry_english), str);
         char *str2 = "";
@@ -568,6 +569,7 @@ void on_retry_next_clicked() {
                     delete_index_profile();
                 }
             } else {
+                retry_rand_up_label();
                 gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
                 gtk_widget_set_visible(retry_fails, FALSE);
                 i_words++;

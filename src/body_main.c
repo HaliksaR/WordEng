@@ -239,6 +239,16 @@ void save_profile(int num) {
             fclose(profile);
             break;
         case 1:
+            profile = fopen("./data/profile/.profile.txt", "w");
+            fprintf(profile, "name: %ls\n", name);
+            fprintf(profile, "level: %d\n", level);
+            fprintf(profile, "words: %d\n", words);
+            fprintf(profile, "fail: %d\n", fail);
+            fprintf(profile, "index:\n");
+            for(int i = 0; i < max_learn; i++) {
+                fprintf(profile, "%d\n", index_arr[i]);
+            }
+            fclose(profile);
             break;
     }
 }
