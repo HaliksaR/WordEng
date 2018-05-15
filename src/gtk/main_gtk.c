@@ -4,23 +4,6 @@
 #include "../body_main.h"
 
 /* GOOD - готовые функции */
-void correct_index() {
-    if (max_index == max_learn) {
-        if (level != 3) {
-            level++;
-            if (load_max_index() == -1) {
-                wprintf(L"ERROR OPEN DATA!\n");
-                gtk_main_quit();
-            }
-            save_profile(0);
-            max_learn = 0;
-        } else {
-            wprintf(L"DONE!\n");
-            remove("./data/profile/.profile.txt");
-            gtk_main_quit();
-        }
-    }
-}
 
 //***************билдеры***************
 static GtkWidget* create_windowgtk(void) {   //GOOD
@@ -45,6 +28,35 @@ static GtkWidget* create_windowgtk(void) {   //GOOD
     g_object_unref(builder);
 
     return windowgtk;
+}
+static GtkWidget* create_massage(void) {   //GOOD
+    GError* error = NULL;
+
+    builder = gtk_builder_new();
+    if (!gtk_builder_add_from_file(builder, "./data/style/style.glade", &error)) {
+        g_critical("Не могу загрузить файл: %s", error->message);
+        g_error_free(error);
+    }
+    GFile *file= g_file_new_for_path("./data/style/style.css");
+    GtkCssProvider *provider = gtk_css_provider_new();
+    if(!gtk_css_provider_load_from_file(provider, file, &error)) {
+        g_warning("%s", error->message);
+        g_error_free(error);
+    }
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+    gtk_builder_connect_signals(builder, NULL);
+
+    massage = GTK_WIDGET(gtk_builder_get_object(builder, "massage"));
+    if (!massage) {
+        g_critical("Ошибка при получении виджета massage");
+    }
+    levelup = GTK_WIDGET(gtk_builder_get_object(builder, "levelup"));
+    if (!levelup) {
+        g_critical("Ошибка при получении виджета levelup");
+    }
+    g_object_unref(builder);
+
+    return massage;
 }
 
 static GtkWidget* create_dialoggtk(void) {   //GOOD
@@ -110,6 +122,94 @@ void main_dialoggtk() {   //GOOD
 void main_window_profilegtk() {   //GOOD
     profilegtk = create_profilegtk();
     gtk_widget_show(profilegtk);
+}
+
+void clear_window() {
+    // меню
+    gtk_widget_set_visible(menubar, FALSE);
+    // фон
+    gtk_widget_set_visible(all_hello, TRUE);
+    gtk_widget_set_visible(all_back, FALSE);
+    // приветствие
+    gtk_widget_set_visible(hello_welcome, FALSE);
+    gtk_widget_set_visible(hello_welcome2, FALSE);
+    gtk_widget_set_visible(hello_button, FALSE);
+    // имя
+    gtk_widget_set_visible(name_label, FALSE);
+    gtk_widget_set_visible(name_enty, FALSE);
+    gtk_widget_set_visible(name_button, FALSE);
+    // уровень
+    gtk_widget_set_visible(level_label, FALSE);
+    gtk_widget_set_visible(level_button_easy, FALSE);
+    gtk_widget_set_visible(level_button_middle, FALSE);
+    gtk_widget_set_visible(level_button_hight, FALSE);
+    // слова
+    gtk_widget_set_visible(words_label, FALSE);
+    gtk_widget_set_visible(number_button_num_1, FALSE);
+    gtk_widget_set_visible(number_button_num_2, FALSE);
+    gtk_widget_set_visible(number_button_num_3, FALSE);
+    gtk_widget_set_visible(number_button_num_4, FALSE);
+    // статус
+    gtk_widget_set_visible(stats_words, FALSE);
+    gtk_widget_set_visible(stats_learn, FALSE);
+    gtk_widget_set_visible(stats_fail, FALSE);
+    gtk_widget_set_visible(stats_words_word, FALSE);
+    gtk_widget_set_visible(stats_words_learn, FALSE);
+    gtk_widget_set_visible(stats_words_fail, FALSE);
+    gtk_widget_set_visible(stats_words_num, FALSE);
+    gtk_widget_set_visible(stats_sl, FALSE);
+    gtk_widget_set_visible(stats_words_num_all, FALSE);
+    // повторение
+    gtk_widget_set_visible(retry_english, FALSE);
+    gtk_widget_set_visible(retry_label, FALSE);
+    gtk_widget_set_visible(retry_enty, FALSE);
+    gtk_widget_set_visible(retry_fails, FALSE);
+    gtk_widget_set_visible(retry_stop, FALSE);
+    gtk_widget_set_visible(retry_next, FALSE);
+    // изучение
+    gtk_widget_set_visible(learn_eng, FALSE);
+    gtk_widget_set_visible(learn_rus, FALSE);
+    gtk_widget_set_visible(learn_button_next, FALSE);    
+}
+int mass_age;
+
+void main_window_massage(int i) {  //GOOD
+    massage = create_massage();
+    switch (i) {
+        case 0:
+            save_profile(0);
+            max_learn = 0;
+            mass_age = 0;
+            break;
+        case 1:
+            mass_age = 1;
+            gtk_label_set_text(GTK_LABEL(levelup), "DONE LEARN ENGLISH!");
+            remove("./data/profile/.profile.txt");
+            clear_window();
+            break;
+    }
+    gtk_widget_show(massage);
+}
+
+void on_massage_destroy() {
+    if (mass_age == 1) {
+        gtk_main_quit();
+    }
+}
+
+void correct_index() {
+    if (max_index == max_learn) {
+        if (level != 3) {
+            level++;
+            if (load_max_index() == -1) {
+                wprintf(L"ERROR OPEN DATA!\n");
+                gtk_main_quit();
+            }
+            main_window_massage(0);
+        } else {
+            main_window_massage(1);
+        }
+    }
 }
 
 void windowgtk_destroy_cb() {   //GOOD
@@ -549,41 +649,43 @@ void on_learn_button_next_clicked() {
     free(str);
 }
 
-void on_retry_next_clicked() {
+int on_retry_next_clicked() {
     correct_index();
     wprintf(L"%ls\n", russian);
     char *str = (char*) malloc(sizeof(char) * 1000);
-    if (i_words != max_learn + 1) {
-        wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
-        gtk_label_set_text(GTK_LABEL(retry_english), str);
-        char *str2 = "";
-        char *ansv = (char*) gtk_entry_get_text(GTK_ENTRY(retry_enty));
-        wchar_t *wword = to_lowercase((wchar_t*)g_utf8_to_ucs4_fast(ansv, -1, NULL));
-        if (strcmp(ansv, str2) != 0) {
-            if (retry_rus(wword) == -1) {
-                gtk_widget_set_visible(retry_fails, TRUE);
-                fail++;
-                chanse++;
-                status_text();
-                if (chanse == 5) {
-                    delete_index_profile();
-                }
-            } else {
-                retry_rand_up_label();
-                gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
-                gtk_widget_set_visible(retry_fails, FALSE);
-                i_words++;
-                status_text();
+    wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
+    gtk_label_set_text(GTK_LABEL(retry_english), str);
+    char *str2 = "";
+    char *ansv = (char*) gtk_entry_get_text(GTK_ENTRY(retry_enty));
+    wchar_t *wword = to_lowercase((wchar_t*)g_utf8_to_ucs4_fast(ansv, -1, NULL));
+    if (strcmp(ansv, str2) != 0) {
+        if (retry_rus(wword) == -1) {
+            gtk_widget_set_visible(retry_fails, TRUE);
+            fail++;
+            chanse++;
+            status_text();
+            if (chanse == 5) {
+                delete_index_profile();
             }
+        } else {
+            retry_rand_up_label();
+            gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
+            gtk_widget_set_visible(retry_fails, FALSE);
+            i_words++;
+            status_text();
         }
+        sprintf(str, "%d", max_learn);
+        gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
     } else {
+        return 0;
+    }
+    if (i_words == max_learn) {
         i_words = 1;
         menubar_learn_activate_cb();
         gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
     }
-    sprintf(str, "%d", max_learn);
-    gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
     free(str);
+    return 0;
 }
 
 void on_retry_stop_clicked() {  //GOOD

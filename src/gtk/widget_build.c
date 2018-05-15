@@ -1,7 +1,7 @@
 #include "gtkwidgets.h" // билдер
 
 void widget_build() {
-        windowgtk = GTK_WIDGET(gtk_builder_get_object(builder, "windowgtk"));
+    windowgtk = GTK_WIDGET(gtk_builder_get_object(builder, "windowgtk"));
     if (!windowgtk) {
         g_critical("Ошибка при получении виджета windowgtk");
     }

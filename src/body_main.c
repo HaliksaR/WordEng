@@ -22,7 +22,7 @@ wchar_t* convert_to_wchar(char *input);// GOOD Законченно
 int load_max_index() {
     FILE *dictionaries = level_file();
     if (dictionaries == NULL) {
-        printf("Could not open file");
+        wprintf(L"Could not open file\n");
         return -1;
     }
     char *ind = malloc(sizeof(char) * 100);
@@ -98,7 +98,7 @@ int search_index(FILE *dictionaries) {
     for (int i = 0; i < max_index; i++) {
         memset(buff, 0, 1000);
         fgets(str, 1000, dictionaries);
-        if (i == index) {
+        if (i + 1 == index) {
             if (buff == NULL) {
                 return -1;
             }
@@ -142,14 +142,16 @@ int srav_index(int h) {
     if (index_arr == NULL) {
         return 0;
     } else {
-        for (int i = 0; i < max_learn + 1; i++) {
+        for (int i = 0; i < max_learn; i++) {
             if (h == 1) {
                 if (index_arr[i] == index) {
                     return -1;
                 }
             } else if (h == 2) {
-                if (index_arr[i] == index) {
-                    return 0;
+                for(int i = 0; i < max_learn; i++) {
+                    if (index_arr[i] == index) {
+                        return -1;
+                    }
                 }
             }              
         }
@@ -161,9 +163,15 @@ int learn_rand() {
     int err = -1;
     FILE *dictionaries = level_file();
     if (dictionaries == NULL) {
-        printf("Could not open file");
+        wprintf(L"Could not open file\n");
         return -1;
     }
+    char *ind = malloc(sizeof(char) * 10);
+    if (ind  == NULL) {
+        return -1;
+    }
+    fscanf(dictionaries, "%s\n", ind);
+    free(ind);
     while (err == -1) {
         srand(clock());
         index = 1 + rand() % max_index;
@@ -175,10 +183,10 @@ int learn_rand() {
 }
 
 int retry_rand() {
-    int err = -1;
+    int err = 0;
     FILE *dictionaries = level_file();
     if (dictionaries == NULL) {
-        printf("Could not open file");
+        wprintf(L"Could not open file\n");
         return -1;
     }
     char *ind = malloc(sizeof(char) * 100);
@@ -188,9 +196,9 @@ int retry_rand() {
     fscanf(dictionaries, "%s\n", ind);
     index = atoi(ind);
     free(ind);
-    while (err == -1) {
+    while (err == 0) {
         srand(clock());
-        index = 1 + rand() % max_index;
+        index = (1 + rand() % max_index);
         err = srav_index(2);
     }
     search_index(dictionaries);
@@ -227,29 +235,33 @@ int retry_rus(wchar_t *ansv) {
 
 
 void save_profile(int num) {
-    FILE *profile;
-    switch (num) {
-        case 0:
-            profile = fopen("./data/profile/.profile.txt", "w");
-            fprintf(profile, "name: %ls\n", name);
-            fprintf(profile, "level: %d\n", level);
-            fprintf(profile, "words: %d\n", words);
-            fprintf(profile, "fail: %d\n", fail);
-            fprintf(profile, "index:\n");
-            fclose(profile);
-            break;
-        case 1:
-            profile = fopen("./data/profile/.profile.txt", "w");
-            fprintf(profile, "name: %ls\n", name);
-            fprintf(profile, "level: %d\n", level);
-            fprintf(profile, "words: %d\n", words);
-            fprintf(profile, "fail: %d\n", fail);
-            fprintf(profile, "index:\n");
-            for(int i = 0; i < max_learn; i++) {
-                fprintf(profile, "%d\n", index_arr[i]);
-            }
-            fclose(profile);
-            break;
+    if (words != 0) {
+        FILE *profile;
+        switch (num) {
+            case 0:
+                profile = fopen("./data/profile/.profile.txt", "w");
+                fprintf(profile, "name: %ls\n", name);
+                fprintf(profile, "level: %d\n", level);
+                fprintf(profile, "words: %d\n", words);
+                fprintf(profile, "fail: %d\n", fail);
+                fprintf(profile, "index:\n");
+                fclose(profile);
+                break;
+            case 1:
+                profile = fopen("./data/profile/.profile.txt", "w");
+                fprintf(profile, "name: %ls\n", name);
+                fprintf(profile, "level: %d\n", level);
+                fprintf(profile, "words: %d\n", words);
+                fprintf(profile, "fail: %d\n", fail);
+                fprintf(profile, "index:\n");
+                for(int i = 0; i < max_learn; i++) {
+                    fprintf(profile, "%d\n", index_arr[i]);
+                }
+                fclose(profile);
+                break;
+        }
+    } else {
+        remove("./data/profile/.profile.txt");
     }
 }
 

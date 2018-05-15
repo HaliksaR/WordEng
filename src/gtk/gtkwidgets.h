@@ -7,6 +7,7 @@
     GtkWidget *dialoggtk;
     GtkWidget *profilegtk;
     GtkWidget *windowgtk;
+    GtkWidget *massage;
 
     GtkWidget *header1;
     GtkWidget *profile_name;
@@ -61,6 +62,7 @@
     GtkWidget *learn_eng;
     GtkWidget *learn_rus;
     GtkWidget *learn_button_next;
+    GtkWidget *levelup;
 
     GtkBuilder *builder;
     

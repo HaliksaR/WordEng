@@ -14,6 +14,11 @@ label#name {
     font-weight: bold;
     color: #FF1F4B;
 }
+label#levelup {
+    font-size: 15pt;
+    font-weight: bold;
+    color: rgb(192, 37, 68);
+}
 label#first {
     font-weight: bold;
     font-size: 20pt;
