@@ -380,6 +380,8 @@
     <accelerator key="q" signal="close" modifiers="GDK_CONTROL_MASK"/>
   </object>
   <object class="GtkWindow" id="windowgtk">
+    <property name="width_request">564</property>
+    <property name="height_request">846</property>
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
@@ -387,6 +389,8 @@
     <signal name="destroy" handler="windowgtk_destroy_cb" swapped="no"/>
     <child>
       <object class="GtkFixed">
+        <property name="width_request">564</property>
+        <property name="height_request">811</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -543,6 +547,7 @@
             <property name="height_request">70</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="max_length">40</property>
             <property name="primary_icon_stock">gtk-go-forward</property>
             <property name="placeholder_text" translatable="yes">Введите ваше имя</property>
           </object>
@@ -804,12 +809,15 @@
             <property name="name">1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="valign">start</property>
             <property name="label" translatable="yes">1</property>
+            <property name="width_chars">8</property>
             <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
-            <property name="x">487</property>
+            <property name="x">469</property>
             <property name="y">50</property>
           </packing>
         </child>
@@ -823,7 +831,7 @@
             <property name="track_visited_links">False</property>
           </object>
           <packing>
-            <property name="x">497</property>
+            <property name="x">517</property>
             <property name="y">49</property>
           </packing>
         </child>
@@ -832,42 +840,33 @@
             <property name="name">1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">end</property>
+            <property name="valign">end</property>
             <property name="label" translatable="yes">4</property>
+            <property name="justify">right</property>
             <property name="single_line_mode">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
-            <property name="x">503</property>
-            <property name="y">50</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="stats_wrd">
-            <property name="name">1</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes"> слов</property>
-            <property name="single_line_mode">True</property>
-          </object>
-          <packing>
-            <property name="x">510</property>
+            <property name="x">532</property>
             <property name="y">50</property>
           </packing>
         </child>
         <child>
           <object class="GtkLabel" id="retry_english">
             <property name="name">engword</property>
-            <property name="width_request">544</property>
+            <property name="width_request">504</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">30</property>
+            <property name="margin_right">30</property>
             <property name="label" translatable="yes">Rabbit</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
-            <property name="x">10</property>
             <property name="y">165</property>
           </packing>
         </child>
@@ -891,6 +890,7 @@
             <property name="height_request">70</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="max_length">40</property>
             <property name="primary_icon_stock">gtk-go-forward</property>
             <property name="placeholder_text" translatable="yes">Перевод</property>
           </object>
@@ -950,9 +950,11 @@
         <child>
           <object class="GtkLabel" id="learn_eng">
             <property name="name">engword</property>
-            <property name="width_request">564</property>
+            <property name="width_request">504</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">30</property>
+            <property name="margin_right">30</property>
             <property name="label" translatable="yes">Rabbit</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
@@ -965,15 +967,25 @@
         <child>
           <object class="GtkLabel" id="learn_rus">
             <property name="name">rus</property>
-            <property name="width_request">564</property>
+            <property name="width_request">464</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="vexpand">True</property>
             <property name="label" translatable="yes">Кролик</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
+            <property name="ellipsize">end</property>
+            <property name="width_chars">23</property>
+            <property name="max_width_chars">23</property>
             <property name="track_visited_links">False</property>
+            <property name="lines">5</property>
+            <property name="xalign">0.5</property>
+            <property name="yalign">0.5</property>
           </object>
           <packing>
+            <property name="x">50</property>
             <property name="y">205</property>
           </packing>
         </child>

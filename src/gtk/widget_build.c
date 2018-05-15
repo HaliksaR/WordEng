@@ -106,10 +106,6 @@ void widget_build() {
     if (!words_label) {
         g_critical("Ошибка при получении виджета words_label");
     }
-    stats_wrd = GTK_WIDGET(gtk_builder_get_object(builder, "stats_wrd"));
-    if (!stats_wrd) {
-        g_critical("Ошибка при получении виджета stats_wrd");
-    }
     retry_english = GTK_WIDGET(gtk_builder_get_object(builder, "retry_english"));
     if (!retry_english) {
         g_critical("Ошибка при получении виджета retry_english");

@@ -1,7 +1,7 @@
 GTK_LIB = `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
 OBJ = 
 CC = gcc
-CFLAGS  = -Wall -Werror -std=c99
+CFLAGS  = -g2 -Wall -Werror -std=c99
 
 .PHONY: clean gtk console sh
 
@@ -32,7 +32,7 @@ clean:
 console :
 	./bin/WordEng_console
 gtk :
-	./bin/WordEng
+	gdb ./bin/WordEng
 sh :
 	sudo chmod +x packages.sh
 	sudo ./packages.sh

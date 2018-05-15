@@ -50,7 +50,6 @@
     GtkWidget *stats_words_num;
     GtkWidget *stats_sl;         // СТАТИК
     GtkWidget *stats_words_num_all;
-    GtkWidget *stats_wrd;        //СТАТИК
     /****ОКНО ПОВТОРЕНИЯ*****/
     GtkWidget *retry_english;
     GtkWidget *retry_label;
