@@ -21,10 +21,7 @@
 #define NUNDERLINE "\033[4m"
 
 #define gotoxy(x,y)		printf(ESC "[%d;%dH", y, x);
-<<<<<<< HaliksaR
-=======
 #define resetcolor() printf(ESC "[0m")
->>>>>>> Add console graphics
 #define set_display_atrib(color) 	printf(ESC "[%dm",color); // цвет фона
     
     
@@ -63,12 +60,10 @@ int main_console () {
    delay(900000);
    level_console();
    delay(900000);
-
     words_console();
     learn_console();
     delay(1000000);
     retry_console();
-
 */
   /*  about_console();
     delay(9000000);
@@ -290,10 +285,7 @@ int retry_console() {
     printf("%s",RESET);
     return 0;
 }
-<<<<<<< HaliksaR
-/*
 
-int profile_console(database data, profile_data profile, int max_index, int max_learn) {
 
 int profile_console(int form) {
     int xx = 54;
@@ -355,7 +347,6 @@ void about_console() {
     int yy = 18;
     system("clear");
     frame(yy,xx);
->>>>>>> Add console graphics
 
     gotoxy(alignment("WordEnd", xx/2),5);
     printf("WordEnd");
@@ -381,7 +372,6 @@ void about_console() {
     gotoxy(alignment("Разработчики", xx/2),17);
     printf("Разработчики");
 }
->>>>>>> Add console graphics
 
 
 
