@@ -184,7 +184,6 @@ void main_window_massage(int i) {  //GOOD
         case 1:
             mass_age = 1;
             gtk_label_set_text(GTK_LABEL(levelup), "DONE LEARN ENGLISH!");
-            remove("./data/profile/.profile.txt");
             clear_window();
             break;
     }
@@ -193,6 +192,7 @@ void main_window_massage(int i) {  //GOOD
 
 void on_massage_destroy() {
     if (mass_age == 1) {
+        remove("./data/profile/.profile.txt");
         gtk_main_quit();
     }
 }

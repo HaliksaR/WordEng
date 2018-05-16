@@ -1,7 +1,6 @@
 #include "global.h" // глобальные переменные
 #include <time.h>
 
-
 // дочерние
 int search_index(FILE *dictionaries);// GOOD Законченно
 int srav_index(int h);// GOOD
@@ -240,6 +239,10 @@ void save_profile(int num) {
         switch (num) {
             case 0:
                 profile = fopen("./data/profile/.profile.txt", "w");
+                if (profile == NULL){
+                    system("mkdir ./data/profile/");
+                    return save_profile(0);
+                }
                 fprintf(profile, "name: %ls\n", name);
                 fprintf(profile, "level: %d\n", level);
                 fprintf(profile, "words: %d\n", words);
@@ -249,6 +252,10 @@ void save_profile(int num) {
                 break;
             case 1:
                 profile = fopen("./data/profile/.profile.txt", "w");
+                if (profile == NULL){
+                    system("mkdir ./data/profile/");
+                    return save_profile(1);
+                }
                 fprintf(profile, "name: %ls\n", name);
                 fprintf(profile, "level: %d\n", level);
                 fprintf(profile, "words: %d\n", words);
@@ -267,6 +274,9 @@ void save_profile(int num) {
 
 int load_profile() {
     FILE *profile = fopen("./data/profile/.profile.txt", "rb");
+    if (profile == NULL){
+        return -1;
+    }
     if (getc(profile) == EOF) {
         fclose(profile);
         return -1;
@@ -305,8 +315,10 @@ int load_profile() {
         return -1;
     }
     while (fscanf(profile, "%s", str) != EOF) {
-        index_arr[max_learn] = atoi(str);
-        max_learn++;
+        if (atoi(str) > 0 || atoi(str) < max_learn) {
+            index_arr[max_learn] = atoi(str);
+            max_learn++;
+        }
     }
     free(str);
     fclose(profile);
