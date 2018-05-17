@@ -10,7 +10,7 @@ int main(int argc, char *argv[] /*<---ВАЖНО! НЕ УДАЛЯТЬ*/) {
         main_gtk(argc, argv); //ВАЖНО ДЛЯ GTK! НЕ УДАЛЯТЬ
     } else if (qes == 2) {
         system("clear");
-        //ебануть мою хуйню
+        main_console();
     } else {
         return -1; 
     }

@@ -39,7 +39,7 @@ clean:
 	rm -rf build bin
 
 console :
-	./bin/WordEng_console
+	gdb ./bin/WordEng_console
 gtk :
 	./bin/WordEng
 sh :

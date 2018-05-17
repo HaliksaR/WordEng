@@ -7,6 +7,7 @@
 #include "includes/term.h"
 #include "includes/logo.h"
 #include "../global.h"
+#include "../body_main.h"
 
 #define resetcolor() wprintf(ESC L"[0m")
 #define set_display_atrib(color) 	wprintf(ESC L"[%dm",color); // цвет фона
@@ -19,62 +20,77 @@ void delay(int msec) {
     float start_time = clock();
     while (clock() <= start_time + milli_seconds);
 }
-
 int guestion_console(); // выбор интерфейса
 //если нет файла профиля
-int hello_console();
-int name_console();
-int level_console();
-int words_console();
+void hello_console();
+void name_console();
+void level_console();
+void words_console();
 // если есть
-int learn_console();
-int retry_console();
+void learn_console();
+void retry_console();
 //всплывающие окна
-int profile_console(int form);
-void about_console();
+void profile_console(int form);
+void about_console(int form);
 
 void logo();
 int alignment(wchar_t* slovo, int pol);
 void frame(int dlina, int shirina);
 
-int main_console () {
-   // int error;
-  /* guestion_console();
-   delay(900000);
-   hello_console();
-   delay(900000);
-   name_console();
-   delay(900000);
-   level_console();
-   delay(900000);
-    words_console();
-    learn_console();
-    delay(1000000);
-    retry_console();
-*/
-  /*  about_console();
-    delay(9000000);
-    profile_console();
-    return 0;*/
-    /*system("clear");
-    frame(32, 54);
-    logo();
-    while (error != 1) {
-        error = hello_console();
-    }
-    error = 0;
-    while (error != 1) {
-        error = name_console();
-    }
-    error = 0;
-    while (error != 1) {
-        error = level_console();
-    }
-    error = 0;
-     while (error != 1) {
-        error = words_console();
-    }*/
 
+void console_massage(int i) {  //GOOD
+    switch (i) {
+        case 0:
+            save_profile(0);
+            max_learn = 0;
+            break;
+        case 1:
+            system("clear");
+            gotoxy(2,1);
+            wprintf(L"DONE LEARN ENGLISH!\n");
+            remove("./data/profile/.profile.txt");
+            exit(0);
+            break;
+    }
+}
+
+void correct_index_console() {
+    if (max_index == max_learn) {
+        if (level != 3) {
+            level++;
+            if (load_max_index() == -1) {
+                wprintf(L"ERROR OPEN DATA!\n");
+                system("clear");
+                exit(0);
+            }
+            console_massage(0);
+        } else {
+            console_massage(1);
+        }
+    }
+}
+
+int main_console () {
+    FILE *pfile;
+    pfile = fopen("./data/profile/.profile.txt", "r");
+    if (pfile == NULL) {
+        hello_console();
+    } else {
+        if (load_profile() == -1) {
+            hello_console();
+        } else {
+            if (load_max_index() == -1) {
+                wprintf(L"ERROR OPEN DATA!\n");
+                return 0;       
+            }
+            i_words = 1;
+            if (learn_rand() == -1) {
+                system("clear");
+                exit(0);
+            }
+            learn_console();
+        }
+    }
     return 0;
 }
 
@@ -101,189 +117,294 @@ int guestion_console() {
     if ( ansv == L'c') {
         return 2;
     }
-	return -1;
-}
-/*
-int hello_console() {
-    int xx = 54;
-    //int yy = 32;
-    wchar_t ansv[2];
-    gotoxy(alignment("Добро подаловать!", xx/2),28);
-    wprintf(L"Добро подаловать!");
-    gotoxy(alignment("Для начала вы должны заполнить профиль:)", xx/2),29);
-    wprintf(L"%sДля начала вы должны заполнить профиль:)%s\n\n", GRAY, RESET);
-    gotoxy(alignment("Начать!(N)", xx/2),30);
-    wprintf(L"%sНачать!(N)%s\n", RED, RESET);
-    gotoxy(xx/2, 31);
-    wscanf(L"%ls", ansv);
-    if ( ansv[0] == 'N' || ansv[0] == 'n' || strcmp(ansv, "т") == 0 || strcmp(ansv, "Т") == 0) {
-        return 1;
+    if ( ansv == L'q') {
+        system("clear");
+        system("clear");
+        exit(0);
     }
-	return -1;
+	guestion_console();
+    return 0;
 }
 
-int name_console() {
+void hello_console() {
+    int xx = 54;
+    int yy = 32;
+    wchar_t ansv;
+    frame(yy,xx);
+    gotoxy(alignment(L"Добро подаловать!", xx/2),15);
+    wprintf(L"Добро подаловать!");
+    gotoxy(alignment(L"Для начала вы должны заполнить профиль:)", xx/2),16);
+    wprintf(L"%lsДля начала вы должны заполнить профиль:)%ls\n\n", GRAY, RESET);
+    gotoxy(alignment(L"Начать!(N)", xx/2),17);
+    wprintf(L"%lsНачать!(N)%ls\n", RED, RESET);
+    gotoxy(xx/2, 18);
+    wscanf(L"%lc", &ansv);
+    ansv = towlower(ansv);
+    if (ansv == L'n') {
+        name_console();
+    } else {
+        hello_console();
+    }
+}
+
+
+
+void name_console() {
     int xx = 54;
     int yy = 32;
     name = (wchar_t*)malloc(100);
     system("clear");
     frame(yy,xx);
-    gotoxy(alignment("Как вас зовут?", xx/2),14);
-    wprintf(L"%sКак вас зовут?", CYAN);
-    gotoxy(alignment("Enter", xx/2),24);
-    wprintf(L"%sEnter%s\n\n", RED, RESET);
+    gotoxy(alignment(L"Как вас зовут?", xx/2),14);
+    wprintf(L"%lsКак вас зовут?", CYAN);
+    gotoxy(alignment(L"Enter", xx/2),24);
+    wprintf(L"%lsEnter%ls\n\n", RED, RESET);
     gotoxy(18,16);
-    wprintf(L"%s", CYAN);
+    wprintf(L"%ls", CYAN);
     wscanf(L"%ls", name);
-    name = realloc (name, strlen(name));
-    wprintf(L"%s", RESET);
-    // хз как проверить пока что, время первый час
-	return 1;
+    name = realloc (name, wcslen(name));
+    wprintf(L"%ls", RESET);
+    level_console();
 }
 
-int level_console() {
-    int xx = 54;
-    int yy = 32;
-    system("clear");
-    frame(yy,xx);
-    wchar_t leveli[2];
-    gotoxy(alignment("Каковы твои знания английского языка?",xx/2),6);
-    wprintf(L"%sКаковы твои знания английского языка?%s", WHITE, RESET);
-    gotoxy(alignment("Низкий(E)",xx/2),8);
-    wprintf(L"%sНизкий(E)%s", WHITE, RESET);
-    gotoxy(alignment("Средний(N)",xx/2),10);
-    wprintf(L"%sСредний(N)%s", WHITE, RESET);
-    gotoxy(alignment("Высокий(H)",xx/2),12);
-    wprintf(L"%sВысокий(H)%s", WHITE, RESET);
-    gotoxy(xx/2,14);
-    wscanf(L"%ls", leveli);
-    if (leveli[0] == 'E' || leveli[0] == 'e' || strcmp(leveli, "у") == 0 || strcmp(leveli, "У") == 0) {
+int level_scan(wchar_t leveli) {
+    leveli = towlower(leveli);
+    if (leveli == L'e') {
         level = 1;
-        return 1;
+        if (load_max_index() == -1) {
+            system("clear");
+            exit(0);    
+        }
+        words_console();
+        return 0;
     }
-    if (leveli[0] == 'N'|| leveli[0] == 'n' || strcmp(leveli, "т") == 0 || strcmp(leveli, "Т") == 0 ) {
+    if (leveli == L'n') {
         level = 2;
-        return 1;
+        if (load_max_index() == -1) {
+            system("clear");
+            exit(0);    
+        }
+        words_console();
+        return 0;
     }
-    if (leveli[0] == 'H'|| leveli[0] == 'h' || strcmp(leveli, "р") == 0 || strcmp(leveli, "Р") == 0 ) {
+    if ( leveli == L'h') {
         level = 3;
-        return 1;
+        if (load_max_index() == -1) {
+            system("clear");
+            exit(0);    
+        }
+        words_console();
+        return 0;
     }
-	else {
-        return -1;
+    if ( leveli == L'q') {
+        system("clear");
+        exit(0);
     }
+    return -1;
 }
 
-int words_console() {
+void level_console() {
     int xx = 54;
     int yy = 32;
     system("clear");
     frame(yy,xx);
-    gotoxy(alignment("Сколько слов вы хотите учить за раз?", xx/2),15);
-    wprintf(L"%sСколько слов вы хотите учить за раз?%s", WHITE, RESET);
+    wchar_t leveli;
+    gotoxy(alignment(L"Каковы твои знания английского языка?",xx/2),6);
+    wprintf(L"%lsКаковы твои знания английского языка?%ls", WHITE, RESET);
+    gotoxy(alignment(L"Низкий(E)",xx/2),8);
+    wprintf(L"%lsНизкий(E)%ls", WHITE, RESET);
+    gotoxy(alignment(L"Средний(N)",xx/2),10);
+    wprintf(L"%lsСредний(N)%ls", WHITE, RESET);
+    gotoxy(alignment(L"Высокий(H)",xx/2),12);
+    wprintf(L"%lsВысокий(H)%ls", WHITE, RESET);
+    gotoxy(xx/2,14);
+    wscanf(L"%lc", &leveli);
+    if (level_scan(leveli) == 0) {
+        words_console();
+    } else {
+        level_console();
+    }
+}
+
+int words_scan(int wwords) {
+    if (wwords == 1 || wwords == 2 || wwords == 3 || wwords == 4 ) {
+        words = wwords;
+        return 0;
+    } else {
+       return -1;
+    }
+}
+
+void words_console() {
+    int xx = 54;
+    int yy = 32;
+    int wwords;
+    system("clear");
+    frame(yy,xx);
+    gotoxy(alignment(L"Сколько слов вы хотите учить за раз?", xx/2),15);
+    wprintf(L"%lsСколько слов вы хотите учить за раз?%ls", WHITE, RESET);
     gotoxy(2,17);
     wprintf(L"\t\t1\t2\t3\t4");
     gotoxy(26,18);
-    wscanf(L"%ld", &words);
-    if ( words == 1 || words == 2 || words == 3 || words == 4 ) {
-	    return 1;
+    wscanf(L"%ld", &wwords);
+    if (words_scan(wwords) == 0) {
+        save_profile(0);
+        i_words = 1;
+        if (learn_rand() == -1) {
+            system("clear");
+            exit(0);
+        }
+        learn_console();
+    } else {
+        words_console();
     }
-    else {
+}
+
+int learn_scan(wchar_t next) {
+    correct_index_console();
+    next = towlower(next);
+    if ( next == L'r') {
         return -1;
     }
-}
-
-int learn_console() { // проверка русских сделать
-    int xx = 54;
-    int yy = 32;
-    int form = 1;
-    wchar_t next[1];
-    system("clear");
-    frame(yy,xx);
-    gotoxy(2,5);
-    wprintf(L" Учить(L) Повторение(R) Профиль(P) Справка(A)");
-    gotoxy(2,7);
-    wprintf(L"%s Слов: %d\t\t\t\t%d/%d слов", GRAY, max_index, 1, words);
-    gotoxy(2,8);
-    wprintf(L" Выученных: %d", max_learn);
-    gotoxy(2,9);
-    wprintf(L" Ошибок: %d%s", fail, RESET);
-    gotoxy(alignment(english, xx/2),11);
-    wprintf(L"%s%s%s%s", UNDERLINE, CYAN, english, RESET);
-    gotoxy(alignment(russian, xx/2),14);
-    wprintf(L"%s", russian);
-    gotoxy(alignment("Далее(N)", xx/2),20);
-    wprintf(L"%sДалее(N)%s", RED, RESET);
-    wscanf(L"%ls", next);
-    gotoxy(xx/2,22);
-    if ( next[0] == 'n' || next[0] == 'N' || strcmp(next, "т") == 0 || 
-        strcmp(next, "Т") == 0) {
-        // 
-    } else {
-        if ( next[0] == 'l' || next[0] == 'L' || strcmp(next, "д") == 0 || 
-            strcmp(next, "Д") == 0) {
-            // 
-        } else {
-            if ( next[0] == 'r' || next[0] == 'R' || strcmp(next, "к") == 0 || 
-                strcmp(next, "К") == 0) {
-                //
-            } else {
-                if ( next[0] == 'p' || next[0] == 'P' || strcmp(next, "з") == 0 || 
-                    strcmp(next, "З") == 0) {
-                    profile_console(form);
-                } else {
-                    if ( next[0] == 'a' || next[0] == 'A' || strcmp(next, "ф") == 0 || 
-                        strcmp(next, "Ф") == 0 || next[0] == 'f' || next[0] == 'F' || 
-                        strcmp(next, "а") == 0 || strcmp(next, "А") == 0) {
-                        //
-                    } else {
-                        return -1;
-                    }
-                }
+    if ( next == L'p') {
+        profile_console(1);
+    }
+    if ( next == L'a') {
+        about_console(1);
+    }
+    if ( next == L'n') {
+        if (i_words != words) {
+            i_words++;
+            if (learn_rand() == -1) {
+                system("clear");
+                exit(0);
             }
+            return 0;
+        } else {
+            i_words = 1;
+            return -1;
         }
+    }
+    if (next == L'q') {
+        system("clear");
+        exit(0);
     }
     return 0;
 }
 
-int retry_console() {
+void learn_console() { // проверка русских сделать
     int xx = 54;
     int yy = 32;
-    int form = 2;
+    wchar_t next;
     system("clear");
     frame(yy,xx);
     gotoxy(2,5);
     wprintf(L" Учить(L) Повторение(R) Профиль(P) Справка(A)");
     gotoxy(2,7);
-    wprintf(L"%s Слов: %d\t\t\t\t%d/%d слов", GRAY, max_index, 1, words);
+    wprintf(L"%ls Слов: %ld\t\t\t\t%ld/%ld слов", GRAY, max_index, i_words, words);
     gotoxy(2,8);
-    wprintf(L" Выученных: %d", max_learn);
+    wprintf(L" Выученных: %ld", max_learn);
     gotoxy(2,9);
-    wprintf(L" Ошибок: %d%s", fail, RESET);
-    gotoxy(alignment(english,xx/2),12);
-    wprintf(L"%s%s%s%s", UNDERLINE, CYAN, english, RESET);
-    gotoxy(12,18);
-    wprintf(L"Ответ:");
+    wprintf(L" Ошибок: %ld%ls", fail, RESET);
+    gotoxy(alignment(english, xx/2),11);
+    wprintf(L"%ls%ls%ls%ls", UNDERLINE, CYAN, english, RESET);
+    gotoxy(alignment(russian, xx/2),14);
+    wprintf(L"%ls", russian);
+    gotoxy(alignment(L"Далее(N)", xx/2),20);
+    wprintf(L"%lsДалее(N)%ls", RED, RESET);
+    wscanf(L"%lc", &next);
+    gotoxy(xx/2,22);
+    int pruf = learn_scan(next);
+    if (pruf == 0) {
+        learn_console(); 
+    } else if (pruf == -1) {
+        retry_console();
+    }
+}
 
-    gotoxy(alignment("НЕВЕРНО!",xx/2),22);
-    wprintf(L"%sНЕВЕРНО!%s", RED, RESET); /// надо условие
-
-    gotoxy(alignment("Стоп(S)        Далее(N)",xx/2),28);
-    wprintf(L"%sСтоп(S)        %sДалее(N)%s", RED, GREEN, RESET);
-    gotoxy(12,19);
-    wchar_t *russ =(wchar_t*)malloc(100);
-    wprintf(L"%s",CYAN);
-    wscanf(L"%ls", russ);
-    wprintf(L"%s",RESET);
+int retry_scan(wchar_t *russ) {
+    correct_index_console();
+    russ = to_lowercase(russ);
+    if (wcscmp(russ, L"q") == 0) {
+        system("clear");
+        exit(0);
+    }
+    if (wcscmp(russ, L"p") == 0) {
+        profile_console(2);
+    }
+    if (wcscmp(russ, L"a") == 0) {
+        about_console(2);
+    }
+    if (wcscmp(russ, L"l") == 0) {
+        return 1;
+    }
+    if (wcscmp(russ, L"") != 0) {
+        if (retry_rus(russ) == -1) {
+            fail++;
+            chanse++;
+            if (chanse == 5) {
+                delete_index_profile();
+            }
+            gotoxy(alignment(L"НЕВЕРНО!",27),22);
+            wprintf(L"%lsНЕВЕРНО!%ls", RED, RESET);
+            return -1;
+        } else {
+            if (retry_rand() == -1) {
+                system("clear");
+                exit(0);
+            }  
+            i_words++;
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+    if (i_words == max_learn) {
+        return 1;
+    }
     return 0;
 }
 
+void retry_console() {
+    int xx = 54;
+    int yy = 32;
+    wchar_t *russ = (wchar_t*) malloc(sizeof(wchar_t) * 100);
+    system("clear");
+    frame(yy,xx);
+    gotoxy(2,5);
+    wprintf(L" Учить(L) Повторение(R) Профиль(P) Справка(A)");
+    gotoxy(2,7);
+    wprintf(L"%ls Слов: %ld\t\t\t\t%ld/%ld слов", GRAY, max_index, i_words, max_learn);
+    gotoxy(2,8);
+    wprintf(L" Выученных: %ld", max_learn);
+    gotoxy(2,9);
+    wprintf(L" Ошибок: %ld%ls", fail, RESET);
+    gotoxy(alignment(english,xx/2),12);
+    wprintf(L"%ls%ls%ls%ls", UNDERLINE, CYAN, english, RESET);
+    gotoxy(12,18);
+    wprintf(L"Ответ:");
+    wscanf(L"%ls", russ);
+    int pruf = retry_scan(russ);
+    if (pruf == -1) {
+        retry_console();
+    } else if (pruf == 1){
+        i_words = 1;
+        if (learn_rand() == -1) {
+            system("clear");
+            exit(0);
+        }
+        learn_console();
+    } else {
+        retry_console();
+    }
+    free(russ);
+}
 
-int profile_console(int form) {
+void profile_console(int form) {
     int xx = 54;
     int yy = 16;
     int yyk = yy + 10;
-    wchar_t exit[2];
+    wchar_t exi;
     gotoxy(xx,yy); 
     wprintf(L"┤");
     gotoxy(1,yy); 
@@ -298,22 +419,22 @@ int profile_console(int form) {
         gotoxy(i,yy); wprintf(L"─");
     }
     gotoxy(xx - 8,yy); 
-    wprintf(L"%s Exit(Q)%s", RED , RESET);\
+    wprintf(L"%ls Exit(Q)%ls", RED , RESET);
     yy++;
-    gotoxy(alignment("Wordeng", xx/2),yy); 
-    wprintf(L"%s%sWordeng%s", RED, UNDERLINE, RESET);
+    gotoxy(alignment(L"Wordeng", xx/2),yy); 
+    wprintf(L"%ls%lsWordeng%ls", RED, UNDERLINE, RESET);
     yy++;
-    gotoxy(alignment("Учи английский с радостью!", xx/2),yy); 
-    wprintf(L"%sУчи английский с радостью!%s", GRAY, RESET);
+    gotoxy(alignment(L"Учи английский с радостью!", xx/2),yy); 
+    wprintf(L"%lsУчи английский с радостью!%ls", GRAY, RESET);
     yy++;
     gotoxy(alignment( name, xx/2),yy);
-    wprintf(L"%s", name);
+    wprintf(L"%ls", name);
     yy = yy + 2;
-    gotoxy(alignment( "Выученных:", xx/2),yy);
-    wprintf(L"Выученных: %d", max_learn);
+    gotoxy(alignment(L"Выученных:", xx/2),yy);
+    wprintf(L"Выученных: %ld", max_learn);
     yy++;
-    gotoxy(alignment( "Ошибок: ", xx/2),yy);
-    wprintf(L"Ошибок: %d", fail);
+    gotoxy(alignment(L"Ошибок: ", xx/2),yy);
+    wprintf(L"Ошибок: %ld", fail);
     yy++;
     gotoxy(xx,yyk); 
     wprintf(L"┤");
@@ -323,49 +444,65 @@ int profile_console(int form) {
         gotoxy(i,yyk); wprintf(L"─");
     }
     yy++;
-    gotoxy(alignment( "Назад (R)", xx/2),yy);
-    wprintf(L"Назад (R)");
-    yy++;
-    gotoxy(alignment( "Назад (R)", xx/2),yy);
-    wscanf(L"%ls", exit);
-    if ( exit[0] == 'r' || exit[0] == 'R' || strcmp(exit, "к") == 0 || strcmp(exit, "К") == 0){
-        return form;
+    gotoxy(xx/2,yy);
+    wscanf(L"%lc", &exi);
+    exi = towlower(exi);
+    if (exi == L'q') {
+        if (form == 1) {
+            learn_console();
+        } else {
+            retry_console();
+        }
+    } else {
+        profile_console(form);
     }
-    return 0;
+
 }
 
-void about_console() {
+void about_console(int form) {
     int xx = 54;
     int yy = 18;
+    wchar_t exi;
     system("clear");
     frame(yy,xx);
 
-    gotoxy(alignment("WordEnd", xx/2),5);
+    gotoxy(alignment(L"WordEnd", xx/2),5);
     wprintf(L"WordEnd");
 
-    gotoxy(alignment("1.0 Beta", xx/2),7);
+    gotoxy(alignment(L"1.0 Beta", xx/2),7);
     wprintf(L"1.0 Beta");
 
-    gotoxy(alignment("Программа для заучивания слов иностранного языка", xx/2),9);
+    gotoxy(alignment(L"Программа для заучивания слов иностранного языка", xx/2),9);
     wprintf(L"Программа для заучивания слов иностранного языка");
 
-    gotoxy(alignment("(английского)", xx/2),10);
+    gotoxy(alignment(L"(английского)", xx/2),10);
     wprintf(L"(английского)");
 
-    gotoxy(alignment("Курсовая работа студентов Сибирского", xx/2),12);
+    gotoxy(alignment(L"Курсовая работа студентов Сибирского", xx/2),12);
     wprintf(L"Курсовая работа студентов Сибирского");
 
-    gotoxy(alignment("государственного университета телекоммуникации", xx/2),13);
+    gotoxy(alignment(L"государственного университета телекоммуникации", xx/2),13);
     wprintf(L"государственного университета телекоммуникации");
 
-    gotoxy(alignment("и информатики", xx/2),14);
+    gotoxy(alignment(L"и информатики", xx/2),14);
     wprintf(L"и информатики");
 
-    gotoxy(alignment("Разработчики", xx/2),17);
+    gotoxy(alignment(L"Разработчики", xx/2),17);
     wprintf(L"Разработчики");
+    wscanf(L"%lc", &exi);
+    exi = towlower(exi);
+    if (exi == L'q') {
+        if (form == 1) {
+            learn_console();
+        } else {
+            retry_console();
+        }
+    } else {
+        about_console(form);
+    }
 }
 
-*/
+
 
 int alignment(wchar_t* slovo, int pol) {
     int otstup, polovinaslova;
