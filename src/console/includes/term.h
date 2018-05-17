@@ -1,7 +1,7 @@
 #ifndef __TERM_EXAMPLE__
 #define __TERM_EXAMPLE__
 
-#define ESC "\033"
+#define ESC L"\033"
 
 //Format text
 #define RESETTT 		0
