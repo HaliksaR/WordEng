@@ -4,5 +4,6 @@
 #include "../global.h" //глобальные переменные
 
 int main_console();
+int guestion_console(); // выбор интерфейса
 
 #endif
