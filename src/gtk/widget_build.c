@@ -1,4 +1,4 @@
-#include "gtkwidgets.h" // билдер
+#include "headers/gtkwidgets.h" // билдер
 
 void widget_build() {
     windowgtk = GTK_WIDGET(gtk_builder_get_object(builder, "windowgtk"));
