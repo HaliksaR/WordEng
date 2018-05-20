@@ -1,7 +1,7 @@
 GTK_LIB = `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
 OBJ = build/main_gtk.o build/widget_build.o build/body_main.o build/build_window.o  build/signals.o build/rendering.o build/main.o
 CC = gcc
-CFLAGS  = -g2 -Wall -Werror -std=c99
+CFLAGS  = -Wall -Werror -std=c99
 
 .PHONY: clean gtk console sh
 
@@ -9,7 +9,7 @@ bin/WordEng: $(OBJ) bin
 	$(CC) $(CFLAGS) $(OBJ) -o bin/WordEng $(GTK_LIB)
 
 build/body_main.o: src/body_main.c build #sh
-	$(CC) $(CFLAGS) -c src/body_main.c -o build/body_main.o $(GTK_LIB)
+	$(CC) $(CFLAGS) -c src/body_main.c -o build/body_main.o
 
 build/main_gtk.o: src/gtk/main_gtk.c build #sh
 	$(CC) $(CFLAGS) -c src/gtk/main_gtk.c -o build/main_gtk.o $(GTK_LIB)
@@ -40,8 +40,12 @@ clean:
 
 console :
 	./bin/WordEng_console
+
 gtk :
-	gdb ./bin/WordEng
+	./bin/WordEng
+
 sh :
 	sudo chmod +x packages.sh
 	sudo ./packages.sh
+	chmod +x icon.sh
+	./icon.sh

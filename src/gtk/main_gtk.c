@@ -60,6 +60,7 @@ void correct_index() {
     if (max_index == max_learn) {
         if (level != 3) {
             level++;
+            free(index_arr);
             if (load_max_index() == -1) {
                 wprintf(L"ERROR OPEN DATA!\n");
                 gtk_main_quit();

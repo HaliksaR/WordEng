@@ -47,6 +47,7 @@ void delete_index_profile() {
     for  (int c = i; c < max_learn - 1; c++) {
         index_arr[c] = index_arr[c + 1];
     }
+    wprintf(L"DELETE INDEX -> %d\n", index);
     max_learn = max_learn - 1;
     index_arr = (int*)realloc(index_arr, sizeof(int) * max_learn);
 }
@@ -220,7 +221,7 @@ wchar_t* to_lowercase( wchar_t *word) {
 }
 
 int retry_rus(wchar_t *ansv) {
-    wprintf(L"%ls\n", russian);
+    wprintf(L"%ls", russian);
     russian = to_lowercase(russian);
     wchar_t *rus = (wchar_t*) malloc(sizeof(wchar_t) * (wcslen(russian)) + 1);
     wcscpy(rus, russian);
@@ -269,9 +270,14 @@ void save_profile(int num) {
                 fprintf(profile, "words: %d\n", words);
                 fprintf(profile, "fail: %d\n", fail);
                 fprintf(profile, "index:\n");
+                load_max_index();
                 for(int i = 0; i < max_learn; i++) {
-                    fprintf(profile, "%d\n", index_arr[i]);
+                    if (index_arr[i] > 0 && index_arr[i] < max_index){
+                        wprintf(L"{-%d-}", index_arr[i]);
+                        fprintf(profile, "%d\n", index_arr[i]);
+                    }
                 }
+                wprintf(L"\n");
                 fclose(profile);
                 break;
         }
@@ -305,6 +311,7 @@ int load_profile() {
     token = strtok(str, pruf);
     token = strtok(NULL, pruf);
     level = atoi(token);
+    load_max_index();
 
     fgets(str, 1000, profile);
     token = strtok(str, pruf);
@@ -323,11 +330,13 @@ int load_profile() {
         return -1;
     }
     while (fscanf(profile, "%s", str) != EOF) {
-        if (atoi(str) > 0 || atoi(str) < max_learn) {
+        if (atoi(str) > 0 && atoi(str) < max_index) {
             index_arr[max_learn] = atoi(str);
+            wprintf(L"{-%d-}", index_arr[max_learn]);
             max_learn++;
         }
     }
+    wprintf(L"\n");
     free(str);
     fclose(profile);
     return 0;

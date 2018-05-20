@@ -61,6 +61,7 @@ void on_learn_button_next_clicked() {
 }
 
 int on_retry_next_clicked() {
+    
     correct_index();
     char *str = (char*) malloc(sizeof(char) * 1000);
     wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
@@ -76,6 +77,9 @@ int on_retry_next_clicked() {
             status_text();
             if (chanse == 5) {
                 delete_index_profile();
+                i_words++;
+                retry_rand_up_label();
+                status_text();
             }
         } else {
             retry_rand_up_label();
@@ -128,7 +132,6 @@ void number_button_num_1_clicked_cb () {  //GOOD
     save_profile(0);
     menubar_learn_activate_cb();
 }
-//***************Сигналы***************
 
 void egg_clicked_cb () {
 

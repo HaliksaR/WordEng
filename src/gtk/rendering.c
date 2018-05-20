@@ -53,6 +53,8 @@ void clear_window() {
 }
 
 void menubar_learn_activate_cb() {
+    gtk_widget_set_sensitive (menubar_retry, TRUE);
+    gtk_widget_set_sensitive (menubar_learn, FALSE);
     correct_index();
     i_words = 1;
     gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
@@ -110,6 +112,8 @@ void menubar_learn_activate_cb() {
 }
 
 void menubar_retry_activate_cb() {
+    gtk_widget_set_sensitive (menubar_retry, FALSE);
+    gtk_widget_set_sensitive (menubar_learn, TRUE);
     correct_index();
     i_words = 1;
     chanse = 0;

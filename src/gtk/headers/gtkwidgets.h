@@ -63,6 +63,9 @@
     GtkWidget *learn_rus;
     GtkWidget *learn_button_next;
     GtkWidget *levelup;
+    
+    GtkWidget *menubar_learn;
+    GtkWidget *menubar_retry;
 
     GtkBuilder *builder;
     
