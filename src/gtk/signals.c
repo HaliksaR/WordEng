@@ -42,7 +42,6 @@ void name_button_clicked_cb() {  //GOOD
     }
 }
 
-
 void on_learn_button_next_clicked() {
     correct_index();
     char *str = (char*) malloc(sizeof(char) * 1000);
@@ -63,7 +62,6 @@ void on_learn_button_next_clicked() {
 
 int on_retry_next_clicked() {
     correct_index();
-    wprintf(L"%ls\n", russian);
     char *str = (char*) malloc(sizeof(char) * 1000);
     wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
     gtk_label_set_text(GTK_LABEL(retry_english), str);

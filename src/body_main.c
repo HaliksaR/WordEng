@@ -204,34 +204,42 @@ int retry_rand() {
     return 0;
 }
 
-wchar_t* to_lowercase(const wchar_t *word) {
+wchar_t* to_lowercase( wchar_t *word) {
     wchar_t *res = malloc(sizeof(wchar_t) * (wcslen(word) + 1));
     if (res == NULL) {
         return NULL;
     }
     res[wcslen(word)] = L'\0';
     for(int i = 0; i < wcslen(word); i++) {
+        if (towlower(word[i]) == L'ё') {
+            word[i] = L'e';
+        }
         res[i] = towlower(word[i]);
     }
     return res;
 }
 
 int retry_rus(wchar_t *ansv) {
+    wprintf(L"%ls\n", russian);
     russian = to_lowercase(russian);
-    wchar_t *rus = russian;
-    wchar_t *pruf = L", \n \0";
+    wchar_t *rus = (wchar_t*) malloc(sizeof(wchar_t) * (wcslen(russian)) + 1);
+    wcscpy(rus, russian);
+    wchar_t *pruf = L", \n";
     wchar_t *token, *ptr;
-	token = wcstok(rus, pruf, &ptr);
+	token = wcstok(russian, pruf, &ptr);
 	while (token) {
-        if (wcsncmp(ansv, token, wcslen(token) -1) == 0) {
+        if (wcsncmp(ansv, token, wcslen(token) - 1) == 0) {
             wprintf(L"DONE WORD\n");
+            wcscpy(russian, rus);
+            free(rus);
             return 0;
         }
 		token = wcstok(NULL, pruf, &ptr);
 	}
+    wcscpy(russian, rus);
+    free(rus);
     return -1;
 }
-
 
 void save_profile(int num) {
     if (words != 0) {

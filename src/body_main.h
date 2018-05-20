@@ -7,7 +7,7 @@ int retry_rus(wchar_t *ansv);
 void save_profile(int num);
 int load_profile();
 int load_max_index();
-wchar_t * to_lowercase(const wchar_t *word);
+wchar_t * to_lowercase(wchar_t *word);
 void delete_index_profile();
 
 #endif
