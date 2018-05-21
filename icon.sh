@@ -7,7 +7,7 @@ current_dir=$(pwd)
 echo "[Desktop Entry]
 Version=1.0
 Name=WordEng
-Exec=$current_dir/.WordEng -ui
+Exec=$current_dir/bin/WordEng -ui
 Path=$current_dir/
 Icon=$current_dir/data/style/img/logo.svg
 Terminal=false
