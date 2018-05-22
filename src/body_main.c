@@ -284,8 +284,8 @@ void save_profile(int num) {
                 load_max_index();
 
                 //wprintf(L"save_profile\n");
-                for(int i = 0; i < max_learn; i++) {
-                    if (index_arr[i] > 0 && index_arr[i] < max_index){
+                for(int i = 0; i <= max_learn; i++) {
+                    if (index_arr[i] > 0 && index_arr[i] <= max_index){
                         /*wprintf(L"{-%d-}", index_arr[i]);
                         wprintf(L"--%ld\n", i);*/
                         fprintf(profile, "%d\n", index_arr[i]);

@@ -47,6 +47,8 @@ int del = 4;
 
 void on_learn_button_next_clicked() {
     if (max_learn == max_index) {
+        save_profile(1);
+        load_profile();
         menubar_retry_activate_cb();
         gtk_widget_set_sensitive(menubar_learn, FALSE);
         gtk_widget_set_visible(menubar_learn, FALSE);
@@ -79,7 +81,7 @@ void on_learn_button_next_clicked() {
 }
 
 int on_retry_next_clicked() {
-    if (i_words == max_learn) {
+    if (i_words == max_learn && del != 1) {
         i_words = 1;
         menubar_learn_activate_cb();
         gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
@@ -88,6 +90,7 @@ int on_retry_next_clicked() {
     if (i_words == (max_learn / 2) && max_index == max_learn) {
         menubar_learn_activate_cb();
         correct_index();
+        del = 4;
         return 0;
     }
     //wprintf(L"%d --", max_learn);
