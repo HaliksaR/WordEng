@@ -49,17 +49,18 @@ void clear_window() {
     // изучение
     gtk_widget_set_visible(learn_eng, FALSE);
     gtk_widget_set_visible(learn_rus, FALSE);
-    gtk_widget_set_visible(learn_button_next, FALSE);    
+    gtk_widget_set_visible(learn_button_next, FALSE);
 }
 
 void menubar_learn_activate_cb() {
-    gtk_widget_set_sensitive (menubar_retry, TRUE);
-    gtk_widget_set_sensitive (menubar_learn, FALSE);
     correct_index();
+    learn_rand_up_label();
+    gtk_widget_set_sensitive(menubar_retry, TRUE);
+    gtk_widget_set_sensitive(menubar_learn, FALSE);
     i_words = 1;
-    gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
-    // меню
     status_text();
+    gtk_entry_set_text(GTK_ENTRY(retry_enty), "");
+    // меню
     gtk_widget_set_visible(menubar, TRUE);
     // фон
     gtk_widget_set_visible(all_hello, FALSE);
@@ -104,20 +105,20 @@ void menubar_learn_activate_cb() {
     gtk_widget_set_visible(learn_eng, TRUE);
     gtk_widget_set_visible(learn_rus, TRUE);
     gtk_widget_set_visible(learn_button_next, TRUE);
-    char *str = (char*) malloc(100);
+    char *str = (char *)malloc(100);
     sprintf(str, "%d", words);
     gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
     free(str);
-    learn_rand_up_label();
 }
 
 void menubar_retry_activate_cb() {
-    gtk_widget_set_sensitive (menubar_retry, FALSE);
-    gtk_widget_set_sensitive (menubar_learn, TRUE);
     correct_index();
+    retry_rand_up_label();
+    gtk_widget_set_sensitive(menubar_retry, FALSE);
+    gtk_widget_set_sensitive(menubar_learn, TRUE);
     i_words = 1;
     chanse = 0;
-    gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
+    gtk_entry_set_text(GTK_ENTRY(retry_enty), "");
     // меню
     status_text();
     gtk_widget_set_visible(menubar, TRUE);
@@ -164,14 +165,13 @@ void menubar_retry_activate_cb() {
     gtk_widget_set_visible(learn_eng, FALSE);
     gtk_widget_set_visible(learn_rus, FALSE);
     gtk_widget_set_visible(learn_button_next, FALSE);
-    char *str = (char*) malloc(100);
+    char *str = (char *)malloc(100);
     sprintf(str, "%d", max_learn);
     gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
     free(str);
-    retry_rand_up_label();
 }
 
-void hello_button_clicked_cb () {
+void hello_button_clicked_cb() {
     // меню
     gtk_widget_set_visible(menubar, FALSE);
     // фон

@@ -39,17 +39,29 @@ void add_index_profile() {
     index_arr = (int*) realloc(index_arr, sizeof(int) * max_learn + 1);
     index_arr[max_learn] = index;
     max_learn++;
+    wprintf(L"add_index_profile\n");
+    for(int i = 0; i < max_learn; i++) {
+        wprintf(L"{-%d-}", index_arr[i]);
+        wprintf(L"--%ld\n", i);
+    }
 }
 
 void delete_index_profile() {
     int i = 0;
     for (; index_arr[i] != index; i++);
-    for  (int c = i; c < max_learn - 1; c++) {
+    for (int c = i; c < max_learn - 1; c++) {
         index_arr[c] = index_arr[c + 1];
+
     }
-    wprintf(L"DELETE INDEX -> %d\n", index);
+    wprintf(L"DELETE INDEX -> %d", index);
     max_learn = max_learn - 1;
+    wprintf(L"--%ld\n", max_learn);
     index_arr = (int*)realloc(index_arr, sizeof(int) * max_learn);
+    wprintf(L"delete_index_profile\n");
+    for(int i = 0; i < max_learn; i++) {
+        wprintf(L"{-%d-}", index_arr[i]);
+        wprintf(L"--%ld\n", i);
+    }
 }
 
 FILE* level_file() {
@@ -131,7 +143,6 @@ int search_index(FILE *dictionaries) {
             return 0;
         }
     }
-    
     free(str);
     free(buff);
     fclose(dictionaries);
@@ -271,9 +282,12 @@ void save_profile(int num) {
                 fprintf(profile, "fail: %d\n", fail);
                 fprintf(profile, "index:\n");
                 load_max_index();
+
+                wprintf(L"save_profile\n");
                 for(int i = 0; i < max_learn; i++) {
                     if (index_arr[i] > 0 && index_arr[i] < max_index){
                         wprintf(L"{-%d-}", index_arr[i]);
+                        wprintf(L"--%ld\n", i);
                         fprintf(profile, "%d\n", index_arr[i]);
                     }
                 }
@@ -324,18 +338,21 @@ int load_profile() {
     fail = atoi(token);
 
     fgets(str, 1000, profile);
-    max_learn = 0;
     index_arr = (int*) malloc(sizeof(int) * 10000);
     if (index_arr == NULL) {
         return -1;
     }
+    max_learn = 0;
+    wprintf(L"load_profile\n");
     while (fscanf(profile, "%s", str) != EOF) {
-        if (atoi(str) > 0 && atoi(str) < max_index) {
+        if (atoi(str) > 0 && atoi(str) <= max_index) {
             index_arr[max_learn] = atoi(str);
             wprintf(L"{-%d-}", index_arr[max_learn]);
+            wprintf(L"--%ld\n", max_learn);
             max_learn++;
         }
     }
+    wprintf(L"%d\n", max_learn);
     wprintf(L"\n");
     free(str);
     fclose(profile);

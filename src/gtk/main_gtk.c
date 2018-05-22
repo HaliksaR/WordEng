@@ -17,6 +17,63 @@ void main_window_profilegtk() {   //GOOD
     gtk_widget_show(profilegtk);
 }
 
+void windowgtk_destroy_cb() {   //GOOD
+    save_profile(1);
+    gtk_main_quit();
+}
+
+void on_header_destroy() {   //GOOD
+    gtk_main_quit();
+}
+
+void menubar_about_activate_cb() {   //GOOD
+    main_dialoggtk();
+}
+
+void menubar_profile_activate_cb() {  //GOOD
+    main_window_profilegtk();
+
+    if (level == 1) {
+        gtk_label_set_text(GTK_LABEL(profile_level), "Низкий");
+    }
+    if (level == 2) {
+        gtk_label_set_text(GTK_LABEL(profile_level), "Средний");
+    }
+    if (level == 3) {
+        gtk_label_set_text(GTK_LABEL(profile_level), "Высокий");
+    }
+    char *str = (char*) malloc(sizeof(char) * 100);
+    wcstombs(str, name, sizeof(wchar_t) * wcslen(name) + 1);
+    gtk_label_set_text(GTK_LABEL(profile_name), str);
+    sprintf(str, "%d", fail);
+    gtk_label_set_text(GTK_LABEL(profile_fail), str);
+    sprintf(str, "%d", max_learn);
+    gtk_label_set_text(GTK_LABEL(profile_words), str);
+    free(str);
+}
+
+void learn_rand_up_label() {
+    char *str = (char*) malloc(sizeof(char) * 1000);
+    if (learn_rand() == -1) {
+        windowgtk_destroy_cb();
+    }
+    wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
+    gtk_label_set_text(GTK_LABEL(learn_eng), str);
+    wcstombs(str, russian, sizeof(wchar_t) * wcslen(russian) + 1);
+    gtk_label_set_text(GTK_LABEL(learn_rus), str);
+    free(str);
+}
+
+void retry_rand_up_label() {
+    char *str = (char*) malloc(sizeof(char) * 1000);
+    if (retry_rand() == -1) {
+        windowgtk_destroy_cb();
+    }  
+    wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
+    gtk_label_set_text(GTK_LABEL(retry_english), str);
+    free(str);
+}
+
 int mass_age;
 
 void main_window_massage(int i) {  //GOOD
@@ -26,6 +83,7 @@ void main_window_massage(int i) {  //GOOD
             save_profile(0);
             max_learn = 0;
             mass_age = 0;
+            i_words = 1;
             break;
         case 1:
             mass_age = 1;
@@ -65,72 +123,13 @@ void correct_index() {
                 wprintf(L"ERROR OPEN DATA!\n");
                 gtk_main_quit();
             }
-            status_text();
             main_window_massage(0);
+            learn_rand_up_label();
+            status_text();
         } else {
             main_window_massage(1);
         }
     }
-}
-
-void windowgtk_destroy_cb() {   //GOOD
-    save_profile(1);
-    gtk_main_quit();
-}
-
-void on_header_destroy() {   //GOOD
-    gtk_main_quit();
-}
-
-void menubar_about_activate_cb() {   //GOOD
-    main_dialoggtk();
-}
-
-void menubar_profile_activate_cb() {  //GOOD
-    main_window_profilegtk();
-
-    if (level == 1) {
-        gtk_label_set_text(GTK_LABEL(profile_level), "Низкий");
-    }
-    if (level == 2) {
-        gtk_label_set_text(GTK_LABEL(profile_level), "Средний");
-    }
-    if (level == 3) {
-        gtk_label_set_text(GTK_LABEL(profile_level), "Высокий");
-    }
-    char *str = (char*) malloc(sizeof(char) * 100);
-    wcstombs(str, name, sizeof(wchar_t) * wcslen(name) + 1);
-    gtk_label_set_text(GTK_LABEL(profile_name), str);
-    sprintf(str, "%d", fail);
-    gtk_label_set_text(GTK_LABEL(profile_fail), str);
-    sprintf(str, "%d", max_learn);
-    gtk_label_set_text(GTK_LABEL(profile_words), str);
-    free(str);
-}
-//***************билдеры***************
-
-//***************Отрисовка***************
-
-void learn_rand_up_label() {
-    char *str = (char*) malloc(sizeof(char) * 1000);
-    if (learn_rand() == -1) {
-        windowgtk_destroy_cb();
-    }
-    wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
-    gtk_label_set_text(GTK_LABEL(learn_eng), str);
-    wcstombs(str, russian, sizeof(wchar_t) * wcslen(russian) + 1);
-    gtk_label_set_text(GTK_LABEL(learn_rus), str);
-    free(str);
-}
-
-void retry_rand_up_label() {
-    char *str = (char*) malloc(sizeof(char) * 1000);
-    if (retry_rand() == -1) {
-        windowgtk_destroy_cb();
-    }  
-    wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
-    gtk_label_set_text(GTK_LABEL(retry_english), str);
-    free(str);
 }
 
 int main_gtk(int argc, char *argv[]) {
