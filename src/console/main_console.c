@@ -33,7 +33,6 @@ void retry_console();
 void profile_console(int form);
 void about_console(int form);
 
-void logo();
 int alignment(wchar_t* slovo, int pol);
 void frame(int dlina, int shirina);
 
@@ -111,14 +110,13 @@ int guestion_console() {
     gotoxy(xx/2,9);
     wscanf(L"%lc", &ansv);
     ansv = towlower(ansv);
-    if ( ansv == L'g') {
+    if ( ansv == L'g' ||  ansv == L'п' ) {
         return 1;
     }
-    if ( ansv == L'c') {
+    if ( ansv == L'c'||  ansv == L'с' ) {
         return 2;
     }
-    if ( ansv == L'q') {
-        system("clear");
+    if ( ansv == L'q'||  ansv == L'й' ) {
         system("clear");
         exit(0);
     }
@@ -128,19 +126,20 @@ int guestion_console() {
 
 void hello_console() {
     int xx = 54;
-    int yy = 32;
+    int yy = 33;
     wchar_t ansv;
     frame(yy,xx);
-    gotoxy(alignment(L"Добро подаловать!", xx/2),15);
+    logo();
+    gotoxy(alignment(L"Добро подаловать!", xx/2),29);
     wprintf(L"Добро подаловать!");
-    gotoxy(alignment(L"Для начала вы должны заполнить профиль:)", xx/2),16);
+    gotoxy(alignment(L"Для начала вы должны заполнить профиль:)", xx/2),30);
     wprintf(L"%lsДля начала вы должны заполнить профиль:)%ls\n\n", GRAY, RESET);
-    gotoxy(alignment(L"Начать!(N)", xx/2),17);
+    gotoxy(alignment(L"Начать!(N)", xx/2),31);
     wprintf(L"%lsНачать!(N)%ls\n", RED, RESET);
-    gotoxy(xx/2, 18);
+    gotoxy(xx/2, 32);
     wscanf(L"%lc", &ansv);
     ansv = towlower(ansv);
-    if (ansv == L'n') {
+    if (ansv == ( L'n' ) || ansv == L'т') {
         name_console();
     } else {
         hello_console();
@@ -169,7 +168,7 @@ void name_console() {
 
 int level_scan(wchar_t leveli) {
     leveli = towlower(leveli);
-    if (leveli == L'e') {
+    if (leveli == L'e' ||  leveli == L'у' ) {
         level = 1;
         if (load_max_index() == -1) {
             system("clear");
@@ -178,7 +177,7 @@ int level_scan(wchar_t leveli) {
         words_console();
         return 0;
     }
-    if (leveli == L'n') {
+    if (leveli == L'n' ||  leveli == L'т' ) {
         level = 2;
         if (load_max_index() == -1) {
             system("clear");
@@ -187,7 +186,7 @@ int level_scan(wchar_t leveli) {
         words_console();
         return 0;
     }
-    if ( leveli == L'h') {
+    if ( leveli == L'h' ||  leveli == L'р' ) {
         level = 3;
         if (load_max_index() == -1) {
             system("clear");
@@ -196,7 +195,7 @@ int level_scan(wchar_t leveli) {
         words_console();
         return 0;
     }
-    if ( leveli == L'q') {
+    if ( leveli == L'q' ||  leveli == L'й' ) {
         system("clear");
         exit(0);
     }
@@ -263,16 +262,16 @@ void words_console() {
 int learn_scan(wchar_t next) {
     correct_index_console();
     next = towlower(next);
-    if ( next == L'r') {
+    if ( next == L'r' ||  next == L'к' ) {
         return -1;
     }
-    if ( next == L'p') {
+    if ( next == L'p' ||  next == L'з' ) {
         profile_console(1);
     }
-    if ( next == L'a') {
+    if ( next == L'a' ||  next == L'ф' ) {
         about_console(1);
     }
-    if ( next == L'n') {
+    if ( next == L'n' ||  next == L'т' ) {
         if (i_words != words) {
             i_words++;
             if (learn_rand() == -1) {
@@ -285,7 +284,7 @@ int learn_scan(wchar_t next) {
             return -1;
         }
     }
-    if (next == L'q') {
+    if (next == L'q' ||  next == L'й' ) {
         system("clear");
         exit(0);
     }
@@ -316,7 +315,7 @@ void learn_console() { // проверка русских сделать
     gotoxy(xx/2,22);
     int pruf = learn_scan(next);
     if (pruf == 0) {
-        learn_console(); 
+        learn_console();
     } else if (pruf == -1) {
         retry_console();
     }
@@ -325,17 +324,17 @@ void learn_console() { // проверка русских сделать
 int retry_scan(wchar_t *russ) {
     correct_index_console();
     russ = to_lowercase(russ);
-    if (wcscmp(russ, L"q") == 0) {
+    if (wcscmp(russ, L"q") == 0 || wcscmp(russ, L"й")) {
         system("clear");
         exit(0);
     }
-    if (wcscmp(russ, L"p") == 0) {
+    if (wcscmp(russ, L"p") == 0 || wcscmp(russ, L"з") == 0) {
         profile_console(2);
     }
-    if (wcscmp(russ, L"a") == 0) {
+    if (wcscmp(russ, L"a" ) == 0 || wcscmp(russ, L"ф") == 0) {
         about_console(2);
     }
-    if (wcscmp(russ, L"l") == 0) {
+    if (wcscmp(russ, L"l" ) == 0 || wcscmp(russ, L"д") == 0) {
         return 1;
     }
     if (wcscmp(russ, L"") != 0) {
@@ -447,7 +446,7 @@ void profile_console(int form) {
     gotoxy(xx/2,yy);
     wscanf(L"%lc", &exi);
     exi = towlower(exi);
-    if (exi == L'q') {
+    if (exi == L'q' || exi == L'й') {
         if (form == 1) {
             learn_console();
         } else {
@@ -491,7 +490,7 @@ void about_console(int form) {
     wprintf(L"Разработчики");
     wscanf(L"%lc", &exi);
     exi = towlower(exi);
-    if (exi == L'q') {
+    if (exi == L'q' || exi == L'й') {
         if (form == 1) {
             learn_console();
         } else {

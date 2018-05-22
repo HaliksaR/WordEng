@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[] /*<---ВАЖНО! НЕ УДАЛЯТЬ*/) {
     setlocale(LC_CTYPE, "");
-    int qes = guestion_console(); //вотздесь
+    int qes = guestion_console();
     if (qes == 1) {
         system("clear");
         main_gtk(argc, argv); //ВАЖНО ДЛЯ GTK! НЕ УДАЛЯТЬ

@@ -1,0 +1,7 @@
+name: артём
+level: 1
+words: 4
+fail: 0
+index:
+192
+290
