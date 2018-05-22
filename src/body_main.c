@@ -39,11 +39,11 @@ void add_index_profile() {
     index_arr = (int*) realloc(index_arr, sizeof(int) * max_learn + 1);
     index_arr[max_learn] = index;
     max_learn++;
-    wprintf(L"add_index_profile\n");
+    /*wprintf(L"add_index_profile\n");
     for(int i = 0; i < max_learn; i++) {
         wprintf(L"{-%d-}", index_arr[i]);
         wprintf(L"--%ld\n", i);
-    }
+    }*/
 }
 
 void delete_index_profile() {
@@ -53,15 +53,15 @@ void delete_index_profile() {
         index_arr[c] = index_arr[c + 1];
 
     }
-    wprintf(L"DELETE INDEX -> %d", index);
+    //wprintf(L"DELETE INDEX -> %d", index);
     max_learn = max_learn - 1;
-    wprintf(L"--%ld\n", max_learn);
+    //wprintf(L"--%ld\n", max_learn);
     index_arr = (int*)realloc(index_arr, sizeof(int) * max_learn);
-    wprintf(L"delete_index_profile\n");
+    /*wprintf(L"delete_index_profile\n");
     for(int i = 0; i < max_learn; i++) {
         wprintf(L"{-%d-}", index_arr[i]);
         wprintf(L"--%ld\n", i);
-    }
+    }*/
 }
 
 FILE* level_file() {
@@ -171,7 +171,6 @@ int srav_index(int h) {
 }
 
 int learn_rand() {
-    wprintf(L"a ya tut\n");
     int err = -1;
     FILE *dictionaries = level_file();
     if (dictionaries == NULL) {
@@ -284,15 +283,15 @@ void save_profile(int num) {
                 fprintf(profile, "index:\n");
                 load_max_index();
 
-                wprintf(L"save_profile\n");
+                //wprintf(L"save_profile\n");
                 for(int i = 0; i < max_learn; i++) {
                     if (index_arr[i] > 0 && index_arr[i] < max_index){
-                        wprintf(L"{-%d-}", index_arr[i]);
-                        wprintf(L"--%ld\n", i);
+                        /*wprintf(L"{-%d-}", index_arr[i]);
+                        wprintf(L"--%ld\n", i);*/
                         fprintf(profile, "%d\n", index_arr[i]);
                     }
                 }
-                wprintf(L"\n");
+                //wprintf(L"\n");
                 fclose(profile);
                 break;
         }
@@ -344,17 +343,16 @@ int load_profile() {
         return -1;
     }
     max_learn = 0;
-    wprintf(L"load_profile\n");
+    //wprintf(L"load_profile\n");
     while (fscanf(profile, "%s", str) != EOF) {
         if (atoi(str) > 0 && atoi(str) <= max_index) {
             index_arr[max_learn] = atoi(str);
-            wprintf(L"{-%d-}", index_arr[max_learn]);
-            wprintf(L"--%ld\n", max_learn);
+            /*wprintf(L"{-%d-}", index_arr[max_learn]);
+            wprintf(L"--%ld\n", max_learn);*/
             max_learn++;
         }
     }
-    wprintf(L"%d\n", max_learn);
-    wprintf(L"\n");
+    //wprintf(L"\n");
     free(str);
     fclose(profile);
     return 0;

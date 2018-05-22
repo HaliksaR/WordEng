@@ -7,6 +7,21 @@
 #include "headers/signals.h"
 /* GOOD - готовые функции */
 
+void main_dialoggtk();
+void main_window_profilegtk();
+void windowgtk_destroy_cb();
+void on_header_destroy();
+void menubar_about_activate_cb();
+void menubar_profile_activate_cb();
+void learn_rand_up_label();
+void retry_rand_up_label();
+void main_window_massage(int i);
+void on_massage_destroy();
+void status_text();
+int correct_index();
+
+int mass_age = 0;
+
 void main_dialoggtk() {   //GOOD
     dialoggtk = create_dialoggtk();
     gtk_widget_show(dialoggtk);
@@ -74,16 +89,14 @@ void retry_rand_up_label() {
     free(str);
 }
 
-int mass_age = 0;
-
 void main_window_massage(int i) {  //GOOD
     massage = create_massage();
     switch (i) {
         case 0:
+            save_profile(0);
             max_learn = 0;
             mass_age = 0;
-            i_words = 1;
-            save_profile(0);
+            i_words = 0;
             break;
         case 1:
             gtk_label_set_text(GTK_LABEL(levelup), "DONE LEARN ENGLISH!");
@@ -115,8 +128,8 @@ void status_text() {
 }
 
 int correct_index() {
-    wprintf(L"%d == %d level %d\n", max_index, max_learn, level);
-    if (max_index <= max_learn) {
+    //wprintf(L"correct_index\n%d == %d level %d\n\n", max_index, max_learn, level);
+    if (max_index == max_learn) {
         if (level != 3) {
             level++;
             free(index_arr);
@@ -152,6 +165,12 @@ int main_gtk(int argc, char *argv[]) {
                 gtk_main_quit();        
             }
             menubar_learn_activate_cb();
+            if (max_learn < words) {
+                gtk_widget_set_visible(menubar_retry, FALSE);
+            } else {
+                gtk_widget_set_sensitive(menubar_retry, TRUE);
+                gtk_widget_set_visible(menubar_retry, TRUE);
+            }
         }
     }
     gtk_main();

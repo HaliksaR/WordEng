@@ -43,7 +43,23 @@ void name_button_clicked_cb() {  //GOOD
     }
 }
 
+int del = 4;
+
 void on_learn_button_next_clicked() {
+    if (max_learn == max_index) {
+        menubar_retry_activate_cb();
+        gtk_widget_set_sensitive(menubar_learn, FALSE);
+        gtk_widget_set_visible(menubar_learn, FALSE);
+        gtk_widget_set_visible(retry_stop, FALSE);
+        del = 1;
+        return;
+    }
+    if (max_learn < words) {
+        gtk_widget_set_visible(menubar_retry, FALSE);
+    } else {
+        gtk_widget_set_sensitive(menubar_retry, TRUE);
+        gtk_widget_set_visible(menubar_retry, TRUE);
+    }
     if (correct_index() != 0) {
         return;
     }
@@ -63,52 +79,63 @@ void on_learn_button_next_clicked() {
 }
 
 int on_retry_next_clicked() {
-    wprintf(L"%d --", max_learn);
-    if (max_learn == 1) {
+    if (i_words == (max_learn / 2) && max_index == max_learn) {
+        menubar_learn_activate_cb();
+        correct_index();
+        return 0;
+    }
+    //wprintf(L"%d --", max_learn);
+    char *str = (char*) malloc(sizeof(char) * 1000);
+    wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
+    gtk_label_set_text(GTK_LABEL(retry_english), str);
+    char *str2 = "";
+    char *ansv = (char*) gtk_entry_get_text(GTK_ENTRY(retry_enty));
+    wchar_t *wword = to_lowercase((wchar_t*)g_utf8_to_ucs4_fast(ansv, -1, NULL));
+    if (strcmp(ansv, str2) != 0) {
+        if (retry_rus(wword) == -1) {
+            gtk_widget_set_visible(retry_fails, TRUE);
+            chanse++;
+            if (chanse == 5) {
+                fail++;
+                chanse = 0;
+                delete_index_profile();
+                retry_rand_up_label();
+            }
+        } else {
+            chanse = 0;
+            retry_rand_up_label();
+            gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
+            gtk_widget_set_visible(retry_fails, FALSE);
+            i_words++;
+        }
+        sprintf(str, "%d", max_learn);
+        gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
+    } else {
+        return 0;
+    }
+    if (i_words > max_learn) {
         i_words = 1;
         menubar_learn_activate_cb();
         gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
-    } else {
-        char *str = (char*) malloc(sizeof(char) * 1000);
-        wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
-        gtk_label_set_text(GTK_LABEL(retry_english), str);
-        char *str2 = "";
-        char *ansv = (char*) gtk_entry_get_text(GTK_ENTRY(retry_enty));
-        wchar_t *wword = to_lowercase((wchar_t*)g_utf8_to_ucs4_fast(ansv, -1, NULL));
-        if (strcmp(ansv, str2) != 0) {
-            if (retry_rus(wword) == -1) {
-                gtk_widget_set_visible(retry_fails, TRUE);
-                fail++;
-                chanse++;
-                if (chanse == 5) {
-                    chanse = 0;
-                    delete_index_profile();
-                    retry_rand_up_label();
-                }
-            } else {
-                retry_rand_up_label();
-                gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
-                gtk_widget_set_visible(retry_fails, FALSE);
-                i_words++;
-            }
-            sprintf(str, "%d", max_learn);
-            gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
-        } else {
-            return 0;
-        }
-        if (i_words == max_learn) {
-            i_words = 1;
-            menubar_learn_activate_cb();
-            gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
-        }
-        free(str);
+        return 0;
     }
+    free(str);
     status_text();
+    if (i_words > (max_learn / del) && (i_words <= 1 && chanse == 0)) {
+        gtk_widget_set_visible(menubar_learn, TRUE); 
+        gtk_widget_set_visible(retry_stop, TRUE);
+    } else {
+        gtk_widget_set_sensitive(menubar_learn, FALSE);
+        gtk_widget_set_visible(menubar_learn, FALSE);
+        gtk_widget_set_visible(retry_stop, FALSE);        
+    }
     return 0;
 }
 
 void on_retry_stop_clicked() {  //GOOD
-    menubar_learn_activate_cb();
+    if (i_words > (max_learn / del) || (i_words == 1 && chanse == 0)) {
+        menubar_learn_activate_cb();
+    }
 }
 
 void number_button_num_4_clicked_cb () {  //GOOD

@@ -57,7 +57,8 @@ void menubar_learn_activate_cb() {
         return;
     }
     learn_rand_up_label();
-    gtk_widget_set_sensitive(menubar_retry, TRUE);
+    gtk_widget_set_visible(menubar_retry, FALSE);
+    gtk_widget_set_sensitive(menubar_retry, FALSE);
     gtk_widget_set_sensitive(menubar_learn, FALSE);
     i_words = 1;
     status_text();
@@ -115,8 +116,8 @@ void menubar_learn_activate_cb() {
 
 void menubar_retry_activate_cb() {
     retry_rand_up_label();
-    gtk_widget_set_sensitive(menubar_retry, FALSE);
     gtk_widget_set_sensitive(menubar_learn, TRUE);
+    gtk_widget_set_sensitive(menubar_retry, FALSE);
     i_words = 1;
     chanse = 0;
     gtk_entry_set_text(GTK_ENTRY(retry_enty), "");
