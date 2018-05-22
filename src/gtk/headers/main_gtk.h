@@ -9,7 +9,7 @@ void main_window_profilegtk();
 void main_window_massage(int i);
 void on_massage_destroy();
 void status_text();
-void correct_index();
+int correct_index();
 void windowgtk_destroy_cb();
 void on_header_destroy();
 void menubar_about_activate_cb();

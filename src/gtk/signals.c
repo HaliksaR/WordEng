@@ -44,6 +44,9 @@ void name_button_clicked_cb() {  //GOOD
 }
 
 void on_learn_button_next_clicked() {
+    if (correct_index() != 0) {
+        return;
+    }
     char *str = (char*) malloc(sizeof(char) * 1000);
     sprintf(str, "%d", words);
     gtk_label_set_text(GTK_LABEL(stats_words_num_all), str);
@@ -57,7 +60,6 @@ void on_learn_button_next_clicked() {
     }
     status_text();
     free(str);
-    correct_index();
 }
 
 int on_retry_next_clicked() {

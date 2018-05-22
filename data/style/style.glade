@@ -223,7 +223,7 @@
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
+    <property name="window_position">center</property>
     <property name="icon">img/ico.svg</property>
     <property name="type_hint">dialog</property>
     <property name="gravity">center</property>

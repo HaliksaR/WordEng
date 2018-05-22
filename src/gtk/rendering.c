@@ -53,7 +53,9 @@ void clear_window() {
 }
 
 void menubar_learn_activate_cb() {
-    correct_index();
+    if (correct_index() != 0) {
+        return;
+    }
     learn_rand_up_label();
     gtk_widget_set_sensitive(menubar_retry, TRUE);
     gtk_widget_set_sensitive(menubar_learn, FALSE);
@@ -112,7 +114,6 @@ void menubar_learn_activate_cb() {
 }
 
 void menubar_retry_activate_cb() {
-    correct_index();
     retry_rand_up_label();
     gtk_widget_set_sensitive(menubar_retry, FALSE);
     gtk_widget_set_sensitive(menubar_learn, TRUE);

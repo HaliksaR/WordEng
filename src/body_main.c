@@ -171,6 +171,7 @@ int srav_index(int h) {
 }
 
 int learn_rand() {
+    wprintf(L"a ya tut\n");
     int err = -1;
     FILE *dictionaries = level_file();
     if (dictionaries == NULL) {
