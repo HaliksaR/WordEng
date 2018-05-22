@@ -79,6 +79,12 @@ void on_learn_button_next_clicked() {
 }
 
 int on_retry_next_clicked() {
+    if (i_words == max_learn) {
+        i_words = 1;
+        menubar_learn_activate_cb();
+        gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
+        return 0;
+    }
     if (i_words == (max_learn / 2) && max_index == max_learn) {
         menubar_learn_activate_cb();
         correct_index();
