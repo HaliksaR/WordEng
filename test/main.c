@@ -5,6 +5,7 @@
 
 #include "ctest.h"
 
-CTEST(че то вставить) { // обозвать
-Че то происходит
+CTEST(Pro,verka) { // Заглушка тест
+
+ASSERT_NOT_NULL(real)
 }
