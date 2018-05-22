@@ -1,7 +1,7 @@
-#include "gtkwidgets.h" // билдер
+#include "headers/gtkwidgets.h" // билдер
 
 void widget_build() {
-        windowgtk = GTK_WIDGET(gtk_builder_get_object(builder, "windowgtk"));
+    windowgtk = GTK_WIDGET(gtk_builder_get_object(builder, "windowgtk"));
     if (!windowgtk) {
         g_critical("Ошибка при получении виджета windowgtk");
     }
@@ -9,6 +9,18 @@ void widget_build() {
     menubar = GTK_WIDGET(gtk_builder_get_object(builder, "menubar"));
     if (!menubar) {
         g_critical("Ошибка при получении виджета menubar");
+    }
+    menubar = GTK_WIDGET(gtk_builder_get_object(builder, "menubar"));
+    if (!menubar) {
+        g_critical("Ошибка при получении виджета menubar");
+    }
+    menubar_learn = GTK_WIDGET(gtk_builder_get_object(builder, "menubar_learn"));
+    if (!menubar_learn) {
+        g_critical("Ошибка при получении виджета menubar_learn");
+    }
+    menubar_retry = GTK_WIDGET(gtk_builder_get_object(builder, "menubar_retry"));
+    if (!menubar_retry) {
+        g_critical("Ошибка при получении виджета menubar_retry");
     }
     learn_eng = GTK_WIDGET(gtk_builder_get_object(builder, "learn_eng"));
     if (!learn_eng) {

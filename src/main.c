@@ -1,5 +1,5 @@
 #include "global.h" // глобальные переменные
-#include "gtk/main_gtk.h" // весь интерфейс GTK
+#include "gtk/headers/main_gtk.h" // весь интерфейс GTK
 
 int main(int argc, char *argv[] /*<---ВАЖНО! НЕ УДАЛЯТЬ*/) {
     setlocale(LC_CTYPE, "");
