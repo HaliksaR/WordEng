@@ -4,9 +4,3 @@ language: c
 os: linux
 compiler: gcc
 script: make
-branches:
-  only:
-    - HaliksaR
-    - Artem
-    - dev
-    - Andrey
