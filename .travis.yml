@@ -7,6 +7,6 @@ script: make
 branches:
   only:
     - HaliksaR
-	- Artem
-	- dev
-	- Andrey
+    - Artem
+    - dev
+    - Andrey
