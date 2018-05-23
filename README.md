@@ -1,3 +1,8 @@
+# Travis
+ - ### dev [![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=dev)](https://travis-ci.org/HaliksaR/WordEng)
+ - ### HaliksaR [![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=HaliksaR)](https://travis-ci.org/HaliksaR/WordEng)
+ - ### Andrey [![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=Andrey)](https://travis-ci.org/HaliksaR/WordEng)
+ - ### Artem [![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=Artem)](https://travis-ci.org/HaliksaR/WordEng)
 WordEng
 =======
 
