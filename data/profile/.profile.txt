@@ -1,7 +1,7 @@
-name: артём
-level: 1
+name: вапва
+level: 3
 words: 4
-fail: 0
+fail: 3
 index:
-192
-290
+39
+30

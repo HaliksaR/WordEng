@@ -9,6 +9,8 @@
 #include "../global.h"
 #include "../body_main.h"
 
+int print = 0;
+
 #define resetcolor() wprintf(ESC L"[0m")
 #define set_display_atrib(color) 	wprintf(ESC L"[%dm",color); // цвет фона
     
@@ -51,6 +53,13 @@ void console_massage(int i) {  //GOOD
             exit(0);
             break;
     }
+}
+
+void retry_rand_up_label_con() {
+    if (retry_rand() == -1) {
+        save_profile(1);
+        exit(0);
+    } 
 }
 
 void correct_index_console() {
@@ -291,7 +300,7 @@ int learn_scan(wchar_t next) {
     return 0;
 }
 
-void learn_console() { // проверка русских сделать
+void learn_console() {
     int xx = 54;
     int yy = 32;
     wchar_t next;
@@ -324,7 +333,7 @@ void learn_console() { // проверка русских сделать
 int retry_scan(wchar_t *russ) {
     correct_index_console();
     russ = to_lowercase(russ);
-    if (wcscmp(russ, L"q") == 0 || wcscmp(russ, L"й")) {
+    if (wcscmp(russ, L"q") == 0 || wcscmp(russ, L"й") == 0) {
         system("clear");
         exit(0);
     }
@@ -335,14 +344,30 @@ int retry_scan(wchar_t *russ) {
         about_console(2);
     }
     if (wcscmp(russ, L"l" ) == 0 || wcscmp(russ, L"д") == 0) {
+        if (print == 1) {
+            print = 0;
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+    if (i_words == max_learn) {
+        print = 0;
         return 1;
     }
+    if (i_words > (max_learn / 4) || (i_words == 1 && chanse == 0)) {
+            print = 1;
+        } else {
+            print = 0;
+        }
     if (wcscmp(russ, L"") != 0) {
         if (retry_rus(russ) == -1) {
-            fail++;
             chanse++;
             if (chanse == 5) {
+                fail++;
+                chanse = 0;
                 delete_index_profile();
+                retry_rand_up_label_con();
             }
             gotoxy(alignment(L"НЕВЕРНО!",27),22);
             wprintf(L"%lsНЕВЕРНО!%ls", RED, RESET);
@@ -358,20 +383,21 @@ int retry_scan(wchar_t *russ) {
     } else {
         return 0;
     }
-    if (i_words == max_learn) {
-        return 1;
-    }
     return 0;
 }
 
-void retry_console() {
+void retry_console() { // нилаботаит
     int xx = 54;
     int yy = 32;
     wchar_t *russ = (wchar_t*) malloc(sizeof(wchar_t) * 100);
     system("clear");
     frame(yy,xx);
     gotoxy(2,5);
-    wprintf(L" Учить(L) Повторение(R) Профиль(P) Справка(A)");
+    if (print == 1) {
+        wprintf(L" Учить(L) Профиль(P) Справка(A)");
+    } else {
+        wprintf(L" Профиль(P) Справка(A)");
+    }
     gotoxy(2,7);
     wprintf(L"%ls Слов: %ld\t\t\t\t%ld/%ld слов", GRAY, max_index, i_words, max_learn);
     gotoxy(2,8);

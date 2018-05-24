@@ -1,7 +1,7 @@
 GTK_LIB = `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
-OBJ = build/main_gtk.o build/widget_build.o build/body_main.o build/build_window.o  build/signals.o build/rendering.o build/main.o
+OBJ = build/main_gtk.o build/widget_build.o build/body_main.o build/build_window.o  build/signals.o build/rendering.o build/logo.o build/main_console.o build/main.o
 CC = gcc
-CFLAGS  = -Wall -Werror -std=c99
+CFLAGS  = -Wall -Werror -std=c99 -g2
 
 .PHONY: clean gtk console sh delete
 
@@ -11,7 +11,7 @@ bin/WordEng: $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o bin/WordEng $(GTK_LIB)
 
 build/body_main.o: src/body_main.c #sh
-	$(CC) $(CFLAGS) -c src/body_main.c -o build/body_main.o
+	$(CC) $(CFLAGS) -c src/body_main.c -o build/body_main.o $(GTK_LIB)
 
 build/main_gtk.o: src/gtk/main_gtk.c #sh
 	$(CC) $(CFLAGS) -c src/gtk/main_gtk.c -o build/main_gtk.o $(GTK_LIB)
@@ -27,6 +27,12 @@ build/rendering.o: src/gtk/rendering.c #sh
 
 build/build_window.o: src/gtk/build_window.c #sh
 	$(CC) $(CFLAGS) -c src/gtk/build_window.c -o build/build_window.o $(GTK_LIB)
+
+build/logo.o: src/console/logo.c #sh
+	$(CC) $(CFLAGS) -c src/console/logo.c -o build/logo.o $(GTK_LIB)
+
+build/main_console.o: src/console/main_console.c #sh
+	$(CC) $(CFLAGS) -c src/console/main_console.c -o build/main_console.o $(GTK_LIB)
 
 build/main.o: src/main.c #sh
 	$(CC) $(CFLAGS) -c src/main.c -o build/main.o $(GTK_LIB)
