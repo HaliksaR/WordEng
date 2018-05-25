@@ -113,6 +113,8 @@ void on_massage_destroy() {
     if (mass_age == 1) {
         remove("./data/profile/.profile.txt");
         gtk_main_quit();
+    } else {
+        menubar_learn_activate_cb();
     }
 }
 
