@@ -88,7 +88,7 @@ int on_retry_next_clicked() {
         gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
         return 0;
     }
-    if (i_words == (max_learn / 2) || i_words == max_learn) { // проверить условия, они не верные 
+    if (i_words == (max_learn / 2) && i_words == max_learn) { // проверить условия, они не верные 
         menubar_learn_activate_cb();
         correct_index();
         del = 4;
