@@ -1,4 +1,5 @@
 #include "global.h" // глобальные переменные
+#include "check_global.h"
 #include <time.h>
 
 // дочерние
@@ -140,6 +141,7 @@ int search_index(FILE *dictionaries) {
             }
             russian = convert_to_wchar_rus(buff);      
             fclose(dictionaries);
+            correct_dictionaries();
             return 0;
         }
     }
@@ -254,49 +256,46 @@ int retry_rus(wchar_t *ansv) {
 }
 
 void save_profile(int num) {
-    if (words != 0) {
-        FILE *profile;
-        switch (num) {
-            case 0:
-                profile = fopen("./data/profile/.profile.txt", "w");
-                if (profile == NULL){
-                    system("mkdir ./data/profile/");
-                    return save_profile(0);
-                }
-                fprintf(profile, "name: %ls\n", name);
-                fprintf(profile, "level: %d\n", level);
-                fprintf(profile, "words: %d\n", words);
-                fprintf(profile, "fail: %d\n", fail);
-                fprintf(profile, "index:\n");
-                fclose(profile);
-                break;
-            case 1:
-                profile = fopen("./data/profile/.profile.txt", "w");
-                if (profile == NULL){
-                    system("mkdir ./data/profile/");
-                    return save_profile(1);
-                }
-                fprintf(profile, "name: %ls\n", name);
-                fprintf(profile, "level: %d\n", level);
-                fprintf(profile, "words: %d\n", words);
-                fprintf(profile, "fail: %d\n", fail);
-                fprintf(profile, "index:\n");
-                load_max_index();
+    correct_profile();
+    FILE *profile;
+    switch (num) {
+        case 0:
+            profile = fopen("./data/profile/.profile.txt", "w");
+            if (profile == NULL){
+                system("mkdir ./data/profile/");
+                return save_profile(0);
+            }
+            fprintf(profile, "name: %ls\n", name);
+            fprintf(profile, "level: %d\n", level);
+            fprintf(profile, "words: %d\n", words);
+            fprintf(profile, "fail: %d\n", fail);
+            fprintf(profile, "index:\n");
+            fclose(profile);
+            break;
+        case 1:
+            profile = fopen("./data/profile/.profile.txt", "w");
+            if (profile == NULL){
+                system("mkdir ./data/profile/");
+                return save_profile(1);
+            }
+            fprintf(profile, "name: %ls\n", name);
+            fprintf(profile, "level: %d\n", level);
+            fprintf(profile, "words: %d\n", words);
+            fprintf(profile, "fail: %d\n", fail);
+            fprintf(profile, "index:\n");
+            load_max_index();
 
-                //wprintf(L"save_profile\n");
-                for(int i = 0; i <= max_learn; i++) {
-                    if (index_arr[i] > 0 && index_arr[i] <= max_index){
-                        /*wprintf(L"{-%d-}", index_arr[i]);
-                        wprintf(L"--%ld\n", i);*/
-                        fprintf(profile, "%d\n", index_arr[i]);
-                    }
+            //wprintf(L"save_profile\n");
+            for(int i = 0; i <= max_learn; i++) {
+                if (index_arr[i] > 0 && index_arr[i] <= max_index){
+                    /*wprintf(L"{-%d-}", index_arr[i]);
+                    wprintf(L"--%ld\n", i);*/
+                    fprintf(profile, "%d\n", index_arr[i]);
                 }
-                //wprintf(L"\n");
-                fclose(profile);
-                break;
-        }
-    } else {
-        remove("./data/profile/.profile.txt");
+            }
+            //wprintf(L"\n");
+            fclose(profile);
+            break;
     }
 }
 
@@ -319,6 +318,10 @@ int load_profile() {
         return -1;
     }
     token = strtok(NULL, pruf);
+    if (!token) {
+
+        return -1;
+    }
     name = convert_to_wchar(token);
 
     fgets(str, 1000, profile);
@@ -355,5 +358,6 @@ int load_profile() {
     //wprintf(L"\n");
     free(str);
     fclose(profile);
+    correct_profile();
     return 0;
 }

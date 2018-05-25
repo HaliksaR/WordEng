@@ -1,7 +1,0 @@
-name: вапва
-level: 3
-words: 4
-fail: 3
-index:
-39
-30

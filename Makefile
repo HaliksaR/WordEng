@@ -1,14 +1,25 @@
 GTK_LIB = `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
-OBJ = build/main_gtk.o build/widget_build.o build/body_main.o build/build_window.o  build/signals.o build/rendering.o build/logo.o build/main_console.o build/main.o
+OBJ = build/main_gtk.o build/widget_build.o build/body_main.o build/build_window.o build/signals.o build/rendering.o build/check_global.o
+OBJUI = $(OBJ) build/main_ui.o
+OBJTRM = $(OBJ) build/logo.o build/main_console.o build/main.o
 CC = gcc
-CFLAGS  = -Wall -Werror -std=c99 -g2
+CFLAGS  = -Wall -Werror -std=c99
 
-.PHONY: clean gtk console sh delete
+.PHONY: clean gtk console sh icon delete
 
-all: build bin bin/WordEng
+default: build bin bin/WordEng bin/WordEng_all
 
-bin/WordEng: $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o bin/WordEng $(GTK_LIB)
+test: build bin bin/WordEng-test
+	bin/WordEng-test
+
+bin/WordEng: $(OBJUI)
+	$(CC) $(CFLAGS) $(OBJUI) -o bin/WordEng $(GTK_LIB)
+
+bin/WordEng_all: $(OBJTRM)
+	$(CC) $(CFLAGS) $(OBJTRM) -o bin/WordEng_all $(GTK_LIB)
+	
+build/check_global.o: src/check_global.c
+	$(CC) $(CFLAGS) -c src/check_global.c -o build/check_global.o
 
 build/body_main.o: src/body_main.c #sh
 	$(CC) $(CFLAGS) -c src/body_main.c -o build/body_main.o $(GTK_LIB)
@@ -37,6 +48,16 @@ build/main_console.o: src/console/main_console.c #sh
 build/main.o: src/main.c #sh
 	$(CC) $(CFLAGS) -c src/main.c -o build/main.o $(GTK_LIB)
 
+build/main_ui.o: src/main_ui.c
+	$(CC) $(CFLAGS) -c src/main_ui.c -o build/main_ui.o $(GTK_LIB)
+
+bin/WordEng-test: build/main_test.o build/check_global.o bin
+	$(CC) $(CFLAGS) build/check_global.o -o bin/WordEng-test
+
+build/main_test.o: test/main.c thirdparty/ctest.h src/check_global.h build
+	$(CC) $(CFLAGS) -I thirdparty -c test/main.c -o build/main_test.o
+
+
 build:
 	mkdir build
 
@@ -46,18 +67,19 @@ bin:
 clean:
 	rm -rf build bin
 
-console :
-	./bin/WordEng_console
+console:
+	./bin/WordEng_all
 
-gtk :
+gtk:
 	./bin/WordEng
 
-sh :
-	sudo chmod +x packages.sh
-	sudo ./packages.sh
+icon: bin/WordEng
 	chmod +x icon.sh
 	./icon.sh
+sh:
+	sudo chmod +x packages.sh
+	sudo ./packages.sh
 
-delete :
+delete:
 	chmod +x .rm_dir.sh
 	./.rm_dir.sh

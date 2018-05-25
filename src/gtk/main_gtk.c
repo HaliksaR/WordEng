@@ -33,7 +33,9 @@ void main_window_profilegtk() {   //GOOD
 }
 
 void windowgtk_destroy_cb() {   //GOOD
-    save_profile(1);
+    if (words) {
+        save_profile(1);
+    }
     gtk_main_quit();
 }
 
@@ -157,6 +159,7 @@ int main_gtk(int argc, char *argv[]) {
     if (pfile == NULL) {
         edit_profile_1();
     } else {
+        fclose(pfile);
         if (load_profile() == -1) {
             edit_profile_1();
         } else {
