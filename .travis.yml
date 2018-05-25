@@ -3,7 +3,7 @@ before_install:
 language: c
 os: linux
 compiler: gcc
-script: make
+script: make && make test
 branches:
   only:
     - HaliksaR
