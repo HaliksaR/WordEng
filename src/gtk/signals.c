@@ -81,13 +81,14 @@ void on_learn_button_next_clicked() {
 }
 
 int on_retry_next_clicked() {
-    if (i_words == max_learn && del != 1) {
+    wprintf(L"%d %d %d %d\n", i_words, fail, chanse, max_learn);
+    if (i_words == max_learn && del != 1) { // проверить условия, они не верные 
         i_words = 1;
         menubar_learn_activate_cb();
         gtk_entry_set_text(GTK_ENTRY(retry_enty),"");
         return 0;
     }
-    if (i_words == (max_learn / 2) && max_index == max_learn) {
+    if (i_words == (max_learn / 2) || i_words == max_learn) { // проверить условия, они не верные 
         menubar_learn_activate_cb();
         correct_index();
         del = 4;

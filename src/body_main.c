@@ -107,46 +107,36 @@ int search_index(FILE *dictionaries) {
     if (str == NULL) {
         return -1;
     }
-    char *buff = (char*) calloc(1000, sizeof(char));
     for (int i = 0; i < max_index; i++) {
-        memset(buff, 0, 1000);
         fgets(str, 1000, dictionaries);
         if (i + 1 == index) {
-            if (buff == NULL) {
+            char *token = strtok(str, ";");
+            if (!token) {
                 return -1;
             }
-            int k = 0;
-            for (int b = 0; str[k] != ';'; k++) {
-                buff[b] = str[k];
-                b++;
+            russian_num = atoi(token);
+            token = strtok(NULL, ";");
+            if (!token) {
+                return -1;
             }
-            k++;
-            russian_num = atoi(buff);
-            for (int b = 0; str[k] != ';'; k++) {
-                buff[b] = str[k];
-                b++;
-            }
-            k++;
-            english = convert_to_wchar(buff);
+            english = convert_to_wchar(token);
             english[0] = towupper(english[0]);
-            for (int b = 0; str[k] != '\0'; k++) {
-                if (str[k] == ';') {
-                    buff[b] = ',';
-                    b++;
-                    buff[b] = ' ';
-                } else {
-                    buff[b] = str[k];
-                }
-                b++;
+            token = strtok(NULL, "\0\n ");
+            if (!token) {
+                return -1;
             }
-            russian = convert_to_wchar_rus(buff);      
+            russian = convert_to_wchar_rus(token);
+            for (int k = 0; k < wcslen(russian) - 1; k++) {
+                if (russian[k] == L';') {
+                    russian[k] = L',';
+                }
+            }
             fclose(dictionaries);
             correct_dictionaries();
             return 0;
         }
     }
     free(str);
-    free(buff);
     fclose(dictionaries);
     return -1;
 }
@@ -319,7 +309,6 @@ int load_profile() {
     }
     token = strtok(NULL, pruf);
     if (!token) {
-
         return -1;
     }
     name = convert_to_wchar(token);

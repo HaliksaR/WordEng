@@ -51,10 +51,10 @@ build/main.o: src/main.c #sh
 build/main_ui.o: src/main_ui.c
 	$(CC) $(CFLAGS) -c src/main_ui.c -o build/main_ui.o $(GTK_LIB)
 
-bin/WordEng-test: build/main_test.o build/check_global.o bin
-	$(CC) $(CFLAGS) build/check_global.o -o bin/WordEng-test
+bin/WordEng-test: build/check_global.o build/main_test.o
+	$(CC) $(CFLAGS) build/main_test.o build/check_global.o -o bin/WordEng-test
 
-build/main_test.o: test/main.c thirdparty/ctest.h src/check_global.h build
+build/main_test.o: test/main.c thirdparty/ctest.h src/check_global.h
 	$(CC) $(CFLAGS) -I thirdparty -c test/main.c -o build/main_test.o
 
 

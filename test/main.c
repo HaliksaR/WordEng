@@ -54,6 +54,7 @@ CTEST(name, correct_name) {
 
 CTEST(name, incorrect_name) {
     int expected = -1;
+    name = L"\0";
     int result = correct_name();
     ASSERT_EQUAL(expected,result);
 }
@@ -61,14 +62,14 @@ CTEST(name, incorrect_name) {
 CTEST(max_index, correct_max_index) {
     int expected = 0;
     max_index = 134;
-    int result = correct_name();
+    int result = correct_max_index();
     ASSERT_EQUAL(expected,result);
 }
 
 CTEST(max_index, incorrect_max_index) {
     int expected = -1;
     max_index = 0;
-    int result = correct_name();
+    int result = correct_max_index();
     ASSERT_EQUAL(expected,result);
 }
 
@@ -82,8 +83,8 @@ CTEST(index, correct_index) {
 
 CTEST(index, incorrect_index) {
     int expected = -1;
-    max_index = 10;
     index = 134;
+    max_index = 10;
     int result = correct_index_global();
     ASSERT_EQUAL(expected,result);
 }
@@ -111,6 +112,7 @@ CTEST(english, correct_english) {
 
 CTEST(english, incorrect_english) {
     int expected = -1;
+    english = L"\0";
     int result = correct_english();
     ASSERT_EQUAL(expected,result);
 }
@@ -124,6 +126,7 @@ CTEST(russian, correct_russian) {
 
 CTEST(russian, incorrect_russian) {
     int expected = -1;
+    russian = L"\0";
     int result = correct_russian();
     ASSERT_EQUAL(expected,result);
 }

@@ -141,7 +141,7 @@ int correct_index() {
             }
             main_window_massage(0);
             status_text();
-            return 0;
+            return -1;
         } else {
             main_window_massage(1);
             return -1;

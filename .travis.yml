@@ -2,7 +2,7 @@ before_install:
 - sudo apt-get install libgtk-3-dev
 language: c
 compiler: gcc
-script: make
+script: make && make test
 branches:
   only:
     - HaliksaR
