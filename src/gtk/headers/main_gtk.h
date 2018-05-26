@@ -1,7 +1,7 @@
 #ifndef __MAIN_GTK_H__
 #define __MAIN_GTK_H__
 
-#include "../../global.h" // глобальные переменные
+#include "../../global.h"
 
 int main_gtk(int argc, char *argv[]);
 void main_dialoggtk();

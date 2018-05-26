@@ -1,8 +1,8 @@
 #ifndef __BUILD_WINDOW_H__
 #define __BUILD_WINDOW_H__
 
-#include "gtkwidgets.h"  // Виджеты
-#include "widget_build.h"  // билдер
+#include "gtkwidgets.h"
+#include "widget_build.h"
 
 GtkWidget* create_windowgtk(void);
 GtkWidget* create_massage(void);

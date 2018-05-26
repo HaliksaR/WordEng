@@ -1,4 +1,4 @@
-#include "global.h" // глобальные переменные
+#include "global.h"
 
 #define RESET L"\033[0m"
 #define RED   L"\033[1;31m"

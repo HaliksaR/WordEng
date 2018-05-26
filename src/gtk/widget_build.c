@@ -1,11 +1,10 @@
-#include "headers/gtkwidgets.h" // билдер
+#include "headers/gtkwidgets.h"
 
 void widget_build() {
     windowgtk = GTK_WIDGET(gtk_builder_get_object(builder, "windowgtk"));
     if (!windowgtk) {
         g_critical("Ошибка при получении виджета windowgtk");
     }
-    /*********************widgets build for hide and show*********************/
     menubar = GTK_WIDGET(gtk_builder_get_object(builder, "menubar"));
     if (!menubar) {
         g_critical("Ошибка при получении виджета menubar");
@@ -190,4 +189,3 @@ void widget_build_profilegtk() {
         g_critical("Ошибка при получении виджета profile_fail");
     }
 }
-/*********************widgets build for hide and show*********************/

@@ -1,6 +1,6 @@
 #define CTEST_MAIN
-
 #include "../src/check_global.h"
+#include "../src/correct_start.h"
 #include <ctest.h>
 
 CTEST(level, correct_level) {
@@ -131,6 +131,21 @@ CTEST(russian, incorrect_russian) {
     ASSERT_EQUAL(expected,result);
 }
 
+CTEST(start, correct_start) {
+    int expected = 0;
+    max_index = 60;
+    max_learn = 60;
+    int result = start_program();
+    ASSERT_EQUAL(expected,result);
+}
+
+CTEST(start, incorrect_start) {
+    int expected = -1;
+    max_index = 60;
+    max_learn = 78;
+    int result = start_program();
+    ASSERT_EQUAL(expected,result);
+}
 int main(int argc, const char** argv) {
     int test_res = ctest_main(argc, argv);
     return test_res;

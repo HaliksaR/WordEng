@@ -4,8 +4,9 @@
 #include "headers/main_gtk.h"
 #include "headers/rendering.h"
 
-//***************Сигналы***************
-void level_button_hight_clicked_cb() {  //GOOD
+int del = 4, i_fail = 5;
+
+void level_button_hight_clicked_cb() {
     level = 3;
     if (load_max_index() == -1) {
         wprintf(L"ERROR OPEN DATA!\n");
@@ -14,7 +15,7 @@ void level_button_hight_clicked_cb() {  //GOOD
     edit_profile_3();
 }
 
-void level_button_middle_clicked_cb() {  //GOOD
+void level_button_middle_clicked_cb() {
     level = 2;
     if (load_max_index() == -1) {
         wprintf(L"ERROR OPEN DATA!\n");
@@ -23,7 +24,7 @@ void level_button_middle_clicked_cb() {  //GOOD
     edit_profile_3();
 }
 
-void level_button_easy_clicked_cb() {  //GOOD
+void level_button_easy_clicked_cb() {
     level = 1;
     if (load_max_index() == -1) {
         wprintf(L"ERROR OPEN DATA!\n");
@@ -32,7 +33,7 @@ void level_button_easy_clicked_cb() {  //GOOD
     edit_profile_3();
 }
 
-void name_button_clicked_cb() {  //GOOD
+void name_button_clicked_cb() {
     char *str2 = "";
     char *ansv = (char*) gtk_entry_get_text(GTK_ENTRY(name_enty));
     name = to_lowercase((wchar_t*)g_utf8_to_ucs4_fast(ansv, -1, NULL));
@@ -43,9 +44,8 @@ void name_button_clicked_cb() {  //GOOD
     }
 }
 
-int del = 4;
 
-void on_learn_button_next_clicked() {
+int learn_srav() {
     if (max_learn == max_index) {
         save_profile(1);
         load_profile();
@@ -54,6 +54,13 @@ void on_learn_button_next_clicked() {
         gtk_widget_set_visible(menubar_learn, FALSE);
         gtk_widget_set_visible(retry_stop, FALSE);
         del = 1;
+        return -1;
+    }
+    return 0;
+}
+
+void on_learn_button_next_clicked() {
+    if (learn_srav() == -1) {
         return;
     }
     if (max_learn < words) {
@@ -80,19 +87,19 @@ void on_learn_button_next_clicked() {
     free(str);
 }
 
-int i_fail = 5;
-
 int on_retry_next_clicked() {
-    if ((i_words == (max_learn / 2) && i_words == max_learn) || i_fail < 0) { // проверить условия, они не верные 
-        wprintf(L"2---------\n");
+    if ((i_words == (max_learn / 2) && i_words == max_learn) || i_fail < 0) {
         menubar_learn_activate_cb();
         correct_index();
         i_fail = 5;
         del = 4;
         return 0;
     }
-    wprintf(L"3---------\n");
-    //wprintf(L"%d --", max_learn);
+    if (i_words == max_learn) {
+        menubar_learn_activate_cb();
+        correct_index();
+        return 0;
+    }    
     char *str = (char*) malloc(sizeof(char) * 1000);
     wcstombs(str, english, sizeof(wchar_t) * wcslen(english) + 1);
     gtk_label_set_text(GTK_LABEL(retry_english), str);
@@ -130,7 +137,6 @@ int on_retry_next_clicked() {
     }
     free(str);
     status_text();
-    wprintf(L"%d %d %d %d\n", i_fail, max_learn, chanse, del);
     if ((i_words > (max_learn / del) && (i_words >= 1)) || i_fail < 0) {
         gtk_widget_set_sensitive(menubar_learn, TRUE);
         gtk_widget_set_visible(menubar_learn, TRUE); 
@@ -143,30 +149,30 @@ int on_retry_next_clicked() {
     return 0;
 }
 
-void on_retry_stop_clicked() {  //GOOD
+void on_retry_stop_clicked() {
     i_fail = 5;
     menubar_learn_activate_cb();
 }
 
-void number_button_num_4_clicked_cb () {  //GOOD
+void number_button_num_4_clicked_cb () {
     words = 4;
     save_profile(0);
     menubar_learn_activate_cb();
 }
 
-void number_button_num_3_clicked_cb () {  //GOOD
+void number_button_num_3_clicked_cb () {
     words = 3;
     save_profile(0);
     menubar_learn_activate_cb();
 }
 
-void number_button_num_2_clicked_cb () {  //GOOD
+void number_button_num_2_clicked_cb () {
     words = 2;
     save_profile(0);
     menubar_learn_activate_cb();
 }
 
-void number_button_num_1_clicked_cb () {  //GOOD
+void number_button_num_1_clicked_cb () {
     words = 1;
     save_profile(0);
     menubar_learn_activate_cb();

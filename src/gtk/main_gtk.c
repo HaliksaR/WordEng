@@ -1,11 +1,11 @@
-#include "../global.h"  // глобальные переменные
-#include "headers/gtkwidgets.h"  // Виджеты
-#include "headers/widget_build.h"  // билдер
+#include "../global.h"
+#include "headers/gtkwidgets.h"
+#include "headers/widget_build.h"
 #include "headers/build_window.h"
 #include "../body_main.h"
 #include "headers/rendering.h"
 #include "headers/signals.h"
-/* GOOD - готовые функции */
+#include "../correct_start.h"
 
 void main_dialoggtk();
 void main_window_profilegtk();
@@ -22,32 +22,32 @@ int correct_index();
 
 int mass_age = 0;
 
-void main_dialoggtk() {   //GOOD
+void main_dialoggtk() {
     dialoggtk = create_dialoggtk();
     gtk_widget_show(dialoggtk);
 }
 
-void main_window_profilegtk() {   //GOOD
+void main_window_profilegtk() {
     profilegtk = create_profilegtk();
     gtk_widget_show(profilegtk);
 }
 
-void windowgtk_destroy_cb() {   //GOOD
+void windowgtk_destroy_cb() {
     if (words) {
         save_profile(1);
     }
     gtk_main_quit();
 }
 
-void on_header_destroy() {   //GOOD
+void on_header_destroy() {
     gtk_main_quit();
 }
 
-void menubar_about_activate_cb() {   //GOOD
+void menubar_about_activate_cb() {
     main_dialoggtk();
 }
 
-void menubar_profile_activate_cb() {  //GOOD
+void menubar_profile_activate_cb() {
     main_window_profilegtk();
 
     if (level == 1) {
@@ -91,7 +91,7 @@ void retry_rand_up_label() {
     free(str);
 }
 
-void main_window_massage(int i) {  //GOOD
+void main_window_massage(int i) {
     massage = create_massage();
     switch (i) {
         case 0:
@@ -132,7 +132,6 @@ void status_text() {
 }
 
 int correct_index() {
-    //wprintf(L"correct_index\n%d == %d level %d\n\n", max_index, max_learn, level);
     if (max_index == max_learn) {
         if (level != 3) {
             level++;
@@ -169,6 +168,7 @@ int main_gtk(int argc, char *argv[]) {
                 wprintf(L"ERROR OPEN DATA!\n");
                 gtk_main_quit();        
             }
+            correct_start_program();
             menubar_learn_activate_cb();
             if (max_learn < words) {
                 gtk_widget_set_visible(menubar_retry, FALSE);

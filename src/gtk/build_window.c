@@ -1,7 +1,7 @@
 #include "headers/build_window.h"
 
 
-GtkWidget* create_windowgtk(void) {   //GOOD
+GtkWidget* create_windowgtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new();
@@ -25,7 +25,7 @@ GtkWidget* create_windowgtk(void) {   //GOOD
     return windowgtk;
 }
 
-GtkWidget* create_massage(void) {   //GOOD
+GtkWidget* create_massage(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new();
@@ -55,7 +55,7 @@ GtkWidget* create_massage(void) {   //GOOD
     return massage;
 }
 
-GtkWidget* create_dialoggtk(void) {   //GOOD
+GtkWidget* create_dialoggtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new ();
@@ -81,7 +81,7 @@ GtkWidget* create_dialoggtk(void) {   //GOOD
     return dialoggtk;
 }
 
-GtkWidget* create_profilegtk(void) {   //GOOD
+GtkWidget* create_profilegtk(void) {
     GError* error = NULL;
 
     builder = gtk_builder_new ();

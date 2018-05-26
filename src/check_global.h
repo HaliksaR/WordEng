@@ -3,11 +3,9 @@
 
 #include "global.h"
 
-// for body
 void correct_profile();
 void correct_dictionaries();
 
-// for test && body
 int correct_level();
 int correct_words();
 int correct_fail();
