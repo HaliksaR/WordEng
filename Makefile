@@ -80,7 +80,7 @@ icon: bin/WordEng
 	chmod +x icon.sh
 	./icon.sh
 sh:
-	sudo chmod +x packages.sh
+	chmod +x packages.sh
 	sudo ./packages.sh
 
 delete:

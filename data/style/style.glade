@@ -46,6 +46,8 @@
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">                    Разработчики                    </property>
+            <property name="width_chars">30</property>
+            <property name="max_width_chars">30</property>
             <property name="track_visited_links">False</property>
             <attributes>
               <attribute name="underline" value="True"/>
@@ -106,7 +108,10 @@
                 <property name="margin_bottom">40</property>
                 <property name="label" translatable="yes">Программист
 Базы данных</property>
-                <property name="justify">right</property>
+                <property name="justify">center</property>
+                <property name="width_chars">20</property>
+                <property name="max_width_chars">20</property>
+                <property name="track_visited_links">False</property>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -123,6 +128,8 @@
 Графический
 интерфейс</property>
                 <property name="justify">center</property>
+                <property name="width_chars">20</property>
+                <property name="max_width_chars">20</property>
                 <property name="track_visited_links">False</property>
               </object>
               <packing>
@@ -140,6 +147,8 @@
 Консольный 
 интерфейс</property>
                 <property name="justify">center</property>
+                <property name="width_chars">20</property>
+                <property name="max_width_chars">20</property>
                 <property name="track_visited_links">False</property>
               </object>
               <packing>
@@ -240,9 +249,6 @@
             <child>
               <placeholder/>
             </child>
-            <child>
-              <placeholder/>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -261,7 +267,8 @@
             <property name="margin_bottom">25</property>
             <property name="label" translatable="yes">LEVEL UP!!!</property>
             <property name="justify">center</property>
-            <property name="wrap">True</property>
+            <property name="width_chars">20</property>
+            <property name="max_width_chars">20</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -301,7 +308,6 @@
       <object class="GtkBox">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox">
             <property name="can_focus">False</property>
@@ -333,7 +339,12 @@
             <property name="can_focus">False</property>
             <property name="margin_top">20</property>
             <property name="label" translatable="yes">Alex</property>
+            <property name="justify">center</property>
+            <property name="width_chars">0</property>
+            <property name="max_width_chars">20</property>
             <property name="track_visited_links">False</property>
+            <property name="xalign">0.5</property>
+            <property name="yalign">0.5</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -345,6 +356,8 @@
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="margin_left">100</property>
             <property name="margin_right">100</property>
             <property name="row_spacing">5</property>
@@ -355,6 +368,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Уровень:</property>
+                <property name="width_chars">15</property>
+                <property name="max_width_chars">15</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -367,6 +382,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Выученных слов:</property>
+                <property name="width_chars">15</property>
+                <property name="max_width_chars">15</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -379,6 +396,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Ошибок:</property>
+                <property name="width_chars">15</property>
+                <property name="max_width_chars">15</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -391,6 +410,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">easy</property>
+                <property name="width_chars">7</property>
+                <property name="max_width_chars">7</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -403,6 +424,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">244</property>
+                <property name="width_chars">5</property>
+                <property name="max_width_chars">5</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -415,6 +438,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">34</property>
+                <property name="width_chars">5</property>
+                <property name="max_width_chars">5</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -614,7 +639,12 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Design by HaliksaR</property>
+            <property name="justify">center</property>
+            <property name="width_chars">15</property>
+            <property name="max_width_chars">35</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -629,9 +659,13 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Добро пожаловать!</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
+            <property name="width_chars">15</property>
+            <property name="max_width_chars">36</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -646,9 +680,13 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Для начала вы должны заполнить данные профиля:)</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
+            <property name="width_chars">36</property>
+            <property name="max_width_chars">36</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -680,9 +718,13 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Как вас зовут?</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
+            <property name="width_chars">15</property>
+            <property name="max_width_chars">15</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -728,10 +770,15 @@
             <property name="width_request">475</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
+            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Твои знания английского языка?</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
+            <property name="width_chars">20</property>
+            <property name="max_width_chars">20</property>
           </object>
           <packing>
             <property name="x">43</property>
@@ -792,10 +839,15 @@
             <property name="width_request">475</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
+            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Сколько слов выучите за раз?</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
+            <property name="width_chars">25</property>
+            <property name="max_width_chars">25</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -874,7 +926,9 @@
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Слов:</property>
+            <property name="width_chars">5</property>
             <property name="single_line_mode">True</property>
+            <property name="max_width_chars">5</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -889,7 +943,9 @@
             <property name="sensitive">False</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Выученных:</property>
+            <property name="width_chars">10</property>
             <property name="single_line_mode">True</property>
+            <property name="max_width_chars">10</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -903,7 +959,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Ошибок:</property>
+            <property name="width_chars">7</property>
             <property name="single_line_mode">True</property>
+            <property name="max_width_chars">7</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -917,7 +975,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">4545</property>
+            <property name="width_chars">4</property>
             <property name="single_line_mode">True</property>
+            <property name="max_width_chars">10</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -931,7 +991,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">656</property>
+            <property name="width_chars">3</property>
             <property name="single_line_mode">True</property>
+            <property name="max_width_chars">10</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -945,7 +1007,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">34</property>
+            <property name="width_chars">2</property>
             <property name="single_line_mode">True</property>
+            <property name="max_width_chars">10</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -963,6 +1027,7 @@
             <property name="label" translatable="yes">1</property>
             <property name="width_chars">8</property>
             <property name="single_line_mode">True</property>
+            <property name="max_width_chars">8</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -1004,18 +1069,21 @@
         <child>
           <object class="GtkLabel" id="retry_english">
             <property name="name">engword</property>
-            <property name="width_request">504</property>
+            <property name="width_request">540</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">30</property>
-            <property name="margin_right">30</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Rabbit</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
+            <property name="width_chars">12</property>
+            <property name="max_width_chars">12</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
+            <property name="x">12</property>
             <property name="y">165</property>
           </packing>
         </child>
@@ -1024,8 +1092,12 @@
             <property name="name">first</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Ответ:</property>
+            <property name="width_chars">5</property>
             <property name="single_line_mode">True</property>
+            <property name="max_width_chars">5</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -1053,8 +1125,12 @@
             <property name="name">fail</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">НЕВЕРНО!</property>
             <property name="justify">center</property>
+            <property name="width_chars">8</property>
+            <property name="max_width_chars">8</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
@@ -1099,17 +1175,20 @@
         <child>
           <object class="GtkLabel" id="learn_eng">
             <property name="name">engword</property>
-            <property name="width_request">504</property>
+            <property name="width_request">540</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">30</property>
-            <property name="margin_right">30</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
             <property name="label" translatable="yes">Rabbit</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
+            <property name="width_chars">12</property>
+            <property name="max_width_chars">12</property>
             <property name="track_visited_links">False</property>
           </object>
           <packing>
+            <property name="x">12</property>
             <property name="y">135</property>
           </packing>
         </child>
