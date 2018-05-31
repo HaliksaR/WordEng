@@ -68,6 +68,12 @@
    Release:	3.9999
    Codename:	shannon
    ```
+   ```bash
+   Distributor ID: Ubuntu
+   Description:    Ubuntu 17.10
+   Release:        17.10
+   Codename:       artful
+   ```
 ## Developers
 <div>
 <a href="https://github.com/HaliksaR">
