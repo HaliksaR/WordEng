@@ -55,7 +55,7 @@ void correct_profile() {
         error++;
     }
     if (error != 0) {
-        remove("./data/profile/.profile.txt");
+        remove("./data/profile/profile.txt");
         exit(-1);
     }
 }
@@ -128,7 +128,7 @@ void correct_dictionaries() {
         error++;
     }
     if (error != 0) {
-        remove("./data/profile/.profile.txt");
+        remove("./data/profile/profile.txt");
         exit(-2);
     }
 }

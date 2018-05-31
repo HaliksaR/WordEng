@@ -17,7 +17,7 @@ void correct_start_program() {
         error++;
     }
     if (error != 0) {
-        remove("./data/profile/.profile.txt");
+        remove("./data/profile/profile.txt");
         exit(-5);
     }
 }

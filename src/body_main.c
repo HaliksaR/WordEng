@@ -34,7 +34,7 @@ int load_max_index() {
 }
 
 void add_index_profile() {
-    FILE *profile = fopen("./data/profile/.profile.txt", "a");
+    FILE *profile = fopen("./data/profile/profile.txt", "a");
     fprintf (profile, "%d\n", index);
     fclose(profile);
     index_arr = (int*) realloc(index_arr, sizeof(int) * max_learn + 1);
@@ -238,7 +238,7 @@ void save_profile(int num) {
     FILE *profile;
     switch (num) {
         case 0:
-            profile = fopen("./data/profile/.profile.txt", "w");
+            profile = fopen("./data/profile/profile.txt", "w");
             if (profile == NULL){
                 system("mkdir ./data/profile/");
                 return save_profile(0);
@@ -251,7 +251,7 @@ void save_profile(int num) {
             fclose(profile);
             break;
         case 1:
-            profile = fopen("./data/profile/.profile.txt", "w");
+            profile = fopen("./data/profile/profile.txt", "w");
             if (profile == NULL){
                 system("mkdir ./data/profile/");
                 return save_profile(1);
@@ -274,7 +274,7 @@ void save_profile(int num) {
 }
 
 int load_profile() {
-    FILE *profile = fopen("./data/profile/.profile.txt", "rb");
+    FILE *profile = fopen("./data/profile/profile.txt", "rb");
     if (profile == NULL){
         return -1;
     }

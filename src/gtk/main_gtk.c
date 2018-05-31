@@ -111,7 +111,7 @@ void main_window_massage(int i) {
 
 void on_massage_destroy() {
     if (mass_age == 1) {
-        remove("./data/profile/.profile.txt");
+        remove("./data/profile/profile.txt");
         gtk_main_quit();
     } else {
         menubar_learn_activate_cb();
@@ -153,7 +153,7 @@ int correct_index() {
 
 int main_gtk(int argc, char *argv[]) {
     FILE *pfile;
-    pfile = fopen("./data/profile/.profile.txt", "r");
+    pfile = fopen("./data/profile/profile.txt", "r");
     gtk_init(&argc, &argv);
     windowgtk = create_windowgtk();
     gtk_widget_show(windowgtk);
