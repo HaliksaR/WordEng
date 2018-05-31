@@ -1,6 +1,6 @@
 *{
     color: white;
-    font-family: Noto Sans;
+    font-family: "Noto Sans", "Liberation Sans", "Sans Regular"; 
     background-blend-mode: darken;
 }
 dialog {
