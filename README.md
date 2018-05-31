@@ -54,7 +54,7 @@
 
 ### TEST MACHINES
    ```bash
-   $ lsb_release -as
+   $ lsb_release -a
    ```
    ```bash
    Distributor ID: Ubuntu
@@ -62,7 +62,12 @@
    Release:        18.04
    Codename:       bionic
    ```
-   
+   ```bash
+   Distributor ID:	Solus
+   Description:	Solus
+   Release:	3.9999
+   Codename:	shannon
+   ```
 ## Developers
 <div>
 <a href="https://github.com/HaliksaR">
