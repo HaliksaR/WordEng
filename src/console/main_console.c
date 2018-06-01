@@ -8,8 +8,11 @@
 #include "includes/logo.h"
 #include "../global.h"
 #include "../body_main.h"
+#include "../correct_start.h"
 
 int print = 0;
+int exam_per = 0;
+int i_fail_c = 5;
 
 #define resetcolor() wprintf(ESC L"[0m")
 #define set_display_atrib(color) 	wprintf(ESC L"[%dm",color); // цвет фона
@@ -17,11 +20,6 @@ int print = 0;
     
     // https://habrahabr.ru/post/119436/
 
-void delay(int msec) {
-    float milli_seconds = msec; 
-    float start_time = clock();
-    while (clock() <= start_time + milli_seconds);
-}
 int guestion_console(); // выбор интерфейса
 //если нет файла профиля
 void hello_console();
@@ -29,6 +27,7 @@ void name_console();
 void level_console();
 void words_console();
 // если есть
+void exam(); 
 void learn_console();
 void retry_console();
 //всплывающие окна
@@ -49,13 +48,14 @@ void console_massage(int i) {  //GOOD
             system("clear");
             gotoxy(2,1);
             wprintf(L"DONE LEARN ENGLISH!\n");
-            remove("./data/profile/.profile.txt");
+            remove("./data/profile/profile.txt");
             exit(0);
             break;
     }
 }
 
 void retry_rand_up_label_con() {
+    save_profile(1);
     if (retry_rand() == -1) {
         save_profile(1);
         exit(0);
@@ -80,7 +80,7 @@ void correct_index_console() {
 
 int main_console () {
     FILE *pfile;
-    pfile = fopen("./data/profile/.profile.txt", "r");
+    pfile = fopen("./data/profile/profile.txt", "r");
     if (pfile == NULL) {
         hello_console();
     } else {
@@ -91,6 +91,8 @@ int main_console () {
                 wprintf(L"ERROR OPEN DATA!\n");
                 return 0;       
             }
+            correct_start_program();
+            correct_index_console();
             i_words = 1;
             if (learn_rand() == -1) {
                 system("clear");
@@ -134,6 +136,7 @@ int guestion_console() {
 }
 
 void hello_console() {
+    system("clear");
     int xx = 54;
     int yy = 33;
     wchar_t ansv;
@@ -145,12 +148,17 @@ void hello_console() {
     wprintf(L"%lsДля начала вы должны заполнить профиль:)%ls\n\n", GRAY, RESET);
     gotoxy(alignment(L"Начать!(N)", xx/2),31);
     wprintf(L"%lsНачать!(N)%ls\n", RED, RESET);
-    gotoxy(xx/2, 32);
+    gotoxy(25, 32);
     wscanf(L"%lc", &ansv);
     ansv = towlower(ansv);
+    if (ansv == ( L'q' ) || ansv == L'й') {
+        system("clear");
+        exit(0);
+    }
     if (ansv == ( L'n' ) || ansv == L'т') {
         name_console();
     } else {
+        system("clear");
         hello_console();
     }
 }
@@ -272,6 +280,7 @@ int learn_scan(wchar_t next) {
     correct_index_console();
     next = towlower(next);
     if ( next == L'r' ||  next == L'к' ) {
+        i_words = 1;
         return -1;
     }
     if ( next == L'p' ||  next == L'з' ) {
@@ -294,6 +303,7 @@ int learn_scan(wchar_t next) {
         }
     }
     if (next == L'q' ||  next == L'й' ) {
+        save_profile(1);
         system("clear");
         exit(0);
     }
@@ -334,7 +344,9 @@ int retry_scan(wchar_t *russ) {
     correct_index_console();
     russ = to_lowercase(russ);
     if (wcscmp(russ, L"q") == 0 || wcscmp(russ, L"й") == 0) {
+        save_profile(1);
         system("clear");
+        gotoxy(1,1);
         exit(0);
     }
     if (wcscmp(russ, L"p") == 0 || wcscmp(russ, L"з") == 0) {
@@ -351,7 +363,10 @@ int retry_scan(wchar_t *russ) {
             return -1;
         }
     }
+
     if (i_words == max_learn) {
+        delete_index_profile();
+        save_profile(0);
         print = 0;
         return 1;
     }
@@ -386,7 +401,7 @@ int retry_scan(wchar_t *russ) {
     return 0;
 }
 
-void retry_console() { // нилаботаит
+void retry_console() {
     int xx = 54;
     int yy = 32;
     wchar_t *russ = (wchar_t*) malloc(sizeof(wchar_t) * 100);

@@ -45,7 +45,7 @@ void add_index_profile() {
 void delete_index_profile() {
     int i = 0;
     for (; index_arr[i] != index; i++);
-    for (int c = i; c < max_learn - 1; c++) {
+    for (int c = i; c < max_learn ; c++) {
         index_arr[c] = index_arr[c + 1];
 
     }
