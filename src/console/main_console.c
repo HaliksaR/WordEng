@@ -110,13 +110,13 @@ int guestion_console() {
     gotoxy(xx/2,9);
     wscanf(L"%lc", &ansv);
     ansv = towlower(ansv);
-    if ( ansv == L'g' ||  ansv == L'п' ) {
+    if (ansv == L'g' || ansv == L'п') {
         return 1;
     }
-    if ( ansv == L'c'||  ansv == L'с' ) {
+    if (ansv == L'c' || ansv == L'с') {
         return 2;
     }
-    if ( ansv == L'q'||  ansv == L'й' ) {
+    if (ansv == L'q' || ansv == L'й') {
         system("clear");
         exit(0);
     }
@@ -140,11 +140,11 @@ void hello_console() {
     gotoxy(25, 32);
     wscanf(L"%lc", &ansv);
     ansv = towlower(ansv);
-    if (ansv == ( L'q' ) || ansv == L'й') {
+    if (ansv == L'q' || ansv == L'й') {
         system("clear");
         exit(0);
     }
-    if (ansv == ( L'n' ) || ansv == L'т') {
+    if (ansv == L'n' || ansv == L'т') {
         name_console();
     } else {
         system("clear");
@@ -172,7 +172,7 @@ void name_console() {
 
 int level_scan(wchar_t leveli) {
     leveli = towlower(leveli);
-    if (leveli == L'e' ||  leveli == L'у' ) {
+    if (leveli == L'e' || leveli == L'у') {
         level = 1;
         if (load_max_index() == -1) {
             system("clear");
@@ -181,7 +181,7 @@ int level_scan(wchar_t leveli) {
         words_console();
         return 0;
     }
-    if (leveli == L'n' ||  leveli == L'т' ) {
+    if (leveli == L'n' || leveli == L'т') {
         level = 2;
         if (load_max_index() == -1) {
             system("clear");
@@ -190,7 +190,7 @@ int level_scan(wchar_t leveli) {
         words_console();
         return 0;
     }
-    if ( leveli == L'h' ||  leveli == L'р' ) {
+    if (leveli == L'h' || leveli == L'р') {
         level = 3;
         if (load_max_index() == -1) {
             system("clear");
@@ -199,7 +199,7 @@ int level_scan(wchar_t leveli) {
         words_console();
         return 0;
     }
-    if ( leveli == L'q' ||  leveli == L'й' ) {
+    if (leveli == L'q' || leveli == L'й') {
         system("clear");
         exit(0);
     }
@@ -230,7 +230,7 @@ void level_console() {
 }
 
 int words_scan(int wwords) {
-    if (wwords == 1 || wwords == 2 || wwords == 3 || wwords == 4 ) {
+    if (wwords == 1 || wwords == 2 || wwords == 3 || wwords == 4) {
         words = wwords;
         return 0;
     } else {
@@ -265,17 +265,17 @@ void words_console() {
 
 int learn_scan(wchar_t next) {
     next = towlower(next);
-    if ( next == L'r' ||  next == L'к' ) {
+    if (next == L'r' || next == L'к') {
         i_words = 1;
         return -1;
     }
-    if ( next == L'p' ||  next == L'з' ) {
+    if (next == L'p' || next == L'з') {
         profile_console(1);
     }
-    if ( next == L'a' ||  next == L'ф' ) {
+    if (next == L'a' || next == L'ф') {
         about_console(1);
     }
-    if ( next == L'n' ||  next == L'т' ) {
+    if (next == L'n' || next == L'т') {
         if (max_index == max_learn) {
             i_words = 1;
             return -1;
@@ -292,7 +292,7 @@ int learn_scan(wchar_t next) {
             return -1;
         }
     }
-    if (next == L'q' ||  next == L'й' ) {
+    if (next == L'q' || next == L'й') {
         save_profile(1);
         system("clear");
         exit(0);
@@ -453,12 +453,12 @@ void profile_console(int form) {
     gotoxy(1,yy); 
     wprintf(L"├");
     for (int i = 2; i < xx; i++) {
-        for (int j = yy; j < yyk; j++){
-             gotoxy(i,j);
-             wprintf(L" ");
+        for (int j = yy; j < yyk; j++) {
+            gotoxy(i,j);
+            wprintf(L" ");
         }
     }
-    for ( int i = 2; i < xx; i++) {
+    for (int i = 2; i < xx; i++) {
         gotoxy(i,yy); wprintf(L"─");
     }
     gotoxy(xx - 8,yy); 
@@ -470,7 +470,7 @@ void profile_console(int form) {
     gotoxy(alignment(L"Учи английский с радостью!", xx/2),yy); 
     wprintf(L"%lsУчи английский с радостью!%ls", GRAY, RESET);
     yy++;
-    for ( int i = 2; i < xx; i++) {
+    for (int i = 2; i < xx; i++) {
         gotoxy(i,yy); wprintf(L"─");
     }
     yy++;
@@ -497,7 +497,7 @@ void profile_console(int form) {
     wprintf(L"┤");
     gotoxy(1,yyk); 
     wprintf(L"├");
-    for ( int i = 2; i < xx; i++) {
+    for (int i = 2; i < xx; i++) {
         gotoxy(i,yyk); wprintf(L"─");
     }
     yy = yy + 2;
@@ -569,7 +569,7 @@ int alignment(wchar_t* slovo, int pol) {
 void frame(int dlina, int shirina) {
     gotoxy(1,1);
     wprintf(L"┌");
-    for ( int i = 2; i < shirina; i++) {
+    for (int i = 2; i < shirina; i++) {
         gotoxy(i,1); wprintf(L"─");
     }
     gotoxy(shirina,1);
@@ -586,14 +586,14 @@ void frame(int dlina, int shirina) {
     }
     gotoxy(1,4); 
     wprintf(L"├");
-    for ( int i = 2; i < shirina; i++) {
+    for (int i = 2; i < shirina; i++) {
         gotoxy(i,4); wprintf(L"─");
     }
     gotoxy(shirina,4); 
     wprintf(L"┤");
     gotoxy(1,dlina);
     wprintf(L"└");
-    for ( int i = 2; i < shirina; i++) {
+    for (int i = 2; i < shirina; i++) {
         gotoxy(i,dlina); wprintf(L"─");
     }
     wprintf(L"┘");

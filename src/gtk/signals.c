@@ -44,7 +44,6 @@ void name_button_clicked_cb() {
     }
 }
 
-
 int learn_srav() {
     if (max_learn == max_index) {
         save_profile(1);

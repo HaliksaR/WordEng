@@ -1,23 +1,19 @@
-#include "global.h" // глобальные переменные
+#include "global.h"
 #include "check_global.h"
 #include <time.h>
 
-// дочерние
-int search_index(FILE *dictionaries);// GOOD Законченно
-int srav_index(int h);// GOOD Законченно
-void add_index_profile();// GOOD Законченно
-void delete_index_profile();// GOOD Законченно
-FILE* level_file(); // GOOD Законченно
-// основные
-int learn_rand();// GOOD Законченно
-int retry_rand();// GOOD Законченно
-// работа с файлами
-void save_profile(int num);// GOOD Законченно
-int load_profile();// GOOD Законченно
-int load_max_index();// GOOD Законченно
-// служебные
-wchar_t* convert_to_wchar_rus(char *input);// GOOD Законченно
-wchar_t* convert_to_wchar(char *input);// GOOD Законченно
+int search_index(FILE *dictionaries);
+int srav_index(int h);
+void add_index_profile();
+void delete_index_profile();
+FILE* level_file(); 
+int learn_rand();
+int retry_rand();
+void save_profile(int num);
+int load_profile();
+int load_max_index();
+wchar_t* convert_to_wchar_rus(char *input);
+wchar_t* convert_to_wchar(char *input);
 
 int load_max_index() {
     FILE *dictionaries = level_file();

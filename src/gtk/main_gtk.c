@@ -33,13 +33,13 @@ void main_window_profilegtk() {
 }
 
 void windowgtk_destroy_cb() {
-    if (words) {
-        save_profile(1);
-    }
     gtk_main_quit();
 }
 
 void on_header_destroy() {
+    if (words) {
+        save_profile(1);
+    }
     gtk_main_quit();
 }
 
