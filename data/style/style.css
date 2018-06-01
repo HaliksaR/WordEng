@@ -10,71 +10,71 @@ box {
     background: #121116;
 }
 label#name {
-    font-size: 30pt;
+    font-size: 45px;
     font-weight: bold;
     color: #FF1F4B;
 }
 label#levelup {
-    font-size: 15pt;
+    font-size: 25px;
     font-weight: bold;
     color: rgb(192, 37, 68);
 }
 label#first {
     font-weight: bold;
-    font-size: 20pt;
+    font-size: 25px;
     color: white;
 }
 label#second {
     font-weight: normal;
-    font-size: 12pt;
+    font-size: 17px;
     color: rgb(151, 151, 151);
 }
 label#Design {
     font-weight: normal;
-    font-size: 11pt;
+    font-size: 15px;
     color: rgb(77, 77, 77);
 }
 label#fail {
-    font-size: 25pt;
+    font-size: 35px;
     font-weight: bolder;
     color:#A2BF26;
     color: rgb(192, 37, 68);
 }
 label#engword {
-    font-size: 45pt;
+    font-size: 60px;
     font-weight: bold;
 }
 label#55 {
-    font-size: 20pt;
+    font-size: 25px;
     font-weight: bolder;
 }
 label#rus {
-    font-size: 24pt;
+    font-size: 30px;
     font-weight: normal;
     color: rgb(214, 214, 214);
 }
 label#1, label#2, label#3, label#4, label#5, label#6, label#7, label#8, label#9, label#10 {
-    font-size: 10pt;
+    font-size: 13px;
     color: rgb(122, 122, 122); 
 }
 label#developer {
-    font-size: 15pt;
+    font-size: 20px;
     font-weight: bold;
     color: #FF1F4B;
 }
 label#work {
-    font-size: 8pt;
+    font-size: 10px;
     font-weight: normal;
     color: rgb(156, 156, 156); 
 }
 headerbar {
     background-color:#121116;
     background-blend-mode: darken;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-width: 0pt;
-    font-size: 10pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-width: 0px;
+    font-size: 15px;
     font-weight: bolder;
     box-shadow: none;
 }
@@ -85,18 +85,18 @@ menubar {
 menuitem {
     background-color:#121116; 
     font-weight: lighter;
-    border-width: 0pt;
+    border-width: 0px;
 
 }
 entry {
     caret-color:rgb(192, 37, 68);
     background-color: linen;
-    font-size: 24pt;
+    font-size: 30px;
     color: rgb(192, 37, 68);
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-width: 0px;
     font-weight: bolder;
     box-shadow: none;
 }
@@ -105,93 +105,93 @@ headerbar button {
 }
 button#allbutt {
     background-color:rgba(192, 37, 68, 0.829);
-    font-size: 20pt;
+    font-size: 25px;
     font-weight: bold;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: white;
     
 }
 button#1 {
     background-color:rgba(161, 76, 93, 0.829);
-    font-size: 18pt;
+    font-size: 23px;
     font-weight: bolder;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: rgb(184, 184, 184);
 }
 button#2 {
     background-color:rgba(192, 59, 85, 0.829);
-    font-size: 20pt;
+    font-size: 25px;
     font-weight: bolder;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: rgb(190, 190, 190);
 }
 button#3 {
     background-color:rgba(192, 48, 77, 0.829);
-    font-size: 22pt;
+    font-size: 27px;
     font-weight: bolder;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: rgb(209, 209, 209);
 }
 
 button#4 {
     background-color:rgba(192, 37, 68, 0.829);
-    font-size: 24pt;
+    font-size: 30px;
     font-weight: bolder;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: white;
 }
 button#nextbutton  {
     background-color:#A2BF26;
-    font-size: 20pt;
+    font-size: 25px;
     font-weight: bolder;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: white;
 }
 button#easy {
     background-color:rgba(192, 37, 68, 0.829);
-    font-size: 18pt;
+    font-size: 23px;
     font-weight: bold;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: rgb(184, 184, 184);
 }
 button#middle {
     background-color:rgba(192, 37, 68, 0.829);
-    font-size: 20pt;
+    font-size: 25px;
     font-weight: bold;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: rgb(216, 216, 216);
 }
 button#hight {
     background-color:rgba(192, 37, 68, 0.829);
-    font-size: 22pt;
+    font-size: 27px;
     font-weight: bold;
-    border-left-width: 0pt;
-    border-right-width: 0pt;
-    border-top-width: 0pt;
-    border-bottom-width: 0pt;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     color: rgb(255, 255, 255);
 }
