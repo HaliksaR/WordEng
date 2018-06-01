@@ -1,9 +1,3 @@
-# Travis
- - ### dev [![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=dev)](https://travis-ci.org/HaliksaR/WordEng)
- - ### HaliksaR [![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=HaliksaR)](https://travis-ci.org/HaliksaR/WordEng)
- - ### Andrey [![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=Andrey)](https://travis-ci.org/HaliksaR/WordEng)
- - ### Artem [![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=Artem)](https://travis-ci.org/HaliksaR/WordEng)
- 
 <div align="center">
 <a href="https://github.com/HaliksaR/WordEng">
 <img src="https://user-images.githubusercontent.com/35256960/37650164-b57a8ba4-2c66-11e8-9f42-91fd9a7e63f8.png" width="320" height="320" alt="logo"></img>
@@ -11,10 +5,11 @@
 </div>
 
 # WordEng (program for learn english for russians)
+[![Build Status](https://travis-ci.org/HaliksaR/WordEng.svg?branch=master)](https://travis-ci.org/HaliksaR/WordEng)
 ### Required packages:
  - **Fonts Family**
    ```
-   Noto Sans
+   Noto Sans, Liberation Sans, Sans Regular
    ```
  - **Ubuntu/Debian**
    ```
