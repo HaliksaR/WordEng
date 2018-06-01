@@ -264,40 +264,38 @@ void words_console() {
 }
 
 int learn_scan(wchar_t next) {
-    if (max_index == max_learn) {
+    next = towlower(next);
+    if ( next == L'r' ||  next == L'к' ) {
         i_words = 1;
-        chanse = 0;
         return -1;
-    } else {
-        next = towlower(next);
-        if ( next == L'r' ||  next == L'к' ) {
+    }
+    if ( next == L'p' ||  next == L'з' ) {
+        profile_console(1);
+    }
+    if ( next == L'a' ||  next == L'ф' ) {
+        about_console(1);
+    }
+    if ( next == L'n' ||  next == L'т' ) {
+        if (max_index == max_learn) {
             i_words = 1;
             return -1;
         }
-        if ( next == L'p' ||  next == L'з' ) {
-            profile_console(1);
-        }
-        if ( next == L'a' ||  next == L'ф' ) {
-            about_console(1);
-        }
-        if ( next == L'n' ||  next == L'т' ) {
-            if (i_words != words) {
-                i_words++;
-                if (learn_rand() == -1) {
-                    system("clear");
-                    exit(0);
-                }
-                return 0;
-            } else {
-                i_words = 1;
-                return -1;
+        if (i_words != words) {
+            i_words++;
+            if (learn_rand() == -1) {
+                system("clear");
+                exit(0);
             }
+            return 0;
+        } else {
+            i_words = 1;
+            return -1;
         }
-        if (next == L'q' ||  next == L'й' ) {
-            save_profile(1);
-            system("clear");
-            exit(0);
-        }
+    }
+    if (next == L'q' ||  next == L'й' ) {
+        save_profile(1);
+        system("clear");
+        exit(0);
     }
     return 0;
 }
@@ -347,58 +345,59 @@ int retry_scan(wchar_t *russ) {
         } else {
             console_massage(1);
         }
-    }
-    russ = to_lowercase(russ);
-    if (wcscmp(russ, L"q") == 0 || wcscmp(russ, L"й") == 0) {
-        save_profile(1);
-        system("clear");
-        gotoxy(1,1);
-        exit(0);
-    }
-    if (wcscmp(russ, L"p") == 0 || wcscmp(russ, L"з") == 0) {
-        profile_console(2);
-    }
-    if (wcscmp(russ, L"a" ) == 0 || wcscmp(russ, L"ф") == 0) {
-        about_console(2);
-    }
-    if (wcscmp(russ, L"l" ) == 0 || wcscmp(russ, L"д") == 0) {
-        if (print == 1) {
+    } else {
+        russ = to_lowercase(russ);
+        if (wcscmp(russ, L"q") == 0 || wcscmp(russ, L"й") == 0) {
+            save_profile(1);
+            system("clear");
+            gotoxy(1,1);
+            exit(0);
+        }
+        if (wcscmp(russ, L"p") == 0 || wcscmp(russ, L"з") == 0) {
+            profile_console(2);
+        }
+        if (wcscmp(russ, L"a" ) == 0 || wcscmp(russ, L"ф") == 0) {
+            about_console(2);
+        }
+        if (wcscmp(russ, L"l" ) == 0 || wcscmp(russ, L"д") == 0) {
+            if (print == 1) {
+                print = 0;
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+        if (i_words == max_learn) {
+            delete_index_profile();
+            save_profile(0);
             print = 0;
             return 1;
-        } else {
-            return -1;
         }
-    }
-    if (i_words == max_learn) {
-        delete_index_profile();
-        save_profile(0);
-        print = 0;
-        return 1;
-    }
-    if (i_words > (max_learn / 4) || (i_words == 1 && chanse == 0)) {
-        print = 1;
-    } else {
-        print = 0;
-    }
-    if (wcscmp(russ, L"") != 0) {
-        if (retry_rus(russ) == -1) {
-            chanse++;
-            if (chanse == 5) {
-                fail++;
-                chanse = 0;
-                delete_index_profile();
-                retry_rand_up_label_con();
-            }
-            gotoxy(alignment(L"НЕВЕРНО!",27),22);
-            wprintf(L"%lsНЕВЕРНО!%ls", RED, RESET);
-            return -1;
+        if (i_words > (max_learn / 4) || (i_words == 1 && chanse == 0)) {
+            print = 1;
         } else {
-            if (retry_rand() == -1) {
-                system("clear");
-                exit(0);
-            }  
-            i_words++;
-            return 0;
+            print = 0;
+        }
+        if (wcscmp(russ, L"") != 0) {
+            if (retry_rus(russ) == -1) {
+                chanse++;
+                if (chanse == 5) {
+                    fail++;
+                    chanse = 0;
+                    delete_index_profile();
+                    retry_rand_up_label_con();
+                }
+                gotoxy(alignment(L"НЕВЕРНО!",27),22);
+                wprintf(L"%lsНЕВЕРНО!%ls", RED, RESET);
+                return -1;
+            } else {
+                if (retry_rand() == -1) {
+                    system("clear");
+                    exit(0);
+                }  
+                i_words++;
+                return 0;
+            }
         }
     }
     return 0;
