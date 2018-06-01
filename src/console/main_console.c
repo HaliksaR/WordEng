@@ -10,35 +10,24 @@
 #include "../body_main.h"
 #include "../correct_start.h"
 
-int print = 0;
-int exam_per = 0;
-int i_fail_c = 5;
-
+int print = 0, exam_per = 0;
 #define resetcolor() wprintf(ESC L"[0m")
-#define set_display_atrib(color) 	wprintf(ESC L"[%dm",color); // цвет фона
-    
-    
-    // https://habrahabr.ru/post/119436/
+#define set_display_atrib(color) 	wprintf(ESC L"[%dm",color);
 
-int guestion_console(); // выбор интерфейса
-//если нет файла профиля
+int guestion_console();
 void hello_console();
 void name_console();
 void level_console();
 void words_console();
-// если есть
 void exam(); 
 void learn_console();
 void retry_console();
-//всплывающие окна
 void profile_console(int form);
 void about_console(int form);
-
 int alignment(wchar_t* slovo, int pol);
 void frame(int dlina, int shirina);
 
-
-void console_massage(int i) {  //GOOD
+void console_massage(int i) {
     switch (i) {
         case 0:
             save_profile(0);
@@ -163,8 +152,6 @@ void hello_console() {
     }
 }
 
-
-
 void name_console() {
     int xx = 54;
     int yy = 32;
@@ -277,35 +264,40 @@ void words_console() {
 }
 
 int learn_scan(wchar_t next) {
-    correct_index_console();
-    next = towlower(next);
-    if ( next == L'r' ||  next == L'к' ) {
+    if (max_index == max_learn) {
         i_words = 1;
+        chanse = 0;
         return -1;
-    }
-    if ( next == L'p' ||  next == L'з' ) {
-        profile_console(1);
-    }
-    if ( next == L'a' ||  next == L'ф' ) {
-        about_console(1);
-    }
-    if ( next == L'n' ||  next == L'т' ) {
-        if (i_words != words) {
-            i_words++;
-            if (learn_rand() == -1) {
-                system("clear");
-                exit(0);
-            }
-            return 0;
-        } else {
+    } else {
+        next = towlower(next);
+        if ( next == L'r' ||  next == L'к' ) {
             i_words = 1;
             return -1;
         }
-    }
-    if (next == L'q' ||  next == L'й' ) {
-        save_profile(1);
-        system("clear");
-        exit(0);
+        if ( next == L'p' ||  next == L'з' ) {
+            profile_console(1);
+        }
+        if ( next == L'a' ||  next == L'ф' ) {
+            about_console(1);
+        }
+        if ( next == L'n' ||  next == L'т' ) {
+            if (i_words != words) {
+                i_words++;
+                if (learn_rand() == -1) {
+                    system("clear");
+                    exit(0);
+                }
+                return 0;
+            } else {
+                i_words = 1;
+                return -1;
+            }
+        }
+        if (next == L'q' ||  next == L'й' ) {
+            save_profile(1);
+            system("clear");
+            exit(0);
+        }
     }
     return 0;
 }
@@ -341,7 +333,21 @@ void learn_console() {
 }
 
 int retry_scan(wchar_t *russ) {
-    correct_index_console();
+    if (max_index == i_words) {
+        if (level != 3) {
+            level++;
+            if (load_max_index() == -1) {
+                wprintf(L"ERROR OPEN DATA!\n");
+                system("clear");
+                exit(0);
+            }
+            console_massage(0);
+            i_words = 1;
+            learn_console();
+        } else {
+            console_massage(1);
+        }
+    }
     russ = to_lowercase(russ);
     if (wcscmp(russ, L"q") == 0 || wcscmp(russ, L"й") == 0) {
         save_profile(1);
@@ -363,7 +369,6 @@ int retry_scan(wchar_t *russ) {
             return -1;
         }
     }
-
     if (i_words == max_learn) {
         delete_index_profile();
         save_profile(0);
@@ -371,10 +376,10 @@ int retry_scan(wchar_t *russ) {
         return 1;
     }
     if (i_words > (max_learn / 4) || (i_words == 1 && chanse == 0)) {
-            print = 1;
-        } else {
-            print = 0;
-        }
+        print = 1;
+    } else {
+        print = 0;
+    }
     if (wcscmp(russ, L"") != 0) {
         if (retry_rus(russ) == -1) {
             chanse++;
@@ -395,8 +400,6 @@ int retry_scan(wchar_t *russ) {
             i_words++;
             return 0;
         }
-    } else {
-        return 0;
     }
     return 0;
 }
@@ -441,8 +444,9 @@ void retry_console() {
 }
 
 void profile_console(int form) {
+    wchar_t *level2;
     int xx = 54;
-    int yy = 16;
+    int yy = 11;
     int yyk = yy + 10;
     wchar_t exi;
     gotoxy(xx,yy); 
@@ -467,9 +471,23 @@ void profile_console(int form) {
     gotoxy(alignment(L"Учи английский с радостью!", xx/2),yy); 
     wprintf(L"%lsУчи английский с радостью!%ls", GRAY, RESET);
     yy++;
+    for ( int i = 2; i < xx; i++) {
+        gotoxy(i,yy); wprintf(L"─");
+    }
+    yy++;
     gotoxy(alignment( name, xx/2),yy);
-    wprintf(L"%ls", name);
+    wprintf(L"%ls%ls%ls",CYAN, name, RESET);
     yy = yy + 2;
+    if (level == 1) {
+        level2 = L"Легкий";
+    } else if (level == 2) {
+        level2 = L"Средний";
+    } else if (level == 3) {
+        level2 = L"Высокий";
+    }
+    gotoxy(20,yy);
+    wprintf(L"Уровень: %ls", level2);
+    yy++;
     gotoxy(alignment(L"Выученных:", xx/2),yy);
     wprintf(L"Выученных: %ld", max_learn);
     yy++;
@@ -483,7 +501,7 @@ void profile_console(int form) {
     for ( int i = 2; i < xx; i++) {
         gotoxy(i,yyk); wprintf(L"─");
     }
-    yy++;
+    yy = yy + 2;
     gotoxy(xx/2,yy);
     wscanf(L"%lc", &exi);
     exi = towlower(exi);
@@ -496,39 +514,39 @@ void profile_console(int form) {
     } else {
         profile_console(form);
     }
-
 }
 
 void about_console(int form) {
     int xx = 54;
-    int yy = 18;
+    int yy = 23;
     wchar_t exi;
     system("clear");
     frame(yy,xx);
-
     gotoxy(alignment(L"WordEnd", xx/2),5);
     wprintf(L"WordEnd");
-
     gotoxy(alignment(L"1.0 Beta", xx/2),7);
     wprintf(L"1.0 Beta");
-
-    gotoxy(alignment(L"Программа для заучивания слов иностранного языка", xx/2),9);
+    gotoxy(alignment(L"Github: https://goo.gl/nHwr3u", xx/2),9);
+    wprintf(L"%lsGithub:%ls https://goo.gl/nHwr3u", CYAN, RESET);
+    gotoxy(alignment(L"Программа для заучивания слов иностранного языка", xx/2),10);
     wprintf(L"Программа для заучивания слов иностранного языка");
-
-    gotoxy(alignment(L"(английского)", xx/2),10);
+    gotoxy(alignment(L"(английского)", xx/2),11);
     wprintf(L"(английского)");
-
     gotoxy(alignment(L"Курсовая работа студентов Сибирского", xx/2),12);
     wprintf(L"Курсовая работа студентов Сибирского");
-
     gotoxy(alignment(L"государственного университета телекоммуникации", xx/2),13);
     wprintf(L"государственного университета телекоммуникации");
-
     gotoxy(alignment(L"и информатики", xx/2),14);
     wprintf(L"и информатики");
-
-    gotoxy(alignment(L"Разработчики", xx/2),17);
-    wprintf(L"Разработчики");
+    gotoxy(alignment(L"Разработчики", xx/2),16);
+    wprintf(L"%lsРазработчики%ls", RED, RESET);
+    gotoxy(alignment(L"HaliksaR - https://goo.gl/VhZ5mm", xx/2),18);
+    wprintf(L"%lsHaliksaR%ls - https://goo.gl/VhZ5mm", CYAN, RESET);
+    gotoxy(alignment(L"Artemka13722 - https://goo.gl/AApF5A", xx/2),19);
+    wprintf(L"%lsArtemka13722%ls - https://goo.gl/AApF5A", CYAN, RESET);
+    gotoxy(alignment(L"KrackensCorp - https://goo.gl/pKBhDg", xx/2),20);
+    wprintf(L"%lsKrackensCorp%ls - https://goo.gl/pKBhDg", CYAN, RESET);
+    gotoxy(27,21);
     wscanf(L"%lc", &exi);
     exi = towlower(exi);
     if (exi == L'q' || exi == L'й') {
@@ -541,8 +559,6 @@ void about_console(int form) {
         about_console(form);
     }
 }
-
-
 
 int alignment(wchar_t* slovo, int pol) {
     int otstup, polovinaslova;
