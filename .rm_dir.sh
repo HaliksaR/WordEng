@@ -4,23 +4,8 @@ BREAK='\033[m'
 LCYAN='\033[1;36m'
 
 current_dir=$(pwd)
+desktop_path=$(xdg-user-dir DESKTOP)
 
-for i in $(ls ~); do
-    if [ "${i}" == "Desktop" ]; then 
-        DESK=${i}
-        break
-    elif [ "${i}" == "Рабочий стол" ]; then
-        DESK=${i}
-        break
-    else 
-        DESK="0"
-    fi
-done
-
-if [ "${DESK}" != "0" ]; then 
-    echo -e "${LCYAN}|Delete folder done!|${BREAK}"
-    rm /home/$USER/${DESK}/WordEng.desktop
-    rm -rf $current_dir
-else
-    echo -e "${LCYAN}I NOT FOUND DESKTOP${BREAK}"  
-fi
+rm $desktop_path/WordEng.desktop
+rm -rf $current_dir
+echo -e "${LCYAN}|Delete folder done!|${BREAK}"
