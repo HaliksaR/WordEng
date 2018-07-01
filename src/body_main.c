@@ -258,7 +258,10 @@ void save_profile(int num) {
             fprintf(profile, "fail: %d\n", fail);
             fprintf(profile, "index:\n");
             load_max_index();
-
+            if (index_arr == NULL) {
+                fclose(profile);
+                break;
+            }
             for(int i = 0; i <= max_learn; i++) {
                 if (index_arr[i] > 0 && index_arr[i] <= max_index){
                     fprintf(profile, "%d\n", index_arr[i]);

@@ -4,21 +4,21 @@
 #define RED   L"\033[1;31m"
 
 int correct_level() {
-    if (level > 3 || level < 0) {
+    if (level > 3 || level <= 0) {
         return -1;
     }
     return 0;
 }
 
 int correct_words() {
-    if (words > 4 || words < 0) {
+    if (words > 4 || words <= 0) {
         return -1;
     }
     return 0;
 }
 
 int correct_fail() {
-    if (fail < 0) {
+    if (fail <= 0) {
         return -1;
     }
     return 0;
@@ -61,14 +61,14 @@ void correct_profile() {
 }
 
 int correct_max_index() {
-    if (max_index < 1) {
+    if (max_index <= 1) {
         return -1;
     }
     return 0;
 }
 
 int correct_index_global() {
-    if (index < 0 || index > max_index) {
+    if (index <= 0 || index > max_index) {
         return -1;
     }
     return 0;
