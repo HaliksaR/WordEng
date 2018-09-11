@@ -9,7 +9,6 @@ int correct_level() {
     }
     return 0;
 }
-
 int correct_words() {
     if (words > 4 || words <= 0) {
         return -1;
@@ -18,7 +17,7 @@ int correct_words() {
 }
 
 int correct_fail() {
-    if (fail <= 0) {
+    if (fail < 0) {
         return -1;
     }
     return 0;
